@@ -106,7 +106,7 @@ This module will install all module dependencies of Kingpsort.
         # ============================================================
         # FUNCTION USED TO UPDATE DATA LIKE POST OBJECT
         # ============================================================
-        "data/function.xml",
+        # "data/function.xml",
     ],
 
     'test': [],
