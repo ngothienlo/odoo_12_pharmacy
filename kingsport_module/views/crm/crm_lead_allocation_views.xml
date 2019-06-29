@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- crm.allocation inherit form view -->
+    <record id="view_lead_allocation_form" model="ir.ui.view">
+        <field name="name">view.lead.allocation.form</field>
+        <field name="model">lead.allocation</field>
+        <field name="arch" type="xml">
+            <form string="Allocations">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="team_id"/>
+                        <field name="is_main_city" invisible="1"/>
+                        <field name="state_ids" widget="many2many_tags"/>
+                        <field name="district_ids" widget="many2many_tags"
+                               attrs="{'required': [('is_main_city', '=', True)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lead_allocation_list" model="ir.ui.view">
+        <field name="name">view.lead.allocation.list</field>
+        <field name="model">lead.allocation</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Allocations">
+                <field name="name"/>
+                <field name="team_id"/>
+                <field name="state_ids"/>
+                <field name="district_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="open_view_lead_allocation_form" model="ir.actions.act_window">
+        <field name="name">Allocations</field>
+        <field name="res_model">lead.allocation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_view_lead_allocation_form"
+              name="Allocations"
+              action="open_view_lead_allocation_form"
+              parent="crm.crm_menu_config"
+              sequence="10"/>
+
+</odoo>

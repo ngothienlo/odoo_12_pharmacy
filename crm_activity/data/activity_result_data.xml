@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'crm_activity'), ('name', 'like', 'result%')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+    <record model="activity.result" id="result_record_new_opportunity">
+        <field name="name">Record new opportunity</field>
+        <field name="code">Record new opportunity</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_invalid_phone_number">
+        <field name="name">Invalid phone no.</field>
+        <field name="code">Invalid phone no.</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_do_not_picking_up">
+        <field name="name">Don't pick up</field>
+        <field name="code">Don't pick up</field>
+        <field name="follow_up" eval="True"/>
+    </record>
+    <record model="activity.result" id="result_busy_call_later">
+        <field name="name">Busy, call later</field>
+        <field name="code">Busy, call later</field>
+        <field name="follow_up" eval="True"/>
+    </record>
+    <record model="activity.result" id="result_not_interested">
+        <field name="name">Not interested</field>
+        <field name="code">Not interested</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_agree_to_buy">
+        <field name="name">Agree to buy product</field>
+        <field name="code">Agree to buy product</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_make_an_appointment">
+        <field name="name">Make an appointment</field>
+        <field name="code">Make an appointment</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_meeting_successful">
+        <field name="name">Successful meeting</field>
+        <field name="code">Successful meeting</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_meeting_cancelled">
+        <field name="name">Meeting cancelled</field>
+        <field name="code">Meeting cancelled</field>
+        <field name="follow_up" eval="True"/>
+    </record>
+
+    <record model="activity.result" id="result_invalid_email">
+        <field name="name">Invalid email</field>
+        <field name="code">Invalid email</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_change_meeting_date">
+        <field name="name">Change meeting date</field>
+        <field name="code">Change meeting date</field>
+        <field name="follow_up" eval="True"/>
+    </record>
+    <record model="activity.result" id="result_consult_successfully">
+        <field name="name">Successful consultant</field>
+        <field name="code">Successful consultant</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_make_quote_successfully">
+        <field name="name">Successfully make quote</field>
+        <field name="code">Successfully make quote</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_not_sure">
+        <field name="name">Not sure, need to discuss</field>
+        <field name="code">Not sure, need to discuss</field>
+        <field name="follow_up" eval="True"/>
+    </record>
+    <record model="activity.result" id="result_do_not_buy">
+        <field name="name">Too expensive, don't buy</field>
+        <field name="code">Too expensive, don't buy</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_customer_in_black_list">
+        <field name="name">Customer in black list</field>
+        <field name="code">Customer in black list</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_not_meet_conditions">
+        <field name="name">Not meet the conditions</field>
+        <field name="code">Not meet the conditions</field>
+        <field name="follow_up" eval="False"/>
+    </record>
+    <record model="activity.result" id="result_consider_about_the_price">
+        <field name="name">Consider about the price, send the general prices for reference</field>
+        <field name="code">Consider about the price, send the general prices for reference</field>
+        <field name="follow_up" eval="True"/>
+    </record>
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'crm_activity'), ('name', 'like', 'result%')]"/>
+        </function>
+        <value eval="{'noupdate': True}"/>
+    </function>
+</odoo>

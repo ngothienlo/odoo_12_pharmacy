@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <record id="company_logo_path" model="ir.config_parameter">
+        <field name="key">Company logo path</field>
+        <field name="value">kingsport_module,static/img/logo.jpeg</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Cateamions form view inherit-->
+    <record id="sales_team_inherit_form_view" model="ir.ui.view">
+        <field name="name">crm.team.inherit.form.view</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <field name="team_type" position="before">
+                <field name="parent_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Cateamions Search view inherit-->
+    <record id="crm_team_salesteams_search" model="ir.ui.view">
+        <field name="name">Case Teams - Search</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_salesteams_search"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="parent_id"/>
+            </field>
+            <xpath expr="//filter[@name='team_leader']" position="after">
+                <filter string="Parent SalesTeam" name="parent_id" context="{'group_by':'parent_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

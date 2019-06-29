@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_res_partner_form_membership" model="ir.ui.view">
+        <field name="name">view.res.partner.form.membership</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="membership.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="member_lines" position="replace">
+                <field name="member_lines" nolabel="1" colspan="4">
+                    <tree string="Memberships" create="0">
+                        <field name="card_number"/>
+                        <field name="membership_id"/>
+                        <field name="member_price"/>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                        <field name="account_invoice_id"/>
+                        <field name="state"/>
+                    </tree>
+                    <form string="Memberships">
+                        <group>
+                            <field name="card_number" readonly="1" />
+                        </group>
+                        <group>
+                            <group>
+                                <field name="membership_id" readonly="1" />
+                                <label for="date_from" string="Membership Duration"/>
+                                <div readonly="1" >
+                                    <field name="date_from" class="oe_inline"/> -
+                                    <field name="date_to" class="oe_inline"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="user_id" readonly="1" />
+                                <field name="gym_location_id" readonly="1" />
+                                <field name="showroom_id" readonly="1" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="member_price" readonly="1" />
+                                <field name="account_invoice_id" readonly="1"
+                                    context="{'form_view_ref': 'account.invoice_form'}"/>
+                                <field name="invoice_refund_id"
+                                    attrs="{'invisible': [('id', '!=', False)]}"
+                                    context="{'form_view_ref': 'account.invoice_form'}" />
+                            </group>
+                            <group>
+                                <field name="stop_membership" />
+                                <field name="date_stop"
+                                    attrs="{'required': [('stop_membership', '=', True)], 'invisible': [('stop_membership', '=', False)]}" />
+                                <field name="days_used" />
+                                <label for="amount_refunded" string="Amount Refunded" attrs="{'invisible': [('account_invoice_line', '=', False), ('stop_membership', '=', False)]}"/>
+                                <div attrs="{'invisible': [('account_invoice_line', '=', False), ('stop_membership', '=', False)]}">
+                                    <field name="amount_refunded" class="oe_inline" />
+                                    <field name="account_invoice_line" invisible="1" />
+                                    <button string="Refund" name="button_account_invoice_refund" type='object' class='btn-info oe_inline ml-2' />
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="reserve_ids">
+                                <tree string="Membership Reserve" editable="bottom">
+                                    <field name="date_from" />
+                                    <field name="date_to" />
+                                    <field name="note" />
+                                </tree>
+                                <form string="Membership Reserve">
+                                    <group>
+                                        <field name="membership_line_id"/>
+                                        <label for="date_from" string="Reserve Duration"/>
+                                        <div>
+                                            <field name="date_from" class="oe_inline"/> -
+                                            <field name="date_to" class="oe_inline"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="note"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </form>
+                </field>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- crm.lead inherit form view -->
+    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.inherit.view.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='lead']" position="after">
+                <page name="activity_history" string="Activity History">
+
+                    <group>
+                        <field name="crm_activity_history_ids" nolabel="1">
+                            <tree delete="false" create="false" edit="false">
+                                <field name="activity_type_id"/>
+                                <field name="summary"/>
+                                <field name="date_deadline"/>
+                                <field name="user_id"/>
+                                <field name="activity_result_id"/>
+                                <field name="status"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- crm.lead Kanban of type LEAD -->
+    <record id="view_crm_lead_kanban_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.kanban</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_lead_kanban"/>
+        <field name="arch" type="xml">
+            <field name="activity_ids" position="attributes">
+                <attribute name="widget"></attribute>
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//kanban//templates//field[@name='activity_ids']" position="attributes">
+                <attribute name="widget"></attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- crm.lead inherit Kanban of type Opportunity -->
+    <record id="crm_lead_view_kanban_opportunity_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.view.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <!-- inherit to set stage_id as readonly field on kanban to remove
+            draggable of item in column -->
+            <field name="stage_id" position="replace">
+                <field name="stage_id" readonly="1" options='{"group_by_tooltip": {"requirements": "Description", "legend_priority": "Use of stars"}}'/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

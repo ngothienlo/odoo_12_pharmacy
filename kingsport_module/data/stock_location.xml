@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <record id="stock_location_northern" model="stock.location">
+        <field name="name">Miền Bắc</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_au_co" model="stock.location">
+        <field name="name">Âu Cơ</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_bac_ninh" model="stock.location">
+        <field name="name">Bắc Ninh</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_bac_tu_liem" model="stock.location">
+        <field name="name">Bắc Từ Liêm</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_thanh_tri" model="stock.location">
+        <field name="name">Thanh Trì</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_dong_da" model="stock.location">
+        <field name="name">Đống Đa</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_hai_duong" model="stock.location">
+        <field name="name">Hải Dương</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_hai_phong" model="stock.location">
+        <field name="name">Hải Phòng</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_hoang_quoc_viet" model="stock.location">
+        <field name="name">Hoàng Quốc Việt</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_hung_yen" model="stock.location">
+        <field name="name">Hưng Yên</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_long_bien" model="stock.location">
+        <field name="name">Long Biên</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_nam_dinh" model="stock.location">
+        <field name="name">Nam Định</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_nghe_an" model="stock.location">
+        <field name="name">Nghệ An</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_nghe_an" model="stock.location">
+        <field name="name">Quảng Ninh</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_thai_nguyen" model="stock.location">
+        <field name="name">Thái Nguyên</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_thanh_hoa" model="stock.location">
+        <field name="name">Thanh Hóa</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_vin_times_city" model="stock.location">
+        <field name="name">Vin Times City</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_thanh_xuan" model="stock.location">
+        <field name="name">Thanh Xuân</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_northern_vinh_phuc" model="stock.location">
+        <field name="name">Vĩnh Phúc</field>
+        <field name="location_id" ref="kingsport_module.stock_location_northern" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_central_and_highlands" model="stock.location">
+        <field name="name">Trung Bộ &amp; Tây Nguyên</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_central_and_highlands_binh_dinh" model="stock.location">
+        <field name="name">Bình Định</field>
+        <field name="location_id" ref="kingsport_module.stock_location_central_and_highlands" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_central_and_highlands_buon_ma_thuoc" model="stock.location">
+        <field name="name">Buôn Ma Thuột</field>
+        <field name="location_id" ref="kingsport_module.stock_location_central_and_highlands" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_central_and_highlands_da_nang" model="stock.location">
+        <field name="name">Đà Nẵng</field>
+        <field name="location_id" ref="kingsport_module.stock_location_central_and_highlands" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_central_and_highlands_gia_lai" model="stock.location">
+        <field name="name">Gia Lai</field>
+        <field name="location_id" ref="kingsport_module.stock_location_central_and_highlands" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_central_and_highlands_hue" model="stock.location">
+        <field name="name">Huế</field>
+        <field name="location_id" ref="kingsport_module.stock_location_central_and_highlands" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_central_and_highlands_quang_ngai" model="stock.location">
+        <field name="name">Quảng Ngãi</field>
+        <field name="location_id" ref="kingsport_module.stock_location_central_and_highlands" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_central" model="stock.location">
+        <field name="name">Nam Trung Bộ</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_central_binh_thuan" model="stock.location">
+        <field name="name">Bình Thuận</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_central" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_central_bao_loc" model="stock.location">
+        <field name="name">Bảo Lộc</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_central" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_central_cam_ranh" model="stock.location">
+        <field name="name">Cam Ranh</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_central" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_central_da_lat" model="stock.location">
+        <field name="name">Đà Lạt</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_central" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_central_nha_trang" model="stock.location">
+        <field name="name">Nha Trang</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_central" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh" model="stock.location">
+        <field name="name">TP.HCM</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_trung_son" model="stock.location">
+        <field name="name">Trung Sơn</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_tan_binh" model="stock.location">
+        <field name="name">Tân Bình</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_tan_phu" model="stock.location">
+        <field name="name">Tân Phú</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_phu_nhuan" model="stock.location">
+        <field name="name">Phú Nhuận</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_district_6" model="stock.location">
+        <field name="name">Quận 6</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_binh_thanh" model="stock.location">
+        <field name="name">Bình Thạnh</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_nguyen_trai" model="stock.location">
+        <field name="name">Nguyễn Trãi</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_thu_duc" model="stock.location">
+        <field name="name">Thủ Đức</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_district_12" model="stock.location">
+        <field name="name">Quận 12</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_binh_tan" model="stock.location">
+        <field name="name">Bình Tân</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_big_c_pandora" model="stock.location">
+        <field name="name">Big C Pandora</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_ho_chi_minh_phan_van_tri" model="stock.location">
+        <field name="name">Phan Văn Trị</field>
+        <field name="location_id" ref="kingsport_module.stock_location_ho_chi_minh" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east" model="stock.location">
+        <field name="name">Đông Nam Bộ</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east_bien_hoa" model="stock.location">
+        <field name="name">Biên Hòa</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_east" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east_binh_duong" model="stock.location">
+        <field name="name">Bình Dương</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_east" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east_tay_ninh" model="stock.location">
+        <field name="name">Tây Ninh</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_east" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east_ba_ria" model="stock.location">
+        <field name="name">Bà Rịa</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_east" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east_binh_phuoc" model="stock.location">
+        <field name="name">Bình Phước</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_east" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east_thuan_an" model="stock.location">
+        <field name="name">Thuận An</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_east" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_east_vung_tau" model="stock.location">
+        <field name="name">Vũng Tàu</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_east" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west" model="stock.location">
+        <field name="name">Tây Nam Bộ</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_an_giang" model="stock.location">
+        <field name="name">An Giang</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_bac_lieu" model="stock.location">
+        <field name="name">Bạc Liêu</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_can_tho" model="stock.location">
+        <field name="name">Cần Thơ</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_dong_thap" model="stock.location">
+        <field name="name">Đồng Tháp</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_kien_giang" model="stock.location">
+        <field name="name">Kiên Giang</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_long_an" model="stock.location">
+        <field name="name">Long An</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_tien_giang" model="stock.location">
+        <field name="name">Tiền Giang</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+    <record id="stock_location_south_west_vinh_long" model="stock.location">
+        <field name="name">Vĩnh Long</field>
+        <field name="location_id" ref="kingsport_module.stock_location_south_west" />
+        <field name="usage">internal</field>
+    </record>
+
+</odoo>

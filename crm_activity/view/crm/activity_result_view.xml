@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- activity.result search view -->
+    <record id="activity_result_view_search" model="ir.ui.view">
+        <field name="name">activity.result.view.search</field>
+        <field name="model">activity.result</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+    <!-- activity.result tree view -->
+    <record id="activity_result_view_tree" model="ir.ui.view">
+        <field name="name">activity.result.view.tree</field>
+        <field name="model">activity.result</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="follow_up"/>
+                
+            </tree>
+        </field>
+    </record>
+    <!-- activity.result form view -->
+    <record id="activity_result_view_form" model="ir.ui.view">
+        <field name="name">activity.result.view.form</field>
+        <field name="model">activity.result</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="follow_up"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'crm_activity'), ('name', '=', 'activity_result_action')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+    <!-- activity.result action window -->
+    <record id="activity_result_action" model="ir.actions.act_window">
+        <field name="name">Activity Results</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">activity.result</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+</odoo>

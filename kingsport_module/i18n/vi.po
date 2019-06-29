@@ -1,0 +1,648 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* kingsport_module
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-10 031+0000\n"
+"PO-Revision-Date: 2019-06-10 031+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+################ HOANG HIEP - TRANSLATE ##############
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_res_partner__birth_date
+#: model:ir.model.fields,field_description:kingsport_module.field_res_users__birth_date
+msgid "Birth Date"
+msgstr "Ngày sinh"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_res_partner__source
+#: model:ir.model.fields,field_description:kingsport_module.field_res_users__source
+msgid "Source"
+msgstr "Nguồn"
+
+#. module: kingsport_module
+#: sql_constraint:res.partner:0
+msgid "This phone number already exists in the system. \n"
+"Please input another phone number."
+msgstr "Số điện thoại đã tồn tại, vui vòng nhập số điện thoại khác!"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_product_category__fullname
+msgid "Fullname"
+msgstr "Tên đầy đủ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_sale_order__approval_id
+#: model_terms:ir.ui.view,arch_db:kingsport_module.sale_order_list_select_view_search_inherit
+msgid "Approver"
+msgstr "Người duyệt"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_sale_order__direct_shipping
+#: model_terms:ir.ui.view,arch_db:kingsport_module.sale_order_list_select_view_search_inherit
+msgid "Direct Shipping"
+msgstr "Giao thẳng khách hàng"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_sale_order__location_id
+#: model:ir.model.fields,field_description:kingsport_module.field_sale_order_line__location_id
+#: model_terms:ir.ui.view,arch_db:kingsport_module.sale_order_list_select_view_search_inherit
+msgid "Delivery Location"
+msgstr "Kho giao hàng"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.sale_order_list_select_view_search_inherit
+msgid "Internal Location"
+msgstr "Kho nội bộ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__product_ids
+msgid "Products"
+msgstr "Sản Phẩm"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_product_template__business_category_id
+#: model:ir.model.fields,field_description:kingsport_module.field_product_product__business_category_id
+msgid "Business category"
+msgstr "Ngành hàng"
+
+#. module: kingsport_module
+#: model:ir.actions.act_window,name:kingsport_module.action_business_category
+#: model:ir.ui.menu,name:kingsport_module.menu_business_category
+msgid "Business Categories"
+msgstr "Ngành hàng kinh doanh"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_product_product__internal_name
+#: model:ir.model.fields,field_description:kingsport_module.field_product_template__internal_name
+msgid "Internal Name"
+msgstr "Tên nội bộ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_product_product__origin
+#: model:ir.model.fields,field_description:kingsport_module.field_product_template__origin
+msgid "Origin"
+msgstr "Xuất xứ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_product_product__product_specification
+#: model:ir.model.fields,field_description:kingsport_module.field_product_template__product_specification
+msgid "Product Specification"
+msgstr "Thông số kỹ thuật"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_stock_quant__action_state
+msgid "Action State"
+msgstr "Trạng thái chọn kho"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_choose_stock_quant_tree
+msgid "Cancel Choice"
+msgstr "Hủy chọn kho"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.sale_order_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_choose_stock_quant_tree
+msgid "Choose Location"
+msgstr "Chọn kho"
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/model/sale/sale_order_line.py:22
+#, python-format
+msgid "Product already exists!."
+msgstr "Sản phẩm đã tồn tại trong đơn hàng!."
+
+#. module: kingsport_module
+#: model:ir.model,name:kingsport_module.model_business_category
+msgid "Business Category"
+msgstr "Ngành hàng kinh doanh"
+
+#. module: kingsport_module
+#: model:ir.actions.act_window,name:kingsport_module.action_business_category
+msgid "Business Categories"
+msgstr "Ngành hàng kinh doanh"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_business_category__name
+msgid "Industry"
+msgstr "Ngành hàng"
+
+################ NGOC LUC - TRANSLATE ##############
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__birthday
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_lead_lead_inherit_filter
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_leads_inherit_filter
+msgid "Birthday"
+msgstr "Ngày Sinh"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__category_ids
+msgid "Categories"
+msgstr "Nhóm Sản Phẩm"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__gender
+#: model:ir.model.fields,field_description:kingsport_module.field_res_partner__gender
+#: model:ir.model.fields,field_description:kingsport_module.field_res_users__gender
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_lead_lead_inherit_filter
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_leads_inherit_filter
+msgid "Gender"
+msgstr "Giới Tính"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__phone
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_lead_lead_inherit_filter
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_leads_inherit_filter
+msgid "Phone"
+msgstr "Điện thoại"
+
+#. module: kingsport_module
+#: selection:crm.lead,gender:0
+#: selection:res.partner,gender:0
+msgid "Female"
+msgstr "Nữ"
+
+#. module: kingsport_module
+#: selection:crm.lead,gender:0
+#: selection:res.partner,gender:0
+msgid "Male"
+msgstr "Nam"
+
+#. module: kingsport_module
+#: selection:crm.lead,gender:0
+#: selection:res.partner,gender:0
+msgid "Other"
+msgstr "Khác"
+
+#. module: kingsport_module
+#: model:crm.stage,name:kingsport_module.input_lead_info
+msgid "Input Lead Infomation"
+msgstr "Nhập Thông Tin Khách Hàng"
+
+#. module: kingsport_module
+#: model:crm.stage,name:kingsport_module.1st_consultation
+msgid "1st Consultation"
+msgstr "Chăm sóc lần 1"
+
+#. module: kingsport_module
+#: model:crm.stage,name:kingsport_module.2nd_consultation
+msgid "2nd Consultation"
+msgstr "Chăm sóc lần 2"
+
+#. module: kingsport_module
+#: model:crm.stage,name:kingsport_module.3rd_consultation
+msgid "3rd Consultation"
+msgstr "Chăm sóc lần 3"
+
+#. module: kingsport_module
+#: model:crm.stage,name:kingsport_module.agency_call1
+msgid "Agency 1 Call"
+msgstr "Chi nhánh 1 gọi"
+
+#. module: kingsport_module
+#: model:crm.stage,name:kingsport_module.agency_call2
+msgid "Agency 2 Call"
+msgstr "Chi nhánh 2 gọi"
+
+#. module: kingsport_module
+#: model:crm.stage,name:kingsport_module.sales
+msgid "Sales"
+msgstr "Bán Hàng"
+
+#. module: crm_required_fields_state
+#: model:ir.model.fields,field_description:crm_required_fields_state.field_crm_stage__mandatory_fields
+msgid "Mandatory Fields"
+msgstr "Trường bắt buộc"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.crm_lead_lead_view_form_inherit
+msgid "Commune/Ward"
+msgstr "Xã/Phường"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_lead_lead_inherit_filter
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_leads_inherit_filter
+msgid "State"
+msgstr "Tỉnh/Thành"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__ward_id
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_lead_lead_inherit_filter
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_leads_inherit_filter
+msgid "Ward"
+msgstr "Phường/Xã"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__district_id
+#: model_terms:ir.ui.view,arch_db:kingsport_module.crm_lead_lead_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_lead_lead_inherit_filter
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_crm_case_leads_inherit_filter
+msgid "District"
+msgstr "Quận/Huyện"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_lead_allocation__team_id
+msgid "Team"
+msgstr "Nhóm bán hàng"
+
+#. module: kingsport_module
+#: sql_constraint:lead.allocation:0
+msgid "This team already exists in the allocation. \n"
+"Please input another team."
+msgstr "Nhóm bán hàng này đã được phân bổ, \nVui lòng chọn nhóm khác."
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__allocation_id
+msgid "Allocation"
+msgstr "Phân bổ"
+
+#. module: kingsport_module
+#: model:ir.actions.act_window,name:kingsport_module.open_view_lead_allocation_form
+#: model:ir.ui.menu,name:kingsport_module.menu_view_lead_allocation_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_lead_allocation_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_lead_allocation_list
+msgid "Allocations"
+msgstr "Phân bổ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_lead_allocation__district_ids
+msgid "Districts"
+msgstr "Quận/Huyện"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_lead_allocation__name
+msgid "Name"
+msgstr "Tên"
+
+################ TUNGPT - TRANSLATE ##############
+#. module: kingsport_module
+#: model:ir.model,name:kingsport_module.model_account_invoice_refund
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__invoice_refund_id
+msgid "Credit Note"
+msgstr "Hóa đơn hoàn tiền"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_invoice__card_number
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__card_number
+msgid "Card Number"
+msgstr "Mã số thẻ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__amount_refunded
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_res_partner_form_membership
+msgid "Amount Refunded"
+msgstr "Số tiền hoàn lại"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__stop_membership
+msgid "Stop"
+msgstr "Ngừng tập"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_invoice__user_id
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__user_id
+msgid "Salesperson"
+msgstr "Nhân viên kinh doanh"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_line_reserve__date_from
+msgid "Date From"
+msgstr "Từ ngày"
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/models/membership/membership_line_reserve.py:80
+#, python-format
+msgid "Date From of this reserve should not less than Date From of its Membership Line!"
+msgstr "Ngày bắt đầu của bảo lưu này không nên nhỏ hơn Ngày bắt đầu của thẻ dịch vụ!"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__date_stop
+msgid "Date Stop"
+msgstr "Ngày ngừng tập"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_line_reserve__date_to
+msgid "Date To"
+msgstr "Đến ngày"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__days_used
+msgid "Days Used"
+msgstr "Số ngày sử dụng"
+
+#. module: kingsport_module
+#: model:ir.actions.act_window,name:kingsport_module.action_stock_location_gym
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_invoice__gym_location_id
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__gym_location_id
+#: model:ir.ui.menu,name:kingsport_module.menu_config_stock_location_gym
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_search
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_tree
+msgid "Gym"
+msgstr "Phòng tập"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_res_partner_form_membership
+msgid "Membership Duration"
+msgstr "Thời hạn"
+
+#. module: kingsport_module
+#: model:ir.model,name:kingsport_module.model_membership_invoice
+msgid "Membership Invoice"
+msgstr "Hoá đơn"
+
+#. module: kingsport_module
+#: model:ir.model,name:kingsport_module.model_membership_membership_line
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_line_reserve__membership_line_id
+msgid "Membership Line"
+msgstr "Thẻ dịch vụ"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_res_partner_form_membership
+msgid "Membership Reserve"
+msgstr "Bảo lưu"
+
+#. module: kingsport_module
+#: model:ir.actions.act_window,name:kingsport_module.action_membership_membership_line
+#: model:ir.ui.menu,name:kingsport_module.menu_memberships_line
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_search
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_tree
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_res_partner_form_membership
+msgid "Memberships"
+msgstr "Thẻ dịch vụ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_product_product__month_membership
+#: model:ir.model.fields,field_description:kingsport_module.field_product_template__month_membership
+msgid "Month Membership"
+msgstr "Tháng"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_line_reserve__note
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: kingsport_module
+#: model:ir.ui.menu,name:kingsport_module.menu_config_membership_product
+msgid "Products"
+msgstr "Gói tập"
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/models/membership/membership_line_reserve.py:88
+#, python-format
+msgid "The minimum number of reservation days is %d day(s)!"
+msgstr "Số ngày bảo lưu tối thiểu là %d ngày!"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_res_partner_form_membership
+msgid "Refund"
+msgstr "Hoàn tiền"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__reserve_ids
+msgid "Reservation List"
+msgstr "Danh sách bảo lưu"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_membership_membership_line_form
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_res_partner_form_membership
+msgid "Reserve Duration"
+msgstr "Thời hạn bảo lưu"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_invoice__showroom_id
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__showroom_id
+#: model:ir.model.fields,field_description:kingsport_module.field_stock_location_gym__showroom_id
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_search
+msgid "Showroom"
+msgstr "Chi nhánh"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_membership_membership_line__membership_id
+msgid "Membership"
+msgstr "Gói tập"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__date_to
+msgid "To"
+msgstr "Đến"
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/models/membership/membership_line.py:67
+#, python-format
+msgid "Total reserve time should not exceed %d months!"
+msgstr "Tổng thời gian bảo lưu không vượt quá %d tháng"
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/models/membership/membership_line.py:74
+#, python-format
+msgid "Date Stop should not less than Date From!"
+msgstr "Ngày ngừng tập không thể nhỏ hơn ngày bắt đầu!"
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/models/membership/membership_line.py:129
+#, python-format
+msgid "There is no Invoice for creating Credit Note!"
+msgstr "Không có hoá đơn để thực hiện hoàn tiền!"
+
+#. module: kingsport_module
+#: model:product.template,uom_name:kingsport_module.product_template_membership_12_months
+#: model:product.template,uom_name:kingsport_module.product_template_membership_1_month
+#: model:product.template,uom_name:kingsport_module.product_template_membership_3_months
+#: model:product.template,uom_name:kingsport_module.product_template_membership_6_months
+msgid "Unit(s)"
+msgstr "Đơn vị"
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/models/membership/membership_line_reserve.py:65
+#, python-format
+msgid "You can not have an overlap between two reserves, please correct the start and/or end dates of your reserves."
+msgstr "Bạn không thể tạo các bảo lưu có thời hạn chồng chéo nhau, vui lòng chỉnh sửa lại ngày bắt đầu hoặc/và ngày kết thúc của thời hạn bảo lưu."
+
+#. module: kingsport_module
+#: code:addons/kingsport_module/models/membership/product_template.py:15
+#, python-format
+msgid "`Month Membership` should be positive!"
+msgstr "Tháng gói tập nên lớn hơn 0!"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_product_template_kanban_membership_products
+msgid "month(s)"
+msgstr "tháng"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_membership_membership_line__member_price
+#: model_terms:ir.ui.view,arch_db:membership.membership_products_form
+#: model_terms:ir.ui.view,arch_db:membership.membership_products_tree
+msgid "Membership Fee"
+msgstr "Phí tập"
+
+#. module: membership
+#: model:ir.actions.act_window,name:membership.action_membership_products
+#: model_terms:ir.ui.view,arch_db:membership.membership_product_search_form_view
+msgid "Membership Products"
+msgstr "Gói tập"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_membership_invoice__product_id
+#: model:ir.model.fields,field_description:membership.field_membership_membership_line__membership_id
+#: model:ir.model.fields,field_description:membership.field_product_product__membership
+#: model:ir.model.fields,field_description:membership.field_product_template__membership
+#: model:ir.model.fields,field_description:membership.field_res_partner__member_lines
+#: model:ir.model.fields,field_description:membership.field_res_users__member_lines
+#: model_terms:ir.ui.view,arch_db:membership.view_partner_form
+#: model_terms:ir.ui.view,arch_db:membership.view_report_membership_graph1
+#: model_terms:ir.ui.view,arch_db:membership.view_report_membership_pivot
+#: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
+msgid "Membership"
+msgstr "Thẻ dịch vụ"
+
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_res_partner__free_member
+#: model:ir.model.fields,field_description:membership.field_res_users__free_member
+#: selection:membership.membership_line,state:0
+#: selection:report.membership,membership_state:0
+#: selection:res.partner,membership_state:0
+msgid "Free Member"
+msgstr "Miễn phí thành viên"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_res_partner__membership_state
+msgid "Current Membership State"
+msgstr "Trạng thái thành viên hiện tại"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_product_product__membership_date_from
+#: model:ir.model.fields,field_description:membership.field_product_template__membership_date_from
+#: model:ir.model.fields,field_description:membership.field_res_partner__membership_start
+#: model:ir.model.fields,field_description:membership.field_res_users__membership_start
+msgid "Membership Start Date"
+msgstr "Ngày bắt đầu"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_product_product__membership_date_to
+#: model:ir.model.fields,field_description:membership.field_product_template__membership_date_to
+#: model:ir.model.fields,field_description:membership.field_res_partner__membership_stop
+#: model:ir.model.fields,field_description:membership.field_res_users__membership_stop
+msgid "Membership End Date"
+msgstr "Ngày kết thúc"
+
+#. module: membership
+#: model_terms:ir.ui.view,arch_db:membership.view_partner_form
+msgid "Buy Membership"
+msgstr "Mua thẻ dịch vụ"
+
+#. module: membership
+#: model:ir.model.fields,help:membership.field_res_partner__membership_state
+#: model:ir.model.fields,help:membership.field_res_users__membership_state
+#: model:ir.model.fields,help:membership.field_membership_membership_line__state
+msgid ""
+"It indicates the membership state.\n"
+"-Non Member: A partner who has not applied for any membership.\n"
+"-Cancelled Member: A member who has cancelled his membership.\n"
+"-Old Member: A member whose membership date has expired.\n"
+"-Waiting Member: A member who has applied for the membership and whose invoice is going to be created.\n"
+"-Invoiced Member: A member whose invoice has been created.\n"
+"-Paying member: A member who has paid the membership fee."
+msgstr ""
+"Trạng thái của thành viên.\n"
+"-Chưa đăng kí thẻ dịch vụ: Khách hàng chưa đăng ký thẻ dịch vụ nào. \n"
+"-Huỷ thẻ dịch vụ: Khách hàng đã hủy thẻ dịch vụ của mình. \n"
+"-Thẻ dịch vụ hết hạn: Thẻ dịch vụ của khách hàng đã hết hạn. \n"
+"-Chờ xuất hoá đơn: Khách hàng đã đăng ký thẻ dịch vụ và đang chờ xuất hoá đơn. \n"
+"-Hoá đơn cần thanh toán: Khách hàng đã đăng ký thẻ dịch vụ và có hóa đơn cần thanh toán. \n"
+"-Hoá đơn đã thanh toán: Khách hàng đã đăng ký thẻ dịch vụ và đã thanh toán hoá đơn."
+
+#. module: membership
+#: selection:membership.membership_line,state:0
+#: selection:report.membership,membership_state:0
+#: selection:res.partner,membership_state:0
+msgid "Non Member"
+msgstr "Chưa đăng kí thẻ dịch vụ"
+
+#. module: membership
+#: selection:membership.membership_line,state:0
+#: selection:report.membership,membership_state:0
+#: selection:res.partner,membership_state:0
+msgid "Cancelled Member"
+msgstr "Huỷ thẻ dịch vụ"
+
+#. module: membership
+#: selection:membership.membership_line,state:0
+#: selection:report.membership,membership_state:0
+#: selection:res.partner,membership_state:0
+msgid "Old Member"
+msgstr "Thẻ dịch vụ hết hạn"
+
+#. module: membership
+#: selection:membership.membership_line,state:0
+#: selection:report.membership,membership_state:0
+#: selection:res.partner,membership_state:0
+msgid "Waiting Member"
+msgstr "Chờ xuất hoá đơn"
+
+#. module: membership
+#: selection:membership.membership_line,state:0
+#: selection:report.membership,membership_state:0
+#: selection:res.partner,membership_state:0
+msgid "Invoiced Member"
+msgstr "Hoá đơn cần thanh toán"
+
+#. module: membership
+#: selection:membership.membership_line,state:0
+#: selection:report.membership,membership_state:0
+#: selection:res.partner,membership_state:0
+msgid "Paid Member"
+msgstr "Hoá đơn đã thanh toán"
+
+#. module: membership
+#: model:ir.model.fields,help:membership.field_res_partner__free_member
+#: model:ir.model.fields,help:membership.field_res_users__free_member
+msgid "Select if you want to give free membership."
+msgstr "Chọn nếu bạn muốn cho phép miễn phí thẻ dịch vụ."
+
+#. module: membership
+#: model:ir.model.fields,help:membership.field_res_partner__associate_member
+#: model:ir.model.fields,help:membership.field_res_users__associate_member
+msgid ""
+"A member with whom you want to associate your membership.It will consider "
+"the membership state of the associated member."
+msgstr ""
+"Một thành viên mà bạn muốn liên kết với thẻ dịch vụ của mình. Sẽ có sự xem xét "
+"trạng thái thành viên của thành viên liên kết."
+
+#. module: membership
+#: model:ir.model.fields,help:membership.field_res_partner__membership_start
+#: model:ir.model.fields,help:membership.field_res_users__membership_start
+msgid "Date from which membership becomes active."
+msgstr "Ngày thẻ dịch vụ bắt đầu kích hoạt."
+
+#. module: membership
+#: model:ir.model.fields,help:membership.field_membership_membership_line__date
+msgid "Date on which member has joined the membership"
+msgstr "Ngày khách hàng đăng kí thẻ dịch vụ"
+
+#. module: membership
+#: model:ir.model.fields,help:membership.field_res_partner__membership_stop
+#: model:ir.model.fields,help:membership.field_res_users__membership_stop
+msgid "Date until which membership remains active."
+msgstr "Ngày cuối cùng mà thẻ dịch vụ vẫn còn hiệu lực."
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_membership_membership_line__partner
+msgid "Partner"
+msgstr "Khách hàng"

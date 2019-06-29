@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="mail_activity_type_view_form_inherit" model="ir.ui.view">
+        <field name="name">mail.activity.type.view.form.inherit</field>
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="replace">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                        <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                    </button>
+                </div>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="code"/>
+                        <field name="stage_id" attrs="{'required': [('use_for_crm', '=', True)]}"/>
+                        <label for="delay_count"/>
+                        <div>
+                            <div class="o_row">
+                                <field name="delay_count"/>
+                                <field name="delay_unit"/>
+                            </div>
+                            <field name="delay_from"/>
+                        </div>
+                        <field name="sequence" />
+                    </group>
+                    <group>
+                        <field name="followup_ids" widget="many2many_tags"/>
+                        <field name="icon" groups="base.group_no_one" />
+                        <field name="decoration_type" />
+                        <field name="category" />
+                        <field name="res_model_id" groups="base.group_no_one"/>
+                        <field name="use_for_crm" />
+                        <field name="res_model_change" invisible="1"/>
+                        <field name="res_model" invisible="1"/>
+                    </group>
+                </group>
+                <label for="summary" />
+                <field name="summary" col="4"/>
+                <p class="alert alert-info" role="alert" attrs="{'invisible': [('res_model_change', '=', False)]}">Modifying the model can have an impact on existing activities using this activity type, be careful.</p>
+                <group col="4" string="Possible Results">
+                    <field name="possible_result_ids" nolabel="1">
+                        <tree editable="top">
+                            <field name="result_id" />
+                            <field name="destination_stage_id" />
+                            <field name="final_stage_id"
+                                   attrs="{'readonly': [('is_result_followup', '=', False)], 'required': [('is_result_followup', '=', True)]}"
+                            />
+                            <field name="is_result_followup" invisible="1"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="mail_activity_type_view_tree_inherit" model="ir.ui.view">
+        <field name="name">mail.activity.type.view.tree.inherit</field>
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="code"/>
+            </field>
+            <field name="delay_from" position="after">
+                <field name="stage_id"/>
+            </field>
+        </field>
+    </record>
+    <record id="mail_activity_type_view_search_inherit" model="ir.ui.view">
+        <field name="name">mail.activity.type.search.inherit</field>
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="code"/>
+                <field name="stage_id"/>
+            </field>
+            <xpath expr="//filter[@name='archived']" position="after">
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Stage" name="stage" domain="[]"
+                            context="{'group_by':'stage_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

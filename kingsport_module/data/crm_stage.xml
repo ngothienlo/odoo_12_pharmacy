@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', 'in', ['crm', 'crm_activity']), ('name', 'like', 'stage%')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+
+    <record model="crm.stage" id="crm.stage_lead1">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model="crm.stage" id="crm.stage_lead2">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model="crm.stage" id="crm.stage_lead3">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model="crm.stage" id="crm.stage_lead4">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model="crm.stage" id="input_lead_info">
+        <field name="name">Input Lead Infomation</field>
+        <field name="probability">10</field>
+        <field name="on_change">1</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="crm.stage" id="agency_call1">
+        <field name="name">Agency 1 Call</field>
+        <field name="probability">20</field>
+        <field name="on_change">1</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record model="crm.stage" id="agency_call2">
+        <field name="name">Agency 2 Call</field>
+        <field name="probability">30</field>
+        <field name="on_change">1</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record model="crm.stage" id="1st_consultation">
+        <field name="name">1st Consultation</field>
+        <field name="fold" eval="False"/>
+        <field name="probability">40</field>
+        <field name="on_change">1</field>
+        <field name="sequence">4</field>
+    </record>
+
+    <record model="crm.stage" id="2nd_consultation">
+        <field name="name">2nd Consultation</field>
+        <field name="fold" eval="False"/>
+        <field name="probability">50</field>
+        <field name="on_change">1</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record model="crm.stage" id="3rd_consultation">
+        <field name="name">3rd Consultation</field>
+        <field name="fold" eval="False"/>
+        <field name="probability">70</field>
+        <field name="on_change">1</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record model="crm.stage" id="sales">
+        <field name="name">Sales</field>
+        <field name="fold" eval="False"/>
+        <field name="probability">100</field>
+        <field name="on_change">1</field>
+        <field name="sequence">7</field>
+    </record>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', 'in', ['crm', 'crm_activity']), ('name', 'like', 'stage%')]"/>
+        </function>
+        <value eval="{'noupdate': True}"/>
+    </function>
+
+</odoo>

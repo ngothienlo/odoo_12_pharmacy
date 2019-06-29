@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- activity.followup search view -->
+    <record id="activity_followup_view_search" model="ir.ui.view">
+        <field name="name">activity.followup.view.search</field>
+        <field name="model">activity.followup</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                
+            </search>
+        </field>
+    </record>
+    <!-- activity.followup tree view -->
+    <record id="activity_followup_view_tree" model="ir.ui.view">
+        <field name="name">activity.followup.view.tree</field>
+        <field name="model">activity.followup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence"/>
+                <field name="hours_to_followup"/>
+            </tree>
+        </field>
+    </record>
+    <!-- activity.followup form view -->
+    <record id="activity_followup_view_form" model="ir.ui.view">
+        <field name="name">activity.followup.view.form</field>
+        <field name="model">activity.followup</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="hours_to_followup"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'crm_activity'), ('name', '=', 'activity_followup_action')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+    <!-- activity.followup action window -->
+    <record id="activity_followup_action" model="ir.actions.act_window">
+        <field name="name">Activity Follow-ups</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">activity.followup</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+</odoo>

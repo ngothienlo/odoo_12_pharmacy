@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_membership_membership_line_form" model="ir.ui.view" >
+        <field name="name">view.membership.membership.line.form</field>
+        <field name="model">membership.membership_line</field>
+        <field name="arch" type="xml">
+            <form string="Memberships" create="0" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <field name="partner" />
+                        <field name="card_number" />
+                    </group>
+                    <group>
+                        <group>
+                            <field name="membership_id" />
+                            <label for="date_from" string="Membership Duration"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> -
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="user_id" />
+                            <field name="gym_location_id" />
+                            <field name="showroom_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="member_price" />
+                            <field name="account_invoice_id"
+                                context="{'form_view_ref': 'account.invoice_form'}"/>
+                            <field name="invoice_refund_id"
+                                attrs="{'invisible': [('id', '!=', False)]}"
+                                context="{'form_view_ref': 'account.invoice_form'}" />
+                        </group>
+                        <group>
+                            <field name="stop_membership" />
+                            <field name="date_stop"
+                                attrs="{'required': [('stop_membership', '=', True)], 'invisible': [('stop_membership', '=', False)]}" />
+                            <field name="days_used" />
+                            <label for="amount_refunded" string="Amount Refunded" attrs="{'invisible': [('account_invoice_line', '=', False), ('stop_membership', '=', False)]}"/>
+                            <div attrs="{'invisible': [('account_invoice_line', '=', False), ('stop_membership', '=', False)]}">
+                                <field name="amount_refunded" class="oe_inline" />
+                                <field name="account_invoice_line" invisible="1" />
+                                <button string="Refund" name="button_account_invoice_refund" type='action' class='btn-info oe_inline ml-2' />
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="reserve_ids">
+                            <tree string="Membership Reserve" editable="bottom">
+                                <field name="date_from" />
+                                <field name="date_to" />
+                                <field name="note" />
+                            </tree>
+                            <form string="Membership Reserve">
+                                <group>
+                                    <field name="membership_line_id"/>
+                                    <label for="date_from" string="Reserve Duration"/>
+                                    <div>
+                                        <field name="date_from" class="oe_inline"/> -
+                                        <field name="date_to" class="oe_inline"/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="note"/>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_membership_membership_line_tree" model="ir.ui.view" >
+        <field name="name">view.membership.membership.line.tree</field>
+        <field name="model">membership.membership_line</field>
+        <field name="arch" type="xml">
+            <tree string="Memberships" create="0" delete="0">
+                <field name="card_number"/>
+                <field name="partner" />
+                <field name="membership_id"/>
+                <field name="member_price"/>
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="account_invoice_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='view_membership_membership_line_search' model='ir.ui.view'>
+        <field name='name'>view.membership.membership.line.search</field>
+        <field name='model'>membership.membership_line</field>
+        <field name='arch' type='xml'>
+            <search string="Memberships">
+                <field name='card_number' />
+                <field name='partner' />
+                <group  expand='0' string='Group by...'>
+                    <filter string='State' name="state"
+                        domain="[]" context="{'group_by' : 'state'}"/>
+                    <filter string='Partner' name="partner"
+                        domain="[]" context="{'group_by' : 'partner'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

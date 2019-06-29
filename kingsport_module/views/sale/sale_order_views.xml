@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="sale_order_view_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.view.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <button name="%(sale.action_view_sale_advance_payment_inv)d" position="replace"/>
+            <button name="%(sale.action_view_sale_advance_payment_inv)d" position="replace">
+                <button string="Create Invoice" name="create_invoices" type="object"
+                        attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"
+                        class="btn-primary"/>
+            </button>
+
+            <header position="inside">
+                <button string="Create Exchange Order" name="create_exchange_order" type="object" attrs="{'invisible': [('exchange_order', '=', True)]}"/>
+            </header>
+
+            <field name="payment_term_id" position="after">
+                <field name="approval_id"/> 
+                <field name="direct_shipping"/>
+                <field name="location_id"/>
+                <field name="total_cost_price" />
+            </field>
+
+            <xpath expr="//tree/field[@name='product_uom_qty']" position="after">
+                <field name="location_id" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="context">{'default_location_id': location_id, 'default_order_id': active_id}</attribute>
+            </xpath>                    
+
+            <xpath expr="//form//field[@name='order_line']" position="before">
+                <div class="oe_button_box">
+                    <button class="oe_stat_button" style="margin-bottom:17px; margin-right:20px"
+                        icon="fa-calculator" name="action_view_stock_quant"
+                        type="object" string="Choose Location"/>
+                </div>
+            </xpath>
+
+	        <xpath expr="//tree/field[@name='price_tax']" position="after">
+                <field name="cost_price"/>
+                <field name="total_cost" invisible="1"/>
+            </xpath>
+
+            <field name="origin" position="after">
+                <field name="maintenance_order"/>
+                <field name="delivery_order" attrs="{'required': [('maintenance_order', '=', True)]}"/>
+                <field name="exchange_order" readonly="1"/>
+                <field name="original_order" attrs="{'invisible': [('exchange_order', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_list_select_view_search_inherit" model="ir.ui.view">
+        <field name="name">sale.order.list.select.view.search.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <field name="analytic_account_id" position="after">
+                <field name="approval_id"/>
+                <field name="location_id"/>
+                <filter name="filter_direct_shipping" string="Direct Shipping" domain="[('direct_shipping','=',True)]"/>
+                <group expand="0" string="Group By...">
+                    <filter name="groupby_approver_id" string="Approver" context="{'group_by': 'approval_id'}"/>
+                    <filter name="groupby_location_id" string="Delivery Location" context="{'group_by': 'location_id'}"/>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>

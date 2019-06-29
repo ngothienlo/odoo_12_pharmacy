@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_stage_form_view_inherit" model="ir.ui.view">
+        <field name="name">crm.stage.form.view.inherit</field>
+        <field name="model">crm.stage</field>
+        <field name="inherit_id" ref="crm.crm_stage_form"/>
+        <field name="arch" type="xml">
+            <field name="fold" position="after">
+                <field name="mandatory_fields" options="{'no_open': True, 'no_create': True, 'no_create_edit': True}" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+</odoo>

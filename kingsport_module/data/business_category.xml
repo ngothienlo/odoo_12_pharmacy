@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <record model="business.category" id="business_category_sport">
+        <field name="name">Sport</field>
+    </record>
+
+    <record model="business.category" id="business_category_health_care">
+        <field name="name">Chăm sóc sức khỏe</field>
+    </record>
+
+    <record model="business.category" id="business_category_appliances">
+        <field name="name">Gia dụng</field>
+    </record>
+
+    <record model="business.category" id="business_category_sanitary_equipment">
+        <field name="name">Thiết bị vệ sinh</field>
+    </record>
+
+    <record model="business.category" id="business_category_small_industry">
+        <field name="name">Ngành hàng nhỏ: máy đo huyết áp, năng lượng mặt trời, thảm, v.v</field>
+    </record>
+
+</odoo>

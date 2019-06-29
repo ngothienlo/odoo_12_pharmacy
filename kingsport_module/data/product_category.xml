@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <record model="product.category" id="product_category_mcb">
+        <field name="name">MCB</field>
+        <field name="fullname">Máy chạy bộ</field>
+    </record>
+
+    <record model="product.category" id="product_category_ms_chair">
+        <field name="name">Ghế MS</field>
+        <field name="fullname">Ghế Massage</field>
+    </record>
+
+    <record model="product.category" id="product_category_vibrator">
+        <field name="name">Máy rung</field>
+        <field name="fullname">Máy rung giảm cân</field>
+    </record>
+
+    <record model="product.category" id="product_category_bike">
+        <field name="name">Xe đạp</field>
+        <field name="fullname">Xe đạp</field>
+    </record>
+
+    <record model="product.category" id="product_category_Weightlifting">
+        <field name="name">Giàn tạ</field>
+        <field name="fullname">Giàn tạ</field>
+    </record>
+
+    <record model="product.category" id="product_category_fan">
+        <field name="name">Quạt</field>
+        <field name="fullname">Quạt điều hoà</field>
+    </record>
+
+    <record model="product.category" id="product_category_grinder">
+        <field name="name">Máy xay</field>
+        <field name="fullname">Máy xay sinh tố</field>
+    </record>
+
+    <record model="product.category" id="product_category_setup_gym">
+        <field name="name">Setup Gym</field>
+        <field name="fullname">Setup Gym</field>
+    </record>
+
+    <record model="product.category" id="product_category_sanitary_equipment">
+        <field name="name">Tbị Vsinh</field>
+        <field name="fullname">Thiết bị vệ sinh</field>
+    </record>
+
+    <record model="product.category" id="product_category_feng_shui">
+        <field name="name">Phong thuỷ</field>
+        <field name="fullname">Phong thuỷ</field>
+    </record>
+
+    <record model="product.category" id="product_category_solarking">
+        <field name="name">Solarking</field>
+        <field name="fullname">Solarking</field>
+    </record>
+
+    <record model="product.category" id="product_category_foot_massage">
+        <field name="name">Massage chân</field>
+        <field name="fullname">Máy massage chân</field>
+    </record>
+
+    <record model="product.category" id="product_category_gym_service">
+        <field name="name">DV Gym</field>
+        <field name="fullname">Dịch vụ Gym</field>
+    </record>
+
+    <record model="product.category" id="product_category_carpet">
+        <field name="name">Thảm</field>
+        <field name="fullname">Thảm lót sàn</field>
+    </record>
+
+    <record model="product.category" id="product_category_sport_shoes">
+        <field name="name">Giày thể thao</field>
+        <field name="fullname">Giày nhập chính hãng</field>
+    </record>
+
+    <record model="product.category" id="product_category_shoe_height_increases">
+        <field name="name">Giày tăng chiều cao</field>
+        <field name="fullname">Giày tăng chiều cao</field>
+    </record>
+
+    <record model="product.category" id="product_category_sphygmomanometer">
+        <field name="name">Máy đo huyết áp</field>
+        <field name="fullname">Máy đo huyết áp</field>
+    </record>
+
+    <record model="product.category" id="product_category_mhck">
+        <field name="name">MHCK</field>
+        <field name="fullname">Máy hút chân không</field>
+    </record>
+
+    <record model="product.category" id="product_category_other">
+        <field name="name">Khác</field>
+        <field name="fullname">Máy chạy bộ</field>
+    </record>
+
+</odoo>

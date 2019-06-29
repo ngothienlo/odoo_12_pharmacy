@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'crm'), ('name', 'like', 'menu%')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+    <!-- CRM > Configuration  > Activity Result-->
+    <menuitem id="menu_activity_result"
+        name="Activity Results"
+        action="activity_result_action"
+        parent="crm.crm_menu_config"
+        sequence="13"/>
+    <!-- CRM > Configuration  > Activity Followup-->
+    <menuitem id="menu_activity_followup"
+        name="Activity Follow-ups"
+        action="activity_followup_action"
+        parent="crm.crm_menu_config"
+        sequence="14"/>
+
+    <record id="crm.menu_crm_lead_stage_act" model="ir.ui.menu">
+        <field name="name">Stages</field>
+        <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_manager')])]"/>
+    </record>
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'crm'), ('name', 'like', 'menu%')]"/>
+        </function>
+        <value eval="{'noupdate': True}"/>
+    </function>
+</odoo>

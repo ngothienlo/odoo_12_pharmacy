@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <record id='product_template_membership_1_month' model='product.template'>
+        <field name="name">1 tháng</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="month_membership">1</field>
+    </record>
+
+    <record id='product_template_membership_3_months' model='product.template'>
+        <field name="name">3 tháng</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="month_membership">3</field>
+    </record>
+
+    <record id='product_template_membership_6_months' model='product.template'>
+        <field name="name">6 tháng</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="month_membership">6</field>
+    </record>
+
+    <record id='product_template_membership_12_months' model='product.template'>
+        <field name="name">12 tháng</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="month_membership">12</field>
+    </record>
+
+</odoo>

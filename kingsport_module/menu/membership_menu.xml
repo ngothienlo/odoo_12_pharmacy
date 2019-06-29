@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============================================================== -->
+    <!-- Members > Memberships -->
+    <!-- ============================================================== -->
+    <record id="action_membership_membership_line" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Memberships</field>
+        <field name="res_model">membership.membership_line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+    <menuitem name="Memberships" id="menu_memberships_line"
+            parent="membership.menu_association" sequence="30"
+            action="action_membership_membership_line"/>
+
+    <!-- ============================================================== -->
+    <!-- Members > Configuration -->
+    <!-- ============================================================== -->
+    <menuitem name="Configuration" id="membership.menu_marketing_config_association"
+            parent="membership.menu_association" sequence="100"/>
+
+    <!-- ============================================================== -->
+    <!-- Members > Configuration > Membership Products -->
+    <!-- ============================================================== -->
+    <menuitem name="Products" id="menu_config_membership_product"
+        parent="membership.menu_marketing_config_association" sequence="10"
+        action="membership.action_membership_products"/>
+
+    <!-- ============================================================== -->
+    <!-- Members > Configuration > Gym -->
+    <!-- ============================================================== -->
+    <record id="action_stock_location_gym" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Gym</field>
+        <field name="res_model">stock.location.gym</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+    <menuitem id="menu_config_stock_location_gym"
+        name="Gym"
+        parent="membership.menu_marketing_config_association"
+        sequence="20"
+        action="action_stock_location_gym"/>
+</odoo>

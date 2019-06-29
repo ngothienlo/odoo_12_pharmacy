@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <record model="activity.followup" id="followup_1day">
+        <field name="name">F1 - 1 day</field>
+        <field name="hours_to_followup" eval="24"/>
+        <field name="sequence" eval="1"/>
+    </record>
+    <record model="activity.followup" id="followup_2days">
+        <field name="name">F2 - 2 days</field>
+        <field name="hours_to_followup" eval="48"/>
+        <field name="sequence" eval="2"/>
+    </record>
+    <record model="activity.followup" id="followup_5days">
+        <field name="name">F3 - 5 days</field>
+        <field name="hours_to_followup" eval="120"/>
+        <field name="sequence" eval="3"/>
+    </record>
+</odoo>

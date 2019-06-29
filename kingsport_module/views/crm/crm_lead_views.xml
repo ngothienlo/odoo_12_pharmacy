@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- crm.lead inherit form view -->
+    <record id="crm_lead_opp_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.opp.inherit.view.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="birthday"/>
+                <field name="gender"/>
+            </field>
+            <field name="phone" position="after">
+                <field name="category_ids" widget="many2many_tags"/>
+                <field name="product_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- crm.lead inherit form view -->
+    <record id="crm_lead_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.lead.inherit.view.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="['|', ('team_id', '=', team_id), ('team_id', '=', False)]" attrs="{'invisible': [('active', '=', False)]}"/>
+            </header>
+            <field name="website" position="after">
+                <field name="category_ids" widget="many2many_tags"/>
+                <field name="product_ids" widget="many2many_tags"/>
+            </field>
+            <field name="city" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="zip" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//field[@name='state_id']" position="replace">
+            </xpath>
+            <field name="country_id" position="replace">
+                <div class="oe_read_only">
+                    <field name="ward_id" placeholder="Commune/ Ward" style="width: 49%%;"/>
+                    <field name="district_id" placeholder="District" style="width: 49%%;"/>
+                    <field name="state_id" placeholder="Province" style="width: 49%%;"
+                           attrs="{'required': [('partner_id', '=', True)]}"/>
+                    <field name="country_id" placeholder="Country" style="width: 49%%;"/>
+                </div>
+                <div class="oe_edit_only">
+                    <field name="country_id" placeholder="Country" style="width: 49%%;"/>
+                    <field name="state_id" placeholder="Province" style="width: 49%%;"
+                           attrs="{'required': [('partner_id', '=', True)]}"/>
+                    <field name="district_id" placeholder="District" style="width: 49%%;"/>
+                    <field name="ward_id" placeholder="Commune/ Ward" style="width: 49%%;"/>
+                </div>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_crm_case_leads_inherit_filter" model="ir.ui.view">
+        <field name="name">crm.lead.search.lead.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <field name="probability" position="after">
+                <field name="gender"/>
+                <field name="birthday"/>
+                <field name="phone"/>
+                <field name="state_id"/>
+                <field name="district_id"/>
+                <field name="ward_id"/>
+            </field>
+            <xpath expr="//filter[@name='country']" position="after">
+                <filter string="State" name="state_id" context="{'group_by':'state_id'}"/>
+                <filter string="District" name="district_id" context="{'group_by':'district_id'}"/>
+                <filter string="Ward" name="ward_id" context="{'group_by':'ward_id'}"/>
+            </xpath>
+            <xpath expr="//filter[@name='city']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
+                <filter string="Birthday" name="birthday" context="{'group_by':'birthday'}"/>
+                <filter string="Phone" name="phone" context="{'group_by':'phone'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_case_lead_lead_inherit_filter" model="ir.ui.view">
+        <field name="name">crm.lead.search.lead.lead.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+        <field name="arch" type="xml">
+            <field name="country_id" position="after">
+                <field name="state_id"/>
+                <field name="district_id"/>
+                <field name="ward_id"/>
+                <field name="gender"/>
+                <field name="birthday"/>
+                <field name="phone"/>
+            </field>
+            <xpath expr="//filter[@name='country']" position="after">
+                <filter string="State" name="state_id" context="{'group_by':'state_id'}"/>
+                <filter string="District" name="district_id" context="{'group_by':'district_id'}"/>
+                <filter string="Ward" name="ward_id" context="{'group_by':'ward_id'}"/>
+            </xpath>
+            <xpath expr="//filter[@name='city']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
+                <filter string="Birthday" name="birthday" context="{'group_by':'birthday'}"/>
+                <filter string="Phone" name="phone" context="{'group_by':'phone'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

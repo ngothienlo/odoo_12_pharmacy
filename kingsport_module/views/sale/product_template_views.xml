@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_product_template_form_inherit" model="ir.ui.view">
+        <field name="name">view.product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="business_category_id"/>
+                <field name="internal_name"/>                    
+                <field name="origin"/>
+                <field name="product_specification"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_template_search_inherit" model="ir.ui.view">
+        <field name="name">view.product.template.search.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="business_category_id"/>
+                <field name="internal_name"/>
+                <field name="product_specification"/>
+                <field name="origin"/>
+                <group expand="0" string="Group By">
+                    <filter name="business_category_id"
+                        domain="[]" context="{'group_by':'business_category_id'}"/>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>
