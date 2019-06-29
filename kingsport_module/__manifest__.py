@@ -42,7 +42,6 @@ This module will install all module dependencies of Kingpsort.
 
         # OCA Addons
         'web_responsive',
-        'web_no_bubble',
 
         # Other Addons
         'orange_theme_odoo12'
