@@ -16,7 +16,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api
+from odoo import models, api
 from datetime import datetime
 
 
@@ -26,17 +26,18 @@ class ReturnPicking(models.TransientModel):
     def _create_returns(self):
         new_picking_id, picking_type_id = super(
             ReturnPicking, self)._create_returns()
-        if self.picking_id.state == 'done' and (
-                datetime.now().date() -
-                self.picking_id.date_done.date()).days > 7:
-            self.env['stock.picking'].browse(
-                new_picking_id).write({'return_do_over_7days': True})
+        if self.picking_id and self.picking_id.picking_type_code == 'outgoing':
+            if self.picking_id.state == 'done' and (
+                    datetime.now().date() -
+                    self.picking_id.date_done.date()).days > 7:
+                self.env['stock.picking'].browse(
+                    new_picking_id).write({'return_do_over_7days': True})
         return new_picking_id, picking_type_id
 
     @api.model
     def default_get(self, fields_):
         res = super(ReturnPicking, self).default_get(fields_)
-        if 'product_reodturn_moves' in res:
-            for line in res.get('product_reodturn_moves'):
+        if 'product_return_moves' in res:
+            for line in res.get('product_return_moves'):
                 line[2].update({'to_refund': True})
         return res

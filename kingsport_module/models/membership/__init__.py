@@ -17,7 +17,7 @@
 #
 ##############################################################################
 from . import account_invoice
+from . import membership_line_attendance
 from . import membership_line_reserve
 from . import membership_line
-from . import product_template
 from . import stock_location_gym

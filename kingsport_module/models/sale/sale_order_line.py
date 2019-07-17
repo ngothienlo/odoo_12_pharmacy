@@ -23,8 +23,10 @@ from odoo.exceptions import Warning
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    location_id = fields.Many2one('stock.location', 'Delivery Location')
-    cost_price = fields.Float(related='product_id.standard_price')
+    location_id = fields.Many2one(
+        'stock.location', 'Delivery Location',
+        domain=[('usage', '=', 'internal')])
+    cost_price = fields.Float(related='product_id.standard_price', store=True)
     total_cost = fields.Float(compute='_compute_total_cost', store=True)
 
     @api.depends('cost_price', 'product_uom_qty')
@@ -60,7 +62,7 @@ class SaleOrderLine(models.Model):
     def _update_location(self):
         product_id = self.product_id and self.product_id.id or False
         if product_id:
-            so_location_id = self.env.context.get('default_location_id')
+            so_location_id = self.env.context.get('so_location_id')
             line_location_id = self.location_id and\
                 self.location_id.id or False
             product_uom_qty = self.product_uom_qty or 0
@@ -93,4 +95,45 @@ class SaleOrderLine(models.Model):
         qty_to_check = total_on_hand - total_reserved
         if qty_to_check < product_uom_qty:
             return False
+        return True
+
+    @api.multi
+    def _prepare_procurement_values(self, group_id=False):
+        self.ensure_one()
+        values = super(SaleOrderLine, self)._prepare_procurement_values(
+            group_id)
+        src_location_id = False
+        direct_shipping = self.order_id and\
+            self.order_id.direct_shipping or False
+        if direct_shipping:
+            src_location_id = self.location_id and self.location_id.id or False
+        else:
+            src_location_id = self.order_id and\
+                self.order_id.current_location_id.id
+        values.update({
+            'src_location_id': src_location_id,
+        })
+        return values
+
+    @api.multi
+    def _create_stock_move(self):
+        self.ensure_one()
+        stock_move_env = self.env['stock.move']
+        date_planned = fields.Datetime.now()
+        move_values = {
+            'location_id': self.location_id.id,
+            'location_dest_id': self.order_id.current_location_id.id,
+            'product_uom_qty': self.product_uom_qty,
+            'product_uom': self.product_uom.id,
+            'name': self.name,
+            'product_id': self.product_id.id,
+            'picking_type_id': self.env.ref('stock.picking_type_internal').id,
+            'date': date_planned,
+            'date_expected': date_planned,
+        }
+        stock_move = stock_move_env.create(move_values)
+        stock_move._assign_picking()
+        picking = stock_move.picking_id
+        if picking:
+            picking.sale_id = self.order_id.id
         return True

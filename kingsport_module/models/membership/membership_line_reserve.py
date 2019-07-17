@@ -15,7 +15,8 @@ class MembershipLineReserve(models.Model):
         'Date To', required=True)
     note = fields.Text('Note')
     membership_line_id = fields.Many2one(
-        'membership.membership_line', string='Membership Line')
+        'membership.membership_line', string='Membership Line',
+        ondelete='cascade')
 
     @api.multi
     def total_reserve_days(self):

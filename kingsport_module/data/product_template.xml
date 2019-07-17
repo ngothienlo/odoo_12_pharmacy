@@ -1,36 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="0">
-
-    <record id='product_template_membership_1_month' model='product.template'>
-        <field name="name">1 tháng</field>
+    <record id="product_template_membership_gym_1_month" model="product.template">
+        <field name="name">1 month</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>
+        <field name="type_membership">gym</field>
         <field name="month_membership">1</field>
     </record>
 
-    <record id='product_template_membership_3_months' model='product.template'>
-        <field name="name">3 tháng</field>
+    <record id="product_template_membership_gym_3_months" model="product.template">
+        <field name="name">3 months</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>
+        <field name="type_membership">gym</field>
         <field name="month_membership">3</field>
     </record>
 
-    <record id='product_template_membership_6_months' model='product.template'>
-        <field name="name">6 tháng</field>
+    <record id="product_template_membership_gym_6_months" model="product.template">
+        <field name="name">6 months</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>
+        <field name="type_membership">gym</field>
         <field name="month_membership">6</field>
     </record>
 
-    <record id='product_template_membership_12_months' model='product.template'>
-        <field name="name">12 tháng</field>
+    <record id="product_template_membership_gym_12_months" model="product.template">
+        <field name="name">12 months</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>
+        <field name="type_membership">gym</field>
         <field name="month_membership">12</field>
+    </record>
+
+    <record id="product_template_membership_training_1_months" model="product.template">
+        <field name="name">Personal trainer 1 month</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="type_membership">personal_trainer</field>
+        <field name="month_membership">1</field>
+        <field name="day_membership">6</field>
+    </record>
+
+    <record id="product_template_membership_training_2_months" model="product.template">
+        <field name="name">Personal trainer 2 months</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="type_membership">personal_trainer</field>
+        <field name="month_membership">2</field>
+        <field name="day_membership">12</field>
+    </record>
+
+    <record id="product_template_membership_training_3_months" model="product.template">
+        <field name="name">Personal trainer 3 months</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="type_membership">personal_trainer</field>
+        <field name="month_membership">3</field>
+        <field name="day_membership">24</field>
+    </record>
+
+    <record id="product_template_membership_training_6_months" model="product.template">
+        <field name="name">Personal trainer 6 months</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="type_membership">personal_trainer</field>
+        <field name="month_membership">6</field>
+        <field name="day_membership">36</field>
+    </record>
+
+    <record id="product_template_membership_training_12_months" model="product.template">
+        <field name="name">Personal trainer 12 months</field>
+        <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
+        <field name="membership">True</field>
+        <field name="type">service</field>
+        <field name="type_membership">personal_trainer</field>
+        <field name="month_membership">12</field>
+        <field name="day_membership">48</field>
     </record>
 
 </odoo>

@@ -1,0 +1,366 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* crm_activity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-04 03:43+0000\n"
+"PO-Revision-Date: 2019-07-04 03:43+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_crm_stage__active
+msgid "Active"
+msgstr "Có hiệu lực"
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_mail_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__activity_type_id
+#: model_terms:ir.ui.view,arch_db:crm_activity.activity_history_view_form
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_done_view_form_popup
+#: model_terms:ir.ui.view,arch_db:crm_activity.view_activity_history_search
+msgid "Activity"
+msgstr "Hoạt động"
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_activity_history
+#: model_terms:ir.ui.view,arch_db:crm_activity.view_activity_history_search
+msgid "Activity History"
+msgstr "Lịch sử hoạt động"
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_activity_result
+msgid "Activity Result"
+msgstr "Kết quả hoạt động"
+
+#. module: crm_activity
+#: model:ir.actions.act_window,name:crm_activity.activity_result_action
+#: model:ir.ui.menu,name:crm_activity.menu_activity_result
+msgid "Activity Results"
+msgstr "Các kết quả hoạt động"
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_mail_activity_type
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__activity_type_id
+msgid "Activity Type"
+msgstr "Loại công việc"
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_activity_type_possible_result
+msgid "Activity Type Possible Result"
+msgstr ""
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity__activity_type_result_ids
+msgid "Activity Type Result"
+msgstr ""
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__user_id
+msgid "Assigned to"
+msgstr "Phân công cho"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__crm_lead_id
+msgid "CRM Lead"
+msgstr ""
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_crm_stage
+msgid "CRM Stages"
+msgstr "Trạng thái"
+
+#. module: crm_activity
+#: selection:activity.history,status:0
+msgid "Cancel"
+msgstr "Hủy Bỏ"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity_type__code
+msgid "Code"
+msgstr "Mã CÔng việc"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__code
+msgid "Code"
+msgstr "Mã"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__create_uid
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__create_uid
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__create_uid
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__create_uid
+#: model:ir.model.fields,field_description:crm_activity.field_post_object_security_dfurni_crm_activity_module__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__create_date
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__create_date
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__create_date
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__create_date
+#: model:ir.model.fields,field_description:crm_activity.field_post_object_security_dfurni_crm_activity_module__create_date
+msgid "Created on"
+msgstr "Thời điểm tạo"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity_type__summary
+msgid "Description"
+msgstr "Miêu tả"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__destination_stage_id
+msgid "Destination Stage"
+msgstr "Giai đoạn tiếp theo"
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_done_view_form_popup
+msgid "Discard"
+msgstr "Huỷ bỏ"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__display_name
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__display_name
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__display_name
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__display_name
+#: model:ir.model.fields,field_description:crm_activity.field_post_object_security_dfurni_crm_activity_module__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity_type__res_model
+msgid "Document Model Name"
+msgstr "Tên Model tài liệu"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity__domain_activity_type_ids
+msgid "Domain Activity Type"
+msgstr ""
+
+#. module: crm_activity
+#: selection:activity.history,status:0
+msgid "Done"
+msgstr "Hoàn tất"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__date_deadline
+msgid "Due Date"
+msgstr "Ngày đến hạn"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__note
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_done_view_form_popup
+msgid "Feedback"
+msgstr "Phản hồi"
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_type_view_search_inherit
+msgid "Group By"
+msgstr "Nhóm theo"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__id
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__id
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__id
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__id
+#: model:ir.model.fields,field_description:crm_activity.field_post_object_security_dfurni_crm_activity_module__id
+msgid "ID"
+msgstr ""
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup____last_update
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history____last_update
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result____last_update
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result____last_update
+#: model:ir.model.fields,field_description:crm_activity.field_post_object_security_dfurni_crm_activity_module____last_update
+msgid "Last Modified on"
+msgstr "Sửa lần cuối vào"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__write_uid
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__write_uid
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__write_uid
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__write_uid
+#: model:ir.model.fields,field_description:crm_activity.field_post_object_security_dfurni_crm_activity_module__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__write_date
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__write_date
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__write_date
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__write_date
+#: model:ir.model.fields,field_description:crm_activity.field_post_object_security_dfurni_crm_activity_module__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Tiềm năng/Cơ hội"
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.activity_history_view_form
+msgid "Log a note..."
+msgstr "Ghi chú ..."
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__mail_activity_id
+msgid "Mail Activity"
+msgstr ""
+
+#. module: crm_activity
+#. openerp-web
+#: code:addons/crm_activity/static/src/js/activity.js:52
+#, python-format
+msgid "Mark Activity Done"
+msgstr ""
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_done_view_form_popup
+msgid "Mark Done Activity"
+msgstr "Đánh dấu hoạt động hoàn tất"
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_done_view_form_popup
+msgid "Mark as Done"
+msgstr "Đánh dấu hoàn tất"
+
+#. module: crm_activity
+#: code:addons/crm_activity/model/crm/mail_activity.py:143
+#, python-format
+msgid "Missing result of activity to make it done."
+msgstr "Thêm kết quả cho hoạt động để hoàn tất."
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_type_view_form_inherit
+msgid "Modifying the model can have an impact on existing activities using this activity type, be careful."
+msgstr ""
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__result_id
+msgid "Name"
+msgstr "Kết quả"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_result__name
+msgid "Name"
+msgstr "Tên kết quả"
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.activity_history_view_form
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: crm_activity
+#: selection:activity.history,status:0
+#: selection:mail.activity,state:0
+msgid "Overdue"
+msgstr "Quá hạn"
+
+#. module: crm_activity
+#: selection:activity.history,status:0
+#: selection:mail.activity,state:0
+msgid "Planned"
+msgstr "Đã lên kế hoạch"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity_type__possible_result_ids
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_type_view_form_inherit
+msgid "Possible Results"
+msgstr "Kết quả khả thi"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__activity_result_id
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity__activity_result_id
+#: model_terms:ir.ui.view,arch_db:crm_activity.view_activity_history_search
+msgid "Result"
+msgstr "Kết Quả"
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.activity_followup_view_search
+#: model_terms:ir.ui.view,arch_db:crm_activity.activity_result_view_search
+msgid "Search Description"
+msgstr "Tìm theo nội dung"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_followup__sequence
+msgid "Sequence"
+msgstr "Thứ tự"
+
+#. module: crm_activity
+#: model:ir.model,name:crm_activity.model_post_object_security_dfurni_crm_activity_module
+#: model:ir.model,name:crm_activity.model_post_object_security_kingsport_crm_activity_module
+msgid "Set up the Groups, Profiles and Access Rights"
+msgstr ""
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity_type__stage_id
+#: model_terms:ir.ui.view,arch_db:crm_activity.mail_activity_type_view_search_inherit
+msgid "Stage"
+msgstr "Giai đoạn bán hàng"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_type_possible_result__final_stage_id
+msgid "Stage after Final Follow-up"
+msgstr ""
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity__state
+msgid "State"
+msgstr "Tỉnh/Thành"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__status
+#: model_terms:ir.ui.view,arch_db:crm_activity.view_activity_history_search
+msgid "Status"
+msgstr "Trạng thái"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_activity_history__summary
+msgid "Summary"
+msgstr "Mô tả"
+
+#. module: crm_activity
+#: selection:activity.history,status:0
+#: selection:mail.activity,state:0
+msgid "Today"
+msgstr "Hôm nay"
+
+#. module: crm_activity
+#: model:ir.model.fields,field_description:crm_activity.field_mail_activity_type__use_for_crm
+msgid "Use for CRM"
+msgstr "Sử dụng cho các hoạt động CRM"
+
+#. module: crm_activity
+#: sql_constraint:mail.activity.type:0
+msgid "You can not have two activity types with the same code !"
+msgstr "Bạn không thể có hai hoạt động cùng mã"
+
+#. module: crm_activity
+#: selection:mail.activity,state:0
+msgid "done"
+msgstr "hoàn tất"
+
+#. module: crm_activity
+#: model_terms:ir.ui.view,arch_db:crm_activity.view_activity_history_search
+msgid "Assignment"
+msgstr "Phân công"
+
+#. module: crm_activity
+#: model:ir.actions.act_window,name:crm_activity.action_view_histisory_activities
+#: model:ir.ui.menu,name:crm_activity.menu_activity_history
+msgid "Activities History"
+msgstr "Lịch sử hoạt động"

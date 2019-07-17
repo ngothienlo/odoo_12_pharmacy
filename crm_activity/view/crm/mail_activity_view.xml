@@ -50,7 +50,7 @@
                             <field name="user_id" readonly="1"/>
                         </group>
                     </group>
-                    <label for="note"/>
+                    <label for="note" string="Feedback"/>
                     <field name="note" nolabel="1"/>
                     <footer>
                         <button

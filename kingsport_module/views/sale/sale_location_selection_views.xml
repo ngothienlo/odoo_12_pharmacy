@@ -15,7 +15,7 @@
                 <button name="action_cancel_choose_stock_quants" attrs="{'invisible': [('selected_location', '=', False)]}" type="object" string="Cancel Choice" icon="fa-times-circle-o fa-2x"/>                
                 <button name="action_choose_stock_quants" attrs="{'invisible': [('selected_location', '=', True)]}" type="object" string="Choose Location" icon="fa-check-circle-o fa-2x"/>
             </tree>
-        </field>        
+        </field>
     </record>
 
     <!-- search view -->

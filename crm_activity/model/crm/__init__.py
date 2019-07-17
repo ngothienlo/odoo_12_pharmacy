@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from . import activity_result
-from . import activity_followup
+# from . import activity_followup
 from . import mail_activity
 from . import crm_lead
 from . import crm_stage

@@ -13,7 +13,7 @@
             </button>
 
             <header position="inside">
-                <button string="Create Exchange Order" name="create_exchange_order" type="object" attrs="{'invisible': [('exchange_order', '=', True)]}"/>
+                <button string="Create Exchange Order" name="create_exchange_order" type="object" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
             </header>
 
             <field name="payment_term_id" position="after">
@@ -24,12 +24,16 @@
             </field>
 
             <xpath expr="//tree/field[@name='product_uom_qty']" position="after">
-                <field name="location_id" readonly="1"/>
+                <field name="location_id"/>
             </xpath>
 
             <xpath expr="//field[@name='order_line']" position="attributes">
-                <attribute name="context">{'default_location_id': location_id, 'default_order_id': active_id}</attribute>
-            </xpath>                    
+                <attribute name="context">{'so_location_id': location_id, 'default_order_id': active_id}</attribute>
+            </xpath>
+
+            <xpath expr="//group//field[@name='price_unit']" position="before">
+                <field name="location_id"/>
+            </xpath>
 
             <xpath expr="//form//field[@name='order_line']" position="before">
                 <div class="oe_button_box">
@@ -44,12 +48,55 @@
                 <field name="total_cost" invisible="1"/>
             </xpath>
 
+            <xpath expr="//header" position="inside">
+                <button name="action_create_down_payment" string="Create Down Payment" attrs="{'invisible': [('state', '!=', 'sale')]}" type="object"/>
+            </xpath>
+
             <field name="origin" position="after">
-                <field name="maintenance_order"/>
-                <field name="delivery_order" attrs="{'required': [('maintenance_order', '=', True)]}"/>
-                <field name="exchange_order" readonly="1"/>
-                <field name="original_order" attrs="{'invisible': [('exchange_order', '=', False)]}"/>
+                <field name="is_exchange_order" readonly="1"/>                
             </field>
+            <xpath expr="//group/field[@name='partner_invoice_id']" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+
+            <xpath expr="//group/field[@name='partner_shipping_id']" position="attributes">
+                <attribute name="context">{'show_address': 1}</attribute>
+                <attribute name="widget">res_partner_many2one</attribute>
+                <attribute name="options">{'no_create_edit': True, 'no_create': True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                <field name="original_order_id" readonly="1" attrs="{'invisible': [('is_exchange_order', '=', False)]}"/>
+                <field name="is_maintenance_order"/>
+                <field name="delivery_order_id" attrs="{'required': [('is_maintenance_order', '=', True)]}"/>
+            </xpath>
+
+            <xpath expr="//group/field[@name='partner_shipping_id']"  position="after">
+                <label for="contact_name" string="Shipping Contact" class="oe_edit_only"/>
+                <div class="oe_edit_only">
+                    <field name="contact_name"/>
+                </div>
+                <field name="phone"/>
+                <label for="street" string="Address" class="oe_edit_only"/>
+                <div class="o_address_format oe_edit_only">
+                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                    <div class="oe_edit_only">
+                        <field name="country_id" placeholder="Country" style="width: 49%;"/>
+                        <field name="state_id" placeholder="Province" style="width: 49%;"/>
+                        <field name="district_id" placeholder="District" style="width: 49%;"/>
+                        <field name="ward_id" placeholder="Commune/ Ward" style="width: 49%;"/>
+                    </div>
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='require_payment']" position="after">
+                <field name="current_location_id" readonly="1" options="{'no_create_edit': True, 'no_create': True}"></field>
+            </xpath>
+            <!-- <label for="partner_shipping_id" string="Shipping Address" class="oe_read_only"/>
+            <div class="oe_read_only">
+                <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery', 'show_address': 1}" widget="res_partner_many2one" options="{&quot;always_reload&quot;: True}"/>
+            </div> -->
         </field>
     </record>
 
@@ -68,5 +115,9 @@
                 </group>
             </field>
         </field>
+    </record>
+
+    <record id="sale.action_view_sale_advance_payment_inv" model="ir.actions.act_window">
+        <field name="binding_model_id" eval=""/>
     </record>
 </odoo>

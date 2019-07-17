@@ -13,6 +13,10 @@ class MembershipInvoice(models.TransientModel):
     showroom_id = fields.Many2one(
         'stock.location', string='Showroom',
         domain=[('usage', '=', 'internal')])
+    personal_trainer_id = fields.Many2one(
+        'res.users', string='Personal Trainer')
+    type_membership = fields.Selection(
+        related='product_id.type_membership')
 
     @api.onchange('product_id')
     def onchange_product(self):
@@ -30,7 +34,8 @@ class MembershipInvoice(models.TransientModel):
             'membership_user_id': self.user_id.id,
             'membership_gym_location_id': self.gym_location_id.id,
             'membership_showroom_id': self.showroom_id.id,
-            'membership_card_number': self.card_number})
+            'membership_card_number': self.card_number,
+            'membership_personal_trainer_id': self.personal_trainer_id.id})
         self = self.with_context(context)
         action = super(MembershipInvoice, self).membership_invoice()
         return action

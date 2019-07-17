@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="stock_inventoryn_view_form_inherit" model="ir.ui.view">
+        <field name="name">stock.inventory.view.form.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']" position="attributes">
+                <attribute name="domain">[('usage', '=', 'internal')]</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='exhausted']" position="after">
+                <field name="is_different_in_inventory_detail" invisible="1" readonly="1"></field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

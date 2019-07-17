@@ -30,7 +30,7 @@
                         <field name="sequence" />
                     </group>
                     <group>
-                        <field name="followup_ids" widget="many2many_tags"/>
+                        <!-- <field name="followup_ids" widget="many2many_tags"/> -->
                         <field name="icon" groups="base.group_no_one" />
                         <field name="decoration_type" />
                         <field name="category" />
@@ -48,10 +48,10 @@
                         <tree editable="top">
                             <field name="result_id" />
                             <field name="destination_stage_id" />
-                            <field name="final_stage_id"
+                            <!-- <field name="final_stage_id"
                                    attrs="{'readonly': [('is_result_followup', '=', False)], 'required': [('is_result_followup', '=', True)]}"
-                            />
-                            <field name="is_result_followup" invisible="1"/>
+                            /> -->
+                            <!-- <field name="is_result_followup" invisible="1"/> -->
                         </tree>
                     </field>
                 </group>

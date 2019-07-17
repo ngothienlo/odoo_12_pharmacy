@@ -18,12 +18,12 @@ class ActivityTypePossibleResult(models.Model):
         required=True,
         string="Destination Stage"
     )
-    final_stage_id = fields.Many2one(
-        comodel_name="crm.stage",
-        string="Stage after Final Follow-up"
-    )
+    # final_stage_id = fields.Many2one(
+    #     comodel_name="crm.stage",
+    #     string="Stage after Final Follow-up"
+    # )
     activity_type_id = fields.Many2one(
         comodel_name="mail.activity.type",
         string="Activity Type"
     )
-    is_result_followup = fields.Boolean(related="result_id.follow_up")
+    # is_result_followup = fields.Boolean(related="result_id.follow_up")

@@ -11,10 +11,10 @@ class MailActivityType(models.Model):
         comodel_name="crm.stage",
         string="Stage"
     )
-    followup_ids = fields.Many2many(
-        comodel_name="activity.followup",
-        string="Follow-up"
-    )
+    # followup_ids = fields.Many2many(
+    #     comodel_name="activity.followup",
+    #     string="Follow-up"
+    # )
     possible_result_ids = fields.One2many(
         comodel_name="activity.type.possible.result",
         inverse_name="activity_type_id",

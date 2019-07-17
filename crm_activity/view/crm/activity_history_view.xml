@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+
+    <record id="action_view_history_activities" model="ir.actions.act_window">
+        <field name="name">Activities History</field>
+        <field name="res_model">activity.history</field>
+        <field name="context">{}</field>
+    </record>
+
     <!-- activity.history form view -->
     <record id="activity_history_view_form" model="ir.ui.view">
         <field name="name">activity.history.view.form</field>
@@ -27,6 +34,44 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+    <!-- activity.history tree view -->
+    <record id="activity_history_view_tree" model="ir.ui.view">
+        <field name="name">activity.history.view.tree</field>
+        <field name="model">activity.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="activity_type_id"/>
+                <field name="activity_result_id"/>
+                <field name="user_id"/>
+                <field name="note"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='view_activity_history_search' model='ir.ui.view'>
+        <field name='name'>view.activity.history.search</field>
+        <field name='model'>activity.history</field>
+        <field name='arch' type='xml'>
+            <search string="Activity History">
+                <field name="activity_type_id"/>
+                <field name="activity_result_id"/>
+                <field name="user_id"/>
+                <field name="note"/>
+                <field name="status"/>
+                <group  expand='0' string='Group by...'>
+                    <filter string='Activity' name="activity_type_id"
+                        domain="[]" context="{'group_by' : 'activity_type_id'}"/>
+                    <filter string='Result' name="activity_result_id"
+                        domain="[]" context="{'group_by' : 'activity_result_id'}"/>
+                    <filter string='Assignment' name="user_id"
+                        domain="[]" context="{'group_by' : 'user_id'}"/>
+                    <filter string='Status' name="status"
+                        domain="[]" context="{'group_by' : 'status'}"/>
+                </group>
+            </search>
         </field>
     </record>
 </odoo>

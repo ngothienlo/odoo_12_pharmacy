@@ -3,6 +3,6 @@
 	<data noupdate="0">
 		<function
 			name="start"
-			model="post.object.security.dfurni.crm.activity.module"/>
+			model="post.object.security.crm.activity.module"/>
     </data>
 </odoo>

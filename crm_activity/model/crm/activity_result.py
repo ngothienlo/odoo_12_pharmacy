@@ -13,6 +13,5 @@ class ActivityResult(models.Model):
     )
     code = fields.Char(
         string='Code',
-        required=True,
     )
-    follow_up = fields.Boolean(string="Follow-up ?", )
+    # follow_up = fields.Boolean(string="Follow-up ?", )

@@ -78,7 +78,7 @@
         <field name="usage">internal</field>
     </record>
 
-    <record id="stock_location_northern_nghe_an" model="stock.location">
+    <record id="stock_location_northern_quang_ninh" model="stock.location">
         <field name="name">Quảng Ninh</field>
         <field name="location_id" ref="kingsport_module.stock_location_northern" />
         <field name="usage">internal</field>

@@ -2,7 +2,7 @@
 <odoo noupdate="0">
 
     <record model="business.category" id="business_category_sport">
-        <field name="name">Sport</field>
+        <field name="name">Thể thao</field>
     </record>
 
     <record model="business.category" id="business_category_health_care">

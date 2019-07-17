@@ -26,7 +26,7 @@ class LeadAllocation(models.Model):
     team_id = fields.Many2one('crm.team', string='Team', required=True)
     state_ids = fields.Many2many(
         'res.country.state', string='State', required=True)
-    is_main_city = fields.Boolean()
+    has_main_cities = fields.Boolean()
     district_ids = fields.Many2many(
         'res.country.state.district', string='Districts')
 
@@ -68,11 +68,8 @@ class LeadAllocation(models.Model):
     @api.onchange('state_ids')
     def onchange_state_id(self):
         if not self.state_ids:
-            self.is_main_city = False
-        elif any(city in self.state_ids.ids for city in [
-                self.env.ref('l10n_vn_country_state.res_country_state_79').id,
-                self.env.ref('l10n_vn_country_state.res_country_state_01').id]
-        ):
-            self.is_main_city = True
+            self.has_main_cities = False
+        elif any(state.is_main_city for state in self.state_ids):
+            self.has_main_cities = True
         else:
-            self.is_main_city = False
+            self.has_main_cities = False

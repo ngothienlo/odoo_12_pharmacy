@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_authorized_approval_form_view" model="ir.ui.view">
+        <field name="name">authorized.approval.form.view</field>
+        <field name="model">authorized.approval</field>
+        <field name="arch" type="xml">
+            <form string="Authorized Approval">
+                <group>
+                    <field name="approver_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                </group>
+                <footer>
+                    <button name="authorized_approval" string="Authorized Approval"
+                        type="object" class="oe_highlight" />
+                    <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

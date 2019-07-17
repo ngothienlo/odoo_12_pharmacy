@@ -5,18 +5,64 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-            <header position="before">
-                <div style="text-align: center;padding: 5px;background: space;color: red;font-weight: bold;font-size: 15px;" attrs="{'invisible': [('return_do_over_7days', '!=', True)]}">
-                    <p>Orders changed / paid more than 7 days, the information the approver needs to be provided</p>
+            <xpath expr="//sheet/div[@name='button_box']" position="after">
+                <div class="alert alert-danger text-center o_form_header"
+                     attrs="{'invisible': ['|', ('return_do_over_7days', '!=', True), ('approver_id', '!=', False)]}">
+                    <a class="close" data-dismiss="alert" href="#" aria-label="Close">x</a>
+                    <div>
+                        <strong>Orders changed / paid more than 7 days, the information the approver needs to be provided</strong>
+                    </div>
                 </div>
-            </header>
+            </xpath>
             <field name="origin" position="after">
-                <field name="return_do_over_7days"/>
+                <field name="return_do_over_7days" invisible="1"/>
                 <field name="approver_id"/>
             </field>
             <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
-                <field name="warranty_expiration_date"/>
+                <field name="warranty_expiration_date" attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'outgoing')]}"/>
             </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="attrs">{'invisible' : [('picking_type_code', '=', 'internal')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="dummy_state" attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}" widget="statusbar" statusbar_visible="draft,pending,confirmed,assigned,done"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="button_ask_for_approval" string="Ask for Approval" type="object"
+                    attrs="{'invisible': ['|', ('picking_type_code', '!=', 'internal'), ('dummy_state', '!=', 'draft')]}" />                
+                <button name="action_confirm" string="Approve and Reserve" type="object" 
+                    attrs="{'invisible': [('dummy_state', '!=', 'pending')]}" />                
+                <button name="button_authorized_approval" string="Authorized Approval" type="object" 
+                    attrs="{'invisible': ['|', ('picking_type_code', '!=', 'internal'), ('dummy_state', 'not in', ['draft', 'pending'])]}" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_view_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.view.tree.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='backorder_id']" position="after">
+                <field name="dummy_state"/>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_view_search_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.view.search.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="after">
+                <filter name="wait_approval" string="Wait For Approval" domain="[('dummy_state','=','draft')]"/>
+            </xpath>
+            <xpath expr="//group//filter[@name='status']" position="replace">
+                <filter string="Status" name="status" domain="[]" context="{'group_by':'dummy_state'}"/>
+            </xpath> 
         </field>
     </record>
 </odoo>

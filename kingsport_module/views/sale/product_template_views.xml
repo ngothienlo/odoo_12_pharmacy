@@ -7,10 +7,13 @@
         <field name="arch" type="xml">
             <field name="type" position="after">
                 <field name="business_category_id"/>
-                <field name="internal_name"/>                    
+                <field name="internal_name"/>
                 <field name="origin"/>
                 <field name="product_specification"/>
             </field>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="internal_name"/>   
+            </xpath>
         </field>
     </record>
 
@@ -29,6 +32,63 @@
                         domain="[]" context="{'group_by':'business_category_id'}"/>
                 </group>
             </field>
+        </field>
+    </record>
+
+    <record id="view_product_template_form_membership_products" model="ir.ui.view" >
+        <field name="name">view.product.template.form.membership.products</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="membership.membership_products_form"/>
+        <field name="arch" type="xml">
+            <label for="membership_date_from" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </label>
+            <xpath expr="//field[@name='membership_date_from']/.." position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="membership_date_from" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+            <field name="membership_date_to" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+            <field name="list_price" position="before">
+                <field name="type_membership"/>
+                <field name="month_membership"/>
+                <field name="day_membership" attrs="{'invisible': [('type_membership', '!=', 'personal_trainer')]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_template_tree_membership_products" model="ir.ui.view" >
+        <field name="name">view.product.template.tree.membership.products</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="membership.membership_products_tree"/>
+        <field name="arch" type="xml">
+            <field name="membership_date_from" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="membership_date_to" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="name" position="after">
+                <field name="type_membership"/>
+                <field name="month_membership"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_template_kanban_membership_products" model="ir.ui.view" >
+        <field name="name">view.product.template.kanban.membership.products</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="membership.membership_products_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban/templates/t/div/div[2]" position="replace">
+                <div class="o_kanban_record_body">
+                    <i class="fa fa-fw fa-star" role="img" aria-label="Period" title="Period"></i> <field name="type_membership"/>
+                    <i class="fa fa-clock-o ml-2" role="img" aria-label="Period" title="Period"></i> <field name="month_membership"/> month(s)
+                </div>
+            </xpath>
         </field>
     </record>
 </odoo>

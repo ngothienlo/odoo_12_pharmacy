@@ -48,6 +48,6 @@ class ActivityHistory(models.Model):
         comodel_name='crm.lead',
         string='CRM Lead',
     )
-    followup_id = fields.Many2one(
-        comodel_name="activity.followup"
-    )
+    # followup_id = fields.Many2one(
+    #     comodel_name="activity.followup"
+    # )

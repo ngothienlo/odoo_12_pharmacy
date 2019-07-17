@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mail.message_activity_done">
+        <div>
+            <p>
+                <strong><span t-attf-class="fa #{activity.activity_type_id.icon}"/></strong> <span t-field="activity.activity_type_id.name"/> done
+                by <span t-field="activity.env.user.name"/><span t-if="activity.summary">:</span>
+                <span t-if="activity.summary" t-field="activity.summary"/>
+                <div t-if="activity.activity_result_id">
+                    <span style="margin-left: 4px;">Result:</span><span t-field="activity.activity_result_id.name" style="margin-left: 8px;"></span>
+                </div>
+            </p>
+            <div t-field="activity.note" style="margin-left: 8px;"/>
+            <div t-if="activity.feedback" style="margin-top: 8px;">
+                <strong> Feedback</strong>
+                <div t-field="activity.feedback" style="margin-left: 8px;"></div>
+            </div>
+        </div>
+    </template>
+</odoo>

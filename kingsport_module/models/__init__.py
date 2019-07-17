@@ -21,3 +21,4 @@ from . import crm
 from . import sale
 from . import stock
 from . import membership
+from . import purchase

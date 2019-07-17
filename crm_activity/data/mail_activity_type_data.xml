@@ -19,8 +19,8 @@
             <field name="name">Call / Send message</field>
             <field name="code">Call / Send message</field>
             <field name="stage_id" ref="stage_customer_service"/>
-            <field name="followup_ids"
-                   eval="[(6, 0, [followup_1day, followup_2days, followup_5days])]"/>
+            <!-- <field name="followup_ids"
+                   eval="[(6, 0, [followup_1day, followup_2days, followup_5days])]"/> -->
             <field name="sequence">2</field>
         </record>
         <record id="mail.mail_activity_data_email" model="mail.activity.type">
@@ -34,8 +34,8 @@
             <field name="name">Meeting</field>
             <field name="code">Meeting</field>
             <field name="stage_id" ref="stage_meetings"/>
-            <field name="followup_ids"
-                   eval="[(6, 0, [followup_1day, followup_2days, followup_5days])]"/>
+            <!-- <field name="followup_ids"
+                   eval="[(6, 0, [followup_1day, followup_2days, followup_5days])]"/> -->
             <field name="sequence">4</field>
         </record>
         <record id="mail_activity_type_make_consultant"

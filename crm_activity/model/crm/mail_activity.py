@@ -33,9 +33,9 @@ class MailActivity(models.Model):
         # store = False to avoid change value on model mail.activity
         # that will raise access rule (mail.activity: user: own only)
     )
-    followup_id = fields.Many2one(
-        comodel_name="activity.followup"
-    )
+    # followup_id = fields.Many2one(
+    #     comodel_name="activity.followup"
+    # )
 
     @api.depends('activity_type_id', 'activity_type_id.possible_result_ids')
     def _compute_activity_type_result_ids(self):
@@ -84,9 +84,9 @@ class MailActivity(models.Model):
                         'user_id': record.user_id.id,
                         'activity_result_id': record.activity_result_id.id,
                         'mail_activity_id': record.id,
-                        'followup_id':
-                            record.followup_id and record.followup_id.id or
-                            False,
+                        # 'followup_id':
+                        #     record.followup_id and record.followup_id.id or
+                        #     False,
                         'note': record.note,
                         'status': ctx.get('is_done', record.state),
                     }
@@ -124,13 +124,46 @@ class MailActivity(models.Model):
         self.ensure_one()
         ctx = self._context.copy()
         ctx.update({'is_done': 'done'})
-        self.mark_done_activity_with_followup()
+        # self.mark_done_activity_with_followup()
+        self.mark_done_activity()
         self.with_context(ctx).create_history_activity()
         super(MailActivity, self).action_done()
 
     def action_feedback(self, feedback=False):
         self = self.with_context(action_feedback=True)
         return super(MailActivity, self).action_feedback(feedback)
+
+    @api.multi
+    def mark_done_activity(self):
+        self.ensure_one()
+        if self.res_model != 'crm.lead':
+            return
+
+        activity_result = self.activity_result_id
+        if not activity_result:
+            raise UserError(_("Missing result of activity to make it done."))
+
+        activity_type = self.activity_type_id
+        current_lead = self.env['crm.lead'].browse(self.res_id)
+        possible_activity_type_result = \
+            activity_type.possible_result_ids.filtered(
+                lambda ps: ps.result_id == activity_result
+            )
+        possible_activity_type_result = possible_activity_type_result and \
+            possible_activity_type_result[0] or False
+        next_stage = possible_activity_type_result \
+            and possible_activity_type_result.destination_stage_id or False
+
+        #  Update next_state and create new activity
+        if not next_stage:
+            next_stage = self.env['crm.stage'].search([
+                ('sequence', '>=', current_lead.stage_id.sequence)
+            ], order="sequence", limit=1)
+            if not next_stage:
+                return
+        if current_lead.stage_id != next_stage:
+            current_lead.stage_id = next_stage
+        return current_lead
 
     @api.multi
     def mark_done_activity_with_followup(self):

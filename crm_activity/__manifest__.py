@@ -10,6 +10,7 @@ This module will install all module dependencies of dfurni.
     'author': 'Trobz',
     'website': 'http://www.trobz.com',
     'depends': [
+        'trobz_base',
         'crm',
         'sales_team',
         'sale',
@@ -26,14 +27,14 @@ This module will install all module dependencies of dfurni.
         # ============================================================
         # 'data/',
         'data/activity_result_data.xml',
-        'data/activity_followup_data.xml',
+        # 'data/activity_followup_data.xml',
         # 'data/mail_activity_type_data.xml',
         # ============================================================
         # VIEWS
         # ============================================================
         # 'view/',
         'view/crm/activity_result_view.xml',
-        'view/crm/activity_followup_view.xml',
+        # 'view/crm/activity_followup_view.xml',
         'view/crm/mail_activity_view.xml',
         'view/crm/crm_lead_view.xml',
         'view/crm/activity_history_view.xml',
@@ -48,6 +49,9 @@ This module will install all module dependencies of dfurni.
         # FUNCTION USED TO UPDATE DATA LIKE POST OBJECT
         # ============================================================
         # "data/dfurni_update_functions_data.xml",
+    ],
+    "qweb": [
+        "static/src/xml/*.xml",
     ],
 
     'test': [],

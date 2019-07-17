@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <!-- crm.lead inherit form view -->
-    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+    <!-- <record id="crm_lead_view_form_inherit" model="ir.ui.view">
         <field name="name">crm.lead.inherit.view.form</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
@@ -25,7 +25,7 @@
                 </page>
             </xpath>
         </field>
-    </record>
+    </record> -->
 
     <!-- crm.lead Kanban of type LEAD -->
     <record id="view_crm_lead_kanban_inherit" model="ir.ui.view">
@@ -54,7 +54,7 @@
             <!-- inherit to set stage_id as readonly field on kanban to remove
             draggable of item in column -->
             <field name="stage_id" position="replace">
-                <field name="stage_id" readonly="1" options='{"group_by_tooltip": {"requirements": "Description", "legend_priority": "Use of stars"}}'/>
+                <field name="stage_id" options='{"group_by_tooltip": {"requirements": "Description", "legend_priority": "Use of stars"}}'/>
             </field>
         </field>
     </record>

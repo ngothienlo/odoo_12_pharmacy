@@ -7,7 +7,8 @@ ODOO_NATIVE_FIELDS = (
     "'create_date'",
     "'create_uid'",
     "'write_date'",
-    "'write_uid'",)
+    "'write_uid'",
+    "'city'")
 
 
 class CrmStage(models.Model):

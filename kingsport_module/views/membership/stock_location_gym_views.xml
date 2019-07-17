@@ -9,8 +9,8 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="name" />
-                            <field name="showroom_id" />
+                            <field name="name"/>
+                            <field name="showroom_id"/>
                         </group>
                     </group>
                 </sheet>
@@ -23,21 +23,21 @@
         <field name="model">stock.location.gym</field>
         <field name="arch" type="xml">
             <tree string="Gym">
-                <field name="name" />
-                <field name="showroom_id" />
+                <field name="name"/>
+                <field name="showroom_id"/>
             </tree>
         </field>
     </record>
 
     <record id='view_stock_location_gym_search' model='ir.ui.view'>
-        <field name='name'>view.stock.location.gym.search</field>
-        <field name='model'>stock.location.gym</field>
-        <field name='arch' type='xml'>
+        <field name="name">view.stock.location.gym.search</field>
+        <field name="model">stock.location.gym</field>
+        <field name="arch" type="xml">
             <search string="Gym">
-                <field name='name' />
-                <field name='showroom_id' />
-                <group  expand='0' string='Group by...'>
-                    <filter string='Showroom' name="showroom_id"
+                <field name="name"/>
+                <field name="showroom_id"/>
+                <group  expand='0' string="Group by...">
+                    <filter string="Showroom" name="showroom_id"
                         domain="[]" context="{'group_by' : 'showroom_id'}"/>
                 </group>
             </search>

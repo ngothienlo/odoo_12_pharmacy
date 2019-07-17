@@ -19,3 +19,4 @@
 from . import crm_lead
 from . import crm_team
 from . import lead_allocation
+from . import mail_activity

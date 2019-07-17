@@ -5,10 +5,11 @@ from odoo.addons import decimal_precision as dp  # @UnresolvedImport
 from odoo.exceptions import UserError, ValidationError
 
 from .membership_line_reserve import MAX_RESERVE_DAYS
+from ..sale.product_template import TYPE_MEMBERSHIP
 
 
 class MembershipLine(models.Model):
-    _inherit = "membership.membership_line"
+    _inherit = 'membership.membership_line'
 
     card_number = fields.Char(
         string='Card Number', required=True)
@@ -32,7 +33,14 @@ class MembershipLine(models.Model):
         compute='_compute_amount_refunded', store=True)
     invoice_refund_id = fields.Many2one(
         'account.invoice', string='Credit Note', readonly=True,
-        ondelete='cascade')
+        ondelete='set null')
+    type_membership = fields.Selection(
+        selection=TYPE_MEMBERSHIP, related='membership_id.type_membership')
+    personal_trainer_id = fields.Many2one(
+        'res.users', string='Personal Trainer', ondelete='set null')
+    attendance_ids = fields.One2many(
+        'membership.line.attendance', 'membership_line_id',
+        string='Attendance Training')
 
     # Override fields
     date_to = fields.Date(compute='_compute_date_to', store=True)
@@ -41,11 +49,16 @@ class MembershipLine(models.Model):
     def create(self, values):
         if self._context.get('from_membership_invoice', False):
             values.update({
-                'user_id': self._context.get('membership_user_id'),
+                'user_id': self._context.get(
+                    'membership_user_id', False),
                 'gym_location_id': self._context.get(
-                    'membership_gym_location_id'),
-                'showroom_id': self._context.get('membership_showroom_id'),
-                'card_number': self._context.get('membership_card_number')
+                    'membership_gym_location_id', False),
+                'showroom_id': self._context.get(
+                    'membership_showroom_id', False),
+                'card_number': self._context.get(
+                    'membership_card_number', False),
+                'personal_trainer_id': self._context.get(
+                    'membership_personal_trainer_id', False)
             })
         if not self._context.get('date_from'):
             values.update({
@@ -69,11 +82,22 @@ class MembershipLine(models.Model):
     @api.constrains('date_from', 'date_stop')
     def _check_date_stop(self):
         for rec in self:
-            if rec.date_stop < rec.date_from:
+            if rec.date_stop and rec.date_from and \
+                    rec.date_stop < rec.date_from:
                 raise ValidationError(
                     _('Date Stop should not less than Date From!'))
 
-    @api.depends('date_from', 'date_to', 'membership_id', 'reserve_ids',
+    @api.constrains('attendance_ids',
+                    'membership_id', 'membership_id.day_membership')
+    def _check_total_attendances(self):
+        for rec in self:
+            if rec.membership_id and \
+                    len(rec.attendance_ids) > rec.membership_id.day_membership:
+                raise ValidationError(
+                    _('The total number of training days should not exceed '
+                      '%d day(s)!') % (rec.membership_id.day_membership))
+
+    @api.depends('date_from', 'membership_id', 'reserve_ids',
                  'reserve_ids.date_from', 'reserve_ids.date_to')
     def _compute_date_to(self):
         for rec in self:
@@ -92,34 +116,51 @@ class MembershipLine(models.Model):
                     not rec.account_invoice_id:
                 continue
 
-            # Determine exact date_stop
-            in_period_reserve = rec.reserve_ids.filtered(
-                lambda reserve:
-                reserve.date_to >= rec.date_stop >= reserve.date_from)
-            if in_period_reserve:
-                date_stop = fields.Date.from_string(
-                    in_period_reserve[0].date_from)
-            else:
-                date_stop = fields.Date.from_string(rec.date_stop)
-
-            # Calculate days used
-            past_reserves = rec.reserve_ids.filtered(
-                lambda reserve: reserve.date_to < rec.date_stop)
-            dates_reserve = past_reserves.total_reserve_days()
-            date_from = fields.Date.from_string(rec.date_from)
-            days_used = (date_stop - date_from).days - dates_reserve
-
-            total_days = rec.membership_id.month_membership * 30
             total_amount = rec.account_invoice_id.amount_total
 
-            rec.amount_refunded = rec.calculate_amount_refunded(
-                total_amount, total_days, days_used)
-            rec.days_used = days_used
+            if rec.membership_id.type_membership == 'gym':
+                # Determine exact date_stop
+                in_period_reserve = rec.reserve_ids.filtered(
+                    lambda reserve:
+                    reserve.date_to >= rec.date_stop >= reserve.date_from)
+                if in_period_reserve:
+                    date_stop = fields.Date.from_string(
+                        in_period_reserve[0].date_from)
+                else:
+                    date_stop = fields.Date.from_string(rec.date_stop)
+
+                # Calculate days used
+                past_reserves = rec.reserve_ids.filtered(
+                    lambda reserve: reserve.date_to < rec.date_stop)
+                dates_reserve = past_reserves.total_reserve_days()
+                date_from = fields.Date.from_string(rec.date_from)
+                days_used = (date_stop - date_from).days - dates_reserve
+
+                total_days = rec.membership_id.month_membership * 30
+
+                rec.amount_refunded =\
+                    rec.calculate_amount_refunded_gym_service(
+                        total_amount, total_days, days_used)
+                rec.days_used = days_used
+            elif rec.membership_id.type_membership == 'personal_trainer':
+                rec.days_used = len(rec.attendance_ids)
+                rec.amount_refunded =\
+                    rec.calculate_amount_refunded_personal_trainer_service(
+                        total_amount, rec.membership_id.day_membership,
+                        len(rec.attendance_ids))
 
     @api.model
-    def calculate_amount_refunded(self, total_amount, total_days, days_used):
+    def calculate_amount_refunded_gym_service(
+            self, total_amount, total_days, days_used):
         amount_used = (total_amount / total_days) * days_used
         amount_refunded = total_amount - amount_used
+        return amount_refunded
+
+    @api.model
+    def calculate_amount_refunded_personal_trainer_service(
+            self, total_amount, total_days_training, days_trained):
+        amount_used = (total_amount / total_days_training) * days_trained
+        amount_refunded = 0.5 * (total_amount - amount_used)
         return amount_refunded
 
     @api.multi
@@ -145,3 +186,16 @@ class MembershipLine(models.Model):
             'target': 'new',
             'context': context
         }
+
+    @api.depends('attendance_ids')
+    def _compute_state(self):
+        """
+        Override to update state to old if current membership
+        is personal trainer and have enough attendances.
+        """
+        super(MembershipLine, self)._compute_state()
+        for rec in self:
+            if rec.membership_id and \
+                    rec.membership_id.type_membership == 'personal_trainer':
+                if len(rec.attendance_ids) >= rec.membership_id.day_membership:
+                    rec.state = 'old'

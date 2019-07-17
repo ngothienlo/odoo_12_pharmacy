@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- UTM Source -->
+        <record model="utm.source" id="utm.utm_source_search_engine">
+            <field name="name">Facebook_Inbox</field>
+        </record>
+        <record model="utm.source" id="utm.utm_source_mailing">
+            <field name="name">Facebook_Comment</field>
+        </record>
+        <record model="utm.source" id="utm.utm_source_newsletter">
+            <field name="name">Hotline_Face</field>
+        </record>
+        <record model="utm.source" id="utm.utm_source_facebook">
+            <field name="name">Hotline_Google</field>
+        </record>
+        <record model="utm.source" id="utm.utm_source_twitter">
+            <field name="name">Tivi</field>
+        </record>
+        <record model="utm.source" id="utm_source_web_order">
+            <field name="name">Đặt hàng trên Web</field>
+        </record>
+        <record model="utm.source" id="utm_source_orther">
+            <field name="name">Khác</field>
+        </record>
+
+</odoo>

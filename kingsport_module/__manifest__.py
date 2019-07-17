@@ -17,20 +17,22 @@
 #
 ##############################################################################
 {
-    'name': 'Project Kingpsort installer',
+    'name': 'Project Kingsport installer',
     'version': '12.0.0.1.0',
     'category': 'Trobz Standard Modules',
     'description': """
-This module will install all module dependencies of Kingpsort.
+This module will install all module dependencies of Kingsport.
     """,
     'author': 'Trobz',
     'website': 'http://www.trobz.com',
     'depends': [
 
         # Trobz Addons
+        'trobz_base',
         'crm_required_fields_state',
         'crm_activity',
         'l10n_vn_country_state',
+        'sale_rental',
 
         # Odoo Native
         'crm',
@@ -42,9 +44,11 @@ This module will install all module dependencies of Kingpsort.
 
         # OCA Addons
         'web_responsive',
+        'web_no_bubble',
+        'report_xlsx',
 
         # Other Addons
-        'orange_theme_odoo12'
+        'muk_web_theme'
 
     ],
     'data': [
@@ -53,6 +57,12 @@ This module will install all module dependencies of Kingpsort.
         # ============================================================
         # 'security/',
         'security/ir.model.access.csv',
+
+        # ============================================================
+        # WIZARDS
+        # ============================================================
+        # 'wizards/',
+
 
         # ============================================================
         # DATA
@@ -64,22 +74,29 @@ This module will install all module dependencies of Kingpsort.
         'data/stock_location.xml',
         'data/crm_stage.xml',
         'data/product_template.xml',
+        'data/utm_source.xml',
+        'data/mail_data.xml',
+
+        # ============================================================
+        # TEMPLATES
+        # ============================================================
+        # 'template/',
+        'template/assets.xml',
 
         # ============================================================
         # VIEWS
         # ============================================================
         # 'view/',
         'views/base/res_partner_views.xml',
+        'views/base/res_country_state_views.xml',
+        'views/base/res_users_views.xml',
 
         'views/crm/crm_lead_views.xml',
-        'views/crm/crm_stage_views.xml',
         'views/crm/crm_team_views.xml',
         'views/crm/crm_stage_views.xml',
         'views/crm/crm_lead_allocation_views.xml',
 
         'views/membership/membership_membership_line_views.xml',
-        'views/membership/product_template_views.xml',
-        'views/membership/res_partner_views.xml',
         'views/membership/stock_location_gym_views.xml',
 
         'views/sale/business_category_views.xml',
@@ -87,14 +104,23 @@ This module will install all module dependencies of Kingpsort.
         'views/sale/sale_order_views.xml',
         'views/sale/product_template_views.xml',
         'views/sale/sale_location_selection_views.xml',
+        'views/sale/product_product_views.xml',
 
         'views/stock/stock_picking_views.xml',
+        'views/stock/stock_picking_type_views.xml',
         'views/stock/product_template_views.xml',
+        'views/stock/stock_location_views.xml',
+        'views/stock/stock_inventory_views.xml',
+
+        'views/purchase/purchase_order_views.xml',
+
+        'views/account/account_payment_views.xml',
 
         # ============================================================
         # WIZARD
         # ============================================================
         'wizards/membership/membership_invoice.xml',
+        'wizards/stock/authorized_approval.xml',
 
         # ============================================================
         # MENU
@@ -106,7 +132,7 @@ This module will install all module dependencies of Kingpsort.
         # ============================================================
         # FUNCTION USED TO UPDATE DATA LIKE POST OBJECT
         # ============================================================
-        # "data/function.xml",
+        "data/function.xml",
     ],
 
     'test': [],

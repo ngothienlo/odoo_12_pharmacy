@@ -1,6 +1,6 @@
 # Copyright 2009-2019 Trobz (http://trobz.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import models, api
+from odoo import models, api, _
 from odoo.exceptions import Warning
 
 
@@ -13,7 +13,7 @@ class CrmLead(models.Model):
         required_fields = res.check_require_boolean_field(vals)
         if required_fields:
             raise Warning(
-                "The following fields are required: %s" %
+                _("The following fields are required: %s") %
                 ", ".join(map(str, required_fields)))
         return res
 
@@ -24,7 +24,7 @@ class CrmLead(models.Model):
             required_fields = record.check_require_boolean_field(vals)
             if required_fields:
                 raise Warning(
-                    "The following fields are required: %s" %
+                    _("The following fields are required: %s") %
                     ", ".join(map(str, required_fields)))
         return res
 
@@ -40,3 +40,15 @@ class CrmLead(models.Model):
             if not self[field.name]:
                 missing_fields.append(field.field_description)
         return missing_fields
+
+    @api.multi
+    def _create_lead_partner_data(self, name, is_company, parent_id=False):
+        vals = super(CrmLead, self)._create_lead_partner_data(
+            name, is_company, parent_id=False)
+        source_name = self.source_id and self.source_id.name or ''
+        vals.update({
+            'birthday': self.birthday or False,
+            'gender': self.gender or False,
+            'source': source_name
+        })
+        return vals

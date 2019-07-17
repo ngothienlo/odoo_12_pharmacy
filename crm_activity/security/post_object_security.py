@@ -11,8 +11,8 @@ g_sale_user = 'Sales / User: Own Documents Only'
 g_sale_manager = 'Sales / Manager'
 
 
-class PostObjectSecurityDfurniCrmActivityModule(models.TransientModel):
-    _name = "post.object.security.dfurni.crm.activity.module"
+class PostObjectSecurityCrmActivityModule(models.TransientModel):
+    _name = "post.object.security.crm.activity.module"
     _description = "Set up the Groups, Profiles and Access Rights"
 
     @api.model
@@ -29,7 +29,7 @@ class PostObjectSecurityDfurniCrmActivityModule(models.TransientModel):
             # "perm_read","perm_write", "perm_create","perm_unlink"
             (
                 'activity.result',
-                'activity.followup',
+                # 'activity.followup',
                 'activity.history',
                 'activity.type.possible.result'
             ): {

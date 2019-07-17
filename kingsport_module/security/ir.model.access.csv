@@ -1,6 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_lead_allocation_manager,lead.allocation.manager,model_lead_allocation,base.group_user,1,1,1,1
-access_lead_allocation_user,lead.allocation.user,model_lead_allocation,base.group_user,1,1,1,0
-access_business_category,access_business_category,model_business_category,base.group_user,1,1,1,0
+access_lead_allocation_user,lead.allocation.user,model_lead_allocation,base.group_user,1,1,1,1
+access_business_category,access_business_category,model_business_category,base.group_user,1,1,1,1
 access_stock_location_gym_user,stock.location.gym.user,model_stock_location_gym,base.group_user,1,1,1,1
 access_membership_line_reserve_user,membership.line.reserve.user,model_membership_line_reserve,base.group_user,1,1,1,1
+access_membership_line_attendance_user,membership.line.attendance.user,model_membership_line_attendance,base.group_user,1,1,1,1

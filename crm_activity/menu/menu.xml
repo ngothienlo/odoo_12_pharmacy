@@ -13,9 +13,15 @@
         parent="crm.crm_menu_config"
         sequence="13"/>
     <!-- CRM > Configuration  > Activity Followup-->
-    <menuitem id="menu_activity_followup"
+    <!-- <menuitem id="menu_activity_followup"
         name="Activity Follow-ups"
         action="activity_followup_action"
+        parent="crm.crm_menu_config"
+        sequence="14"/> -->
+    <!-- CRM > Configuration  > Activity History-->
+    <menuitem id="menu_activity_history"
+        name="Activities History"
+        action="action_view_history_activities"
         parent="crm.crm_menu_config"
         sequence="14"/>
 

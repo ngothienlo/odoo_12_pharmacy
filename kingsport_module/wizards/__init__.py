@@ -18,3 +18,4 @@
 ##############################################################################
 from . import membership
 from . import stock_picking_return
+from . import stock

@@ -10,10 +10,10 @@
                     <group>
                         <field name="name"/>
                         <field name="team_id"/>
-                        <field name="is_main_city" invisible="1"/>
-                        <field name="state_ids" widget="many2many_tags"/>
-                        <field name="district_ids" widget="many2many_tags"
-                               attrs="{'required': [('is_main_city', '=', True)]}"/>
+                        <field name="has_main_cities" invisible="1"/>
+                        <field name="state_ids"/>
+                        <field name="district_ids"
+                               attrs="{'required': [('has_main_cities', '=', True)]}"/>
                     </group>
                 </sheet>
             </form>

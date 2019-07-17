@@ -18,10 +18,15 @@
 ##############################################################################
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+from odoo.exceptions import Warning
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
+
+    @api.model
+    def _get_default_locaiton(self):
+        return self.env.user.location_id or False
 
     approval_id = fields.Many2one(
         'res.partner', 'Approver',
@@ -29,13 +34,47 @@ class SaleOrder(models.Model):
     direct_shipping = fields.Boolean()
     location_id = fields.Many2one(
         'stock.location', 'Delivery Location',
+        default=lambda self: self._get_default_locaiton(),
         domain=[('usage', '=', 'internal')])
-    maintenance_order = fields.Boolean()
-    delivery_order = fields.Many2one('stock.picking')
-    exchange_order = fields.Boolean()
-    original_order = fields.Many2one('sale.order')
+    is_maintenance_order = fields.Boolean('Maintenance Order', copy=False)
+    delivery_order_id = fields.Many2one(
+        'stock.picking', 'Delivery Order', copy=False)
+    is_exchange_order = fields.Boolean('Exchange Order', copy=False)
+    original_order_id = fields.Many2one(
+        'sale.order', 'Original Order', copy=False)
     total_cost_price = fields.Char(
         compute='_compute_total_cost_price', store=True)
+    contact_name = fields.Char(
+        'Shipping Contact',
+        related='partner_shipping_id.name',
+        required=True, store=True, readonly=False, copy=True)
+    phone = fields.Char(
+        'Contact Phone',
+        related='partner_shipping_id.phone',
+        required=True, store=True, readonly=False)
+    district_id = fields.Many2one(
+        related='partner_shipping_id.district_id',
+        required=True, store=True, readonly=False)
+    ward_id = fields.Many2one(
+        related='partner_shipping_id.ward_id',
+        required=True, store=True, readonly=False)
+    street = fields.Char(
+        related='partner_shipping_id.street',
+        required=True, store=True, readonly=False)
+    street2 = fields.Char(
+        related='partner_shipping_id.street2', store=True, readonly=False)
+    country_id = fields.Many2one(
+        related='partner_shipping_id.country_id',
+        required=True, store=True, readonly=False, copy=True)
+    state_id = fields.Many2one(
+        related='partner_shipping_id.state_id',
+        required=True, store=True, readonly=False, copy=True)
+    partner_shipping_id = fields.Many2one(
+        domain="['|', ('parent_id', '=', partner_id),"
+               "('id','=', partner_id)]", required=False)
+    current_location_id = fields.Many2one(
+        'stock.location', 'Current Location',
+        default=lambda self: self._get_default_locaiton())
 
     @api.depends('order_line.total_cost')
     def _compute_total_cost_price(self):
@@ -54,22 +93,36 @@ class SaleOrder(models.Model):
         product_ids = []
         for sale_order_line in sale_order_lines:
             product_ids.append(
-                (sale_order_line.product_id.id, sale_order_line.location_id.id)
+                (sale_order_line.product_id, sale_order_line.location_id)
             )
         return product_ids
 
     @api.multi
     def create_exchange_order(self):
-        for order in self:
-            if order.exchange_order:
-                continue
-            new_exchange_order_id = self.env['sale.order'].create({
-                'partner_id': order.partner_id.id,
-                'exchange_order': True,
-                'original_order': order.id,
-            })
-            if new_exchange_order_id:
-                order.write({'exchange_order': True})
+        self.ensure_one()
+        new_exchange_order = self.env['sale.order'].create({
+            'partner_id': self.partner_id.id,
+            'is_exchange_order': True,
+            'original_order_id': self.id,
+            'contact_name': self.contact_name,
+            'street': self.street,
+            'street2': self.street2,
+            'phone': self.phone,
+            'district_id': self.district_id.id,
+            'ward_id': self.ward_id.id,
+            'country_id': self.country_id.id,
+            'state_id': self.state_id.id,
+        })
+        if new_exchange_order:
+            return {
+                'name': _('Exchange Order'),
+                'type': 'ir.actions.act_window',
+                'res_model': 'sale.order',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': new_exchange_order.id,
+                'target': 'current'
+            }
 
     @api.multi
     def create_invoices(self):
@@ -82,12 +135,28 @@ class SaleOrder(models.Model):
                 'advance_payment_method': 'delivered'})
         adv_wiz.create_invoices()
 
+    @api.multi
+    def action_invoice_create(self, grouped=False, final=False):
+        invoices = super(SaleOrder, self).action_invoice_create(
+            grouped=False, final=False)
+        for invoice_id in invoices:
+            if self.is_exchange_order:
+                ivn_line_env = self.env['account.invoice.line']
+                ivn_line_env.create({
+                    'name': _('Exchanged Order for SO %s') % (
+                        self.original_order_id and
+                        self.original_order_id.name),
+                    'display_type': 'line_note',
+                    'invoice_id': invoice_id
+                })
+        return invoices
+
     @api.model
     def get_stock_quant_for_product(self):
         products = self.get_list_product_on_sale_order()
         product_ids = []
         for product in products:
-            product_ids.append(product[0])
+            product_ids.append(product[0].id)
         stock_quants = self.env['stock.quant'].search(
             [('product_id', 'in', product_ids),
              ('location_id.usage', '=', 'internal')]
@@ -124,7 +193,7 @@ class SaleOrder(models.Model):
             'search_default_groupby_product_id': True
         })
         return {
-            'name': 'Choose Location',
+            'name': _('Choose Location'),
             'type': 'ir.actions.act_window',
             'res_model': 'sale.location.selection',
             'view_type': 'form',
@@ -134,3 +203,111 @@ class SaleOrder(models.Model):
             'target': 'current',
             'context': context
         }
+
+    @api.multi
+    def _create_shipping_address(self):
+        partner_env = self.env['res.partner']
+        for rec in self:
+            if not rec.partner_shipping_id:
+                # Create shipping address for partner_id current
+                vals = {
+                    'type': 'delivery',
+                    'street': rec.street,
+                    'street2': rec.street2 or '',
+                    'country_id': rec.country_id.id,
+                    'district_id': rec.district_id.id,
+                    'state_id': rec.state_id.id,
+                    'ward_id': rec.ward_id.id,
+                    'name': rec.contact_name,
+                    'phone': rec.phone,
+                    'parent_id': rec.partner_id.id,
+                }
+                partner = partner_env.create(vals)
+                rec.partner_shipping_id = partner
+        return True
+
+    @api.model
+    def create(self, vals):
+        res = super(SaleOrder, self).create(vals)
+        res._create_shipping_address()
+        return res
+
+    @api.multi
+    def write(self, vals):
+        res = super(SaleOrder, self).write(vals)
+        self._create_shipping_address()
+        return res
+
+    @api.multi
+    def action_create_down_payment(self):
+        self.ensure_one()
+        memo = _('%s - Down payment') % (self.name)
+        context = {
+            'default_payment_type': 'inbound',
+            'default_partner_type': 'customer',
+            'default_partner_id': self.partner_id.id or False,
+            'default_communication': memo,
+            'is_payment_from_so': True
+        }
+        return {
+            'name': _('Create Down Payment'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.payment',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'current',
+            'context': context
+        }
+
+    @api.onchange('user_id')
+    def _domain_sale_person(self):
+        sale_team = self.user_id and self.user_id.sale_team_id or False
+        self.team_id = sale_team
+
+    @api.onchange('team_id')
+    def _onchange_team_id(self):
+        member_ids = self.team_id and self.team_id.member_ids and\
+            self.team_id.member_ids.ids or False
+        domain = {}
+        if member_ids:
+            domain['user_id'] = [('id', 'in', member_ids)]
+            return {'domain': domain}
+        else:
+            domain['user_id'] = []
+            return {'domain': domain}
+
+    @api.multi
+    def _create_internal_tranfer(self):
+        self.ensure_one()
+        lines = self.order_line or []
+        if not self.current_location_id:
+            raise Warning(
+                _('Current showroom is not defined. Please  define '
+                  'it in tab other information of user form.'))
+        for line in lines:
+            if line.location_id != self.current_location_id:
+                line._create_stock_move()
+        return True
+
+    @api.multi
+    def action_confirm(self):
+        # check s.o line none location => raise warning
+        self.check_sale_order_line_none_location()
+        direct_shipping = self.direct_shipping
+        if not direct_shipping:
+            self._create_internal_tranfer()
+        res = super(SaleOrder, self).action_confirm()
+        return res
+
+    @api.multi
+    def check_sale_order_line_none_location(self):
+        product_ids = self.get_list_product_on_sale_order()
+        product_name = []
+        for product in product_ids:
+            if not product[1]:
+                product_name.append(product[0].name)
+        product_name_str = ', '.join(product_name)
+        if len(product_name) > 0:
+            raise Warning(
+                _('Need to specify a stock for product: "%s"!')
+                % product_name_str)
