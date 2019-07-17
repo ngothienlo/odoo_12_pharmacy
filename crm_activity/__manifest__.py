@@ -10,7 +10,6 @@ This module will install all module dependencies of dfurni.
     'author': 'Trobz',
     'website': 'http://www.trobz.com',
     'depends': [
-        'trobz_base',
         'crm',
         'sales_team',
         'sale',

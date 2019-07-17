@@ -17,18 +17,17 @@
 #
 ##############################################################################
 {
-    'name': 'Project Kingsport installer',
+    'name': 'Project Pharmacy installer',
     'version': '12.0.0.1.0',
-    'category': 'Trobz Standard Modules',
+    'category': 'Standard Modules',
     'description': """
-This module will install all module dependencies of Kingsport.
+This module will install all module dependencies of Pharmacy.
     """,
-    'author': 'Trobz',
-    'website': 'http://www.trobz.com',
+    'author': 'Pharmacy',
+    'website': 'http://www.google.com',
     'depends': [
 
-        # Trobz Addons
-        'trobz_base',
+        # Base Addons
         'crm_required_fields_state',
         'crm_activity',
         'l10n_vn_country_state',
@@ -132,7 +131,7 @@ This module will install all module dependencies of Kingsport.
         # ============================================================
         # FUNCTION USED TO UPDATE DATA LIKE POST OBJECT
         # ============================================================
-        "data/function.xml",
+        # "data/function.xml",
     ],
 
     'test': [],
