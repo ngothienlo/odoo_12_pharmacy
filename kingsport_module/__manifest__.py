@@ -43,7 +43,6 @@ This module will install all module dependencies of Pharmacy.
 
         # OCA Addons
         'web_responsive',
-        'web_no_bubble',
         'report_xlsx',
 
         # Other Addons
