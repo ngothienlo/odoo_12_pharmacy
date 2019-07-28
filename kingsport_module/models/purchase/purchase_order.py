@@ -16,7 +16,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class PurchaseOrder(models.Model):
@@ -76,6 +76,7 @@ class PurchaseOrder(models.Model):
                         'location_dest_id': location_dest_id,
                         'scheduled_date': scheduled_date
                     })
+                    picking._update_stock_move_line()
         return True
 
     @api.multi
@@ -106,3 +107,24 @@ class PurchaseOrder(models.Model):
         if self.location_dest_id:
             return self.location_dest_id.id
         return super(PurchaseOrder, self)._get_destination_location()
+
+    @api.multi
+    def action_create_down_payment(self):
+        self.ensure_one()
+        memo = _('%s - Down payment') % (self.name)
+        context = {
+            'default_payment_type': 'outbound',
+            'default_partner_type': 'supplier',
+            'default_partner_id': self.partner_id.id or False,
+            'default_communication': memo,
+            'is_payment_from_po': True
+        }
+        return {
+            'name': _('Create Down Payment'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.payment',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'current',
+            'context': context
+        }

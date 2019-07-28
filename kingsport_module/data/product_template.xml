@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="0">
+<odoo noupdate="1">
     <record id="product_template_membership_gym_1_month" model="product.template">
-        <field name="name">1 month</field>
+        <field name="name">Gym 1 month</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>
@@ -10,7 +10,7 @@
     </record>
 
     <record id="product_template_membership_gym_3_months" model="product.template">
-        <field name="name">3 months</field>
+        <field name="name">Gym 3 months</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>
@@ -19,7 +19,7 @@
     </record>
 
     <record id="product_template_membership_gym_6_months" model="product.template">
-        <field name="name">6 months</field>
+        <field name="name">Gym 6 months</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>
@@ -28,7 +28,7 @@
     </record>
 
     <record id="product_template_membership_gym_12_months" model="product.template">
-        <field name="name">12 months</field>
+        <field name="name">Gym 12 months</field>
         <field name="categ_id" ref="kingsport_module.product_category_gym_service" />
         <field name="membership">True</field>
         <field name="type">service</field>

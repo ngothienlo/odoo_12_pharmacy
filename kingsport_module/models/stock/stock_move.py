@@ -34,3 +34,33 @@ class StockMove(models.Model):
                 continue
             move.warranty_expiration_date = move.picking_id.date_done + \
                 relativedelta(months=+move.product_id.product_tmpl_id.warranty)
+
+    def _search_picking_for_assignation(self):
+        """Overwrite for Kingsport workflow"""
+        self.ensure_one()
+        list_condition = self._prepare_value_for_search_picking()
+        picking = self.env['stock.picking'].search(list_condition, limit=1)
+        if picking:
+            return picking
+        return False
+
+    @api.model
+    def _prepare_value_for_search_picking(self):
+        sale_order = self.sale_line_id and self.sale_line_id.order_id or False
+        list_condition = [
+            ('sale_id', '=', sale_order.id),
+            ('group_id', '=', self.group_id.id),
+            ('location_id', '=', self.location_id.id),
+            ('location_dest_id', '=', self.location_dest_id.id),
+            ('picking_type_id', '=', self.picking_type_id.id),
+            ('printed', '=', False),
+            ('state', 'in', [
+                'draft', 'confirmed', 'waiting',
+                'partially_available', 'assigned'])
+        ]
+        return list_condition
+
+    @api.depends('product_id', 'has_tracking')
+    def _compute_show_details_visible(self):
+        for move in self:
+            move.show_details_visible = False

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="res_company_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.view.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Other Information" name="showrooms_info">
+                    <group>
+                        <separator string="Default Terms &amp; Conditions" colspan="2"/>
+                        <field name="sale_note" nolabel="1"/>
+
+                        <separator string="Note For Service" colspan="2"/>
+                        <field name="note_service" nolabel="1"/>
+
+                        <separator string="Note Payment Method" colspan="2"/>
+                        <field name="note_payment_method" nolabel="1"/>
+
+                        <separator string="Note Delivery Method" colspan="2"/>
+                        <field name="note_delivery_method" nolabel="1"/>
+                        
+                        <separator string="Showrooms" colspan="2"/>
+                        <field name="showroom_info" nolabel="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

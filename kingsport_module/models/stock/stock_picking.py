@@ -24,8 +24,8 @@ class StockPicking(models.Model):
 
     return_do_over_7days = fields.Boolean(copy=False)
     approver_id = fields.Many2one(
-        'res.partner', domain=[
-            ('customer', '=', False), ('supplier', '=', False)])
+        'res.partner',
+        track_visibility='onchange')
     dummy_state = fields.Selection([
         ('draft', 'Draft'),
         ('waiting', 'Waiting Another Operation'),
@@ -61,6 +61,15 @@ class StockPicking(models.Model):
         return True
 
     @api.multi
+    def approve_and_reserve(self):
+        self.action_confirm()
+        self.action_assign()
+        partner_id = self.env.user.partner_id and\
+            self.env.user.partner_id.id or False
+        self.write({'approver_id': partner_id})
+        return True
+
+    @api.multi
     def button_authorized_approval(self):
         self.ensure_one()
         context = dict(self._context) or {}
@@ -84,3 +93,13 @@ class StockPicking(models.Model):
         for picking in self:
             if picking.picking_type_code == 'internal':
                 picking.show_mark_as_todo = False
+
+    @api.model
+    def _update_stock_move_line(self):
+        move_lines = self.move_line_ids or []
+        state = ['draft', 'waiting',
+                 'partially_available', 'assigned', 'confirmed']
+        move_lines.filtered(lambda self: self.state in state).write({
+            'location_dest_id': self.location_dest_id.id
+        })
+        return True

@@ -16,7 +16,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import data
-from . import models
-from . import wizards
-from . import reports
+from odoo import models, fields
+
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    showroom_info = fields.Text('Showrooms Information')
+    note_service = fields.Text('Note For Service')
+    note_payment_method = fields.Text('Note Payment Method')
+    note_delivery_method = fields.Text('Note Delivery Method')

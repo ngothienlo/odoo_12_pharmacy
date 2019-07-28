@@ -22,4 +22,5 @@ from odoo import models, fields
 class ResCountryState(models.Model):
     _inherit = 'res.country.state'
 
+    active = fields.Boolean(default=True)
     is_main_city = fields.Boolean()

@@ -29,7 +29,9 @@ class StockRule(models.Model):
             product_id, product_qty, product_uom,
             location_id, name, origin, values, group_id
         )
-        move_values.update({
-            'location_id': values.get('src_location_id', False),
-        })
+        is_rental_order = values.get('is_rental_order')
+        if not is_rental_order:
+            move_values.update({
+                'location_id': values.get('src_location_id', False),
+            })
         return move_values

@@ -37,8 +37,8 @@ class StockInventory(models.Model):
         string='Difference in details')
 
     def action_validate(self):
-        if self.is_different_in_inventory_detail and\
-                not self.env.user.has_group('stock.group_stock_manager'):
-            raise Warning(_('There is a difference in detail, please ask for '
-                            'validation from inventory manager!'))
+        if self.is_different_in_inventory_detail:
+            if not self.env.user.has_group('stock.group_stock_manager'):
+                raise Warning(_('There is a difference in detail, please '
+                                'ask for validation from inventory manager!'))
         return super(StockInventory, self).action_validate()

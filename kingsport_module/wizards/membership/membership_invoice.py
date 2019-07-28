@@ -7,7 +7,8 @@ class MembershipInvoice(models.TransientModel):
     card_number = fields.Char(
         string='Card Number', required=True)
     user_id = fields.Many2one(
-        'res.users', string='Salesperson')
+        'res.users', string='Salesperson',
+        default=lambda self: self.env.user)
     gym_location_id = fields.Many2one(
         'stock.location.gym', string='Gym')
     showroom_id = fields.Many2one(
@@ -24,6 +25,11 @@ class MembershipInvoice(models.TransientModel):
         """
         price_dict = self.product_id.price_compute('list_price')
         self.member_price = price_dict.get(self.product_id.id) or False
+
+    @api.onchange('gym_location_id')
+    def _onchange_gym_location_id(self):
+        if self.gym_location_id:
+            self.showroom_id = self.gym_location_id.showroom_id
 
     @api.multi
     def membership_invoice(self):

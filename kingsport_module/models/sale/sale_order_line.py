@@ -25,7 +25,7 @@ class SaleOrderLine(models.Model):
 
     location_id = fields.Many2one(
         'stock.location', 'Delivery Location',
-        domain=[('usage', '=', 'internal')])
+        domain=[('usage', '=', 'internal'), ('is_sale_location', '=', True)])
     cost_price = fields.Float(related='product_id.standard_price', store=True)
     total_cost = fields.Float(compute='_compute_total_cost', store=True)
 
@@ -60,18 +60,19 @@ class SaleOrderLine(models.Model):
 
     @api.model
     def _update_location(self):
-        product_id = self.product_id and self.product_id.id or False
-        if product_id:
-            so_location_id = self.env.context.get('so_location_id')
-            line_location_id = self.location_id and\
-                self.location_id.id or False
-            product_uom_qty = self.product_uom_qty or 0
-            if line_location_id:
-                self.location_id = self.check_inventory(
-                    product_id, line_location_id, product_uom_qty)
-            else:
-                self.location_id = self.check_inventory(
-                    product_id, so_location_id, product_uom_qty)
+        if not self.order_id.is_rental_order:
+            product_id = self.product_id and self.product_id.id or False
+            if product_id:
+                so_location_id = self.env.context.get('so_location_id')
+                line_location_id = self.location_id and\
+                    self.location_id.id or False
+                product_uom_qty = self.product_uom_qty or 0
+                if line_location_id:
+                    self.location_id = self.check_inventory(
+                        product_id, line_location_id, product_uom_qty)
+                else:
+                    self.location_id = self.check_inventory(
+                        product_id, so_location_id, product_uom_qty)
         return True
 
     @api.model
@@ -102,17 +103,21 @@ class SaleOrderLine(models.Model):
         self.ensure_one()
         values = super(SaleOrderLine, self)._prepare_procurement_values(
             group_id)
-        src_location_id = False
-        direct_shipping = self.order_id and\
-            self.order_id.direct_shipping or False
-        if direct_shipping:
-            src_location_id = self.location_id and self.location_id.id or False
-        else:
-            src_location_id = self.order_id and\
-                self.order_id.current_location_id.id
-        values.update({
-            'src_location_id': src_location_id,
-        })
+        is_rental_order = self.order_id.is_rental_order
+        values.update({'is_rental_order': is_rental_order})
+        if not is_rental_order:
+            src_location_id = False
+            direct_shipping = self.order_id and\
+                self.order_id.direct_shipping or False
+            if direct_shipping:
+                src_location_id = self.location_id and\
+                    self.location_id.id or False
+            else:
+                src_location_id = self.order_id and\
+                    self.order_id.current_location_id.id
+            values.update({
+                'src_location_id': src_location_id,
+            })
         return values
 
     @api.multi
@@ -130,10 +135,18 @@ class SaleOrderLine(models.Model):
             'picking_type_id': self.env.ref('stock.picking_type_internal').id,
             'date': date_planned,
             'date_expected': date_planned,
+            'sale_line_id': self.id
         }
         stock_move = stock_move_env.create(move_values)
         stock_move._assign_picking()
         picking = stock_move.picking_id
-        if picking:
+        if picking and not picking.sale_id:
             picking.sale_id = self.order_id.id
         return True
+
+    @api.model
+    def _prepare_value_procurement_group_run(self, procurement_group):
+        vals = super(SaleOrderLine, self)._prepare_value_procurement_group_run(
+            procurement_group)
+        vals.update({'is_rental_order': self.order_id.is_rental_order})
+        return vals

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-10 09:15+0000\n"
-"PO-Revision-Date: 2019-07-10 09:15+0000\n"
+"POT-Creation-Date: 2019-07-24 10:47+0000\n"
+"PO-Revision-Date: 2019-07-24 10:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,7 @@ msgstr "* Mới: Khi một dịch chuyển kho được tạo và chưa được
 "* Khả dụng: Khi sản phẩm đã được xí và có sẵn để dịch chuyển.\n"
 "* Hoàn thành: Khi một lô hàng được xử lý xong."
 
+
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
 #: selection:sale.rental,state:0
@@ -39,19 +40,19 @@ msgstr "Trở lại"
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_order_line__can_sell_rental
 msgid "Can Sell from Rental"
-msgstr ""
+msgstr "Có thể bán"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:47
 #, python-format
 msgid "Can't find any generic 'Rent' route."
-msgstr ""
+msgstr "Không thể tìm thấy tuyến cung ứng 'Cho thuê' chung nào."
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:58
 #, python-format
 msgid "Can't find any generic 'Sell Rented Product' route."
-msgstr ""
+msgstr "Không thể tìm thấy tuyến cung ứng 'Bán sản phẩm cho thuê' chung nào."
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.create_rental_product_form
@@ -67,7 +68,7 @@ msgstr "Đã hủy"
 #: code:addons/sale_rental/models/sale_order.py:42
 #, python-format
 msgid "Cannot sell the rental %s because it has not been delivered"
-msgstr "Không thể bán cho thuê %s vì chưa vận chuyển."
+msgstr "Không thể bán sản phẩm cho thuê %s vì chưa vận chuyển."
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__company_id
@@ -77,12 +78,19 @@ msgstr "Công ty"
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product__copy_image
 msgid "Copy Product Image"
-msgstr ""
+msgstr "Sao chép hình ảnh sản phẩm"
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.create_rental_product_form
 msgid "Create"
 msgstr "Tạo"
+
+#. module: sale_rental
+#: model:ir.actions.act_window,name:sale_rental.create_rental_product_action
+#: model_terms:ir.ui.view,arch_db:sale_rental.create_rental_product_form
+#: model_terms:ir.ui.view,arch_db:sale_rental.product_normal_form_view
+msgid "Create Rental Service"
+msgstr ""
 
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_create_rental_product
@@ -110,7 +118,7 @@ msgstr "Khách hàng"
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product__default_code
 msgid "Default Code"
-msgstr ""
+msgstr "Mã nội bộ"
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
@@ -137,35 +145,35 @@ msgstr "Ngày kết thúc"
 
 #. module: sale_rental
 #: model:ir.model.fields,help:sale_rental.field_sale_rental__end_date
-msgid "End Date of the Rental (extensions included),         taking into account all the extensions sold to the customer."
-msgstr ""
+msgid "End Date of the Rental (extensions included), taking into account all the extensions sold to the customer."
+msgstr "Ngày kết thúc cho thuê (đã bao gồm thời gian mở rộng)."
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
 msgid "Group By"
-msgstr "Nhóm theo"
+msgstr "Gom nhóm"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product__id
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__in_state
 msgid "In Move State"
-msgstr ""
+msgstr "Trạng thái đơn nhập hàng"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__in_move_id
 msgid "Incoming Move"
-msgstr ""
+msgstr "Đơn nhập hàng"
 
 #. module: sale_rental
 #: model:ir.model.fields,help:sale_rental.field_sale_order_line__rental_qty
 #: model:ir.model.fields,help:sale_rental.field_sale_rental__rental_qty
 msgid "Indicate the number of items that will be rented."
-msgstr ""
+msgstr "Số lượng các sản phẩm sẽ được cho thuê."
 
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_stock_inventory
@@ -176,7 +184,7 @@ msgstr "Kho"
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product____last_update
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental____last_update
 msgid "Last Modified on"
-msgstr "Sửa lần cuối vào"
+msgstr "Chỉnh sửa lần cuối vào"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product__write_uid
@@ -194,62 +202,74 @@ msgstr "Cập nhật lần cuối vào"
 #: code:addons/sale_rental/models/sale_order.py:97
 #, python-format
 msgid "Missing 'Rental to Extend' on the sale order line with rental service %s"
-msgstr "Thiếu 'gian hạn cho thuê' trên dòng đặt hàng với dịch vụ cho thuê %s"
+msgstr "Thiếu thông tin 'đơn cho thuê cần gia hạn' trên dòng chi tiết đơn hàng với dịch vụ cho thuê %s"
 
 #. module: sale_rental
 #: selection:sale.order.line,rental_type:0
 msgid "New Rental"
-msgstr "Thuê mới"
+msgstr "Cho thuê mới"
 
 #. module: sale_rental
-#: code:addons/sale_rental/models/sale_order.py:232
+#: code:addons/sale_rental/models/sale_order.py:247
 #, python-format
 msgid "Not enough stock !"
-msgstr "Không đủ tồn kho!"
+msgstr "Không đủ sản phẩm trong kho !"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/sale_order.py:112
 #, python-format
 msgid "On the 'new rental' sale order line with product '%s', we should have a rental service product !"
-msgstr "Trên chi tiết hóa đơn 'thuê mới' với sản phẩm '%s', chúng ta nên có một dịch vụ cho thuê!"
+msgstr "Trên dòng chi tiết đơn hàng với loại 'cho thuê mới' của sản phẩm '%s, chúng ta nên có một sản phẩm dịch vụ cho thuê!"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/sale_order.py:129
 #, python-format
 msgid "On the sale order line with product %s you are trying to sell a rented product with a quantity (%s) that is different from the rented quantity (%s). This is not supported."
-msgstr ""
+msgstr "Hệ thống không hỗ trợ bán sản phẩm đã cho thuê có số lượng khác với số lượng đã cho thuê. Chi tiết đơn hàng của sản phẩm: %s, số lượng cần bán: %s, số lượng cho thuê: %s."
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/sale_order.py:118
 #, python-format
 msgid "On the sale order line with product '%s' the Product Quantity (%s) should be the number of days (%s) multiplied by the Rental Quantity (%s)."
-msgstr ""
+msgstr "Trên dòng chi tiết đơn hàng của sản phẩm: %s, số lượng sản phẩm (%s) phải bằng số ngày (%s) nhân với số lượng cho thuê (%s)."
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/sale_order.py:101
 #, python-format
 msgid "On the sale order line with rental service %s, you are trying to extend a rental with a rental quantity (%s) that is different from the quantity of the original rental (%s). This is not supported."
-msgstr ""
+msgstr "Hệ thống không hỗ trợ gia hạn cho thuê có số lượng khác với số lượng đã cho thuê. Chi tiết đơn hàng cho thuê: %s, số lượng cần gia hạn: %s, số lượng cho thuê: %s."
+
+#. module: sale_rental
+#: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
+#: selection:sale.rental,state:0
+msgid "Ordered"
+msgstr "Đã Thuê"
+
+#. module: sale_rental
+#: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
+#: selection:sale.rental,state:0
+msgid "Out"
+msgstr "Đang chuyển đi"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__out_state
 msgid "Out Move State"
-msgstr ""
+msgstr "Trạng thái đơn xuất hàng"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__out_move_id
 msgid "Outgoing Move"
-msgstr ""
+msgstr "Đơn xuất hàng"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_stock_warehouse__rental_view_location_id
 msgid "Parent Rental"
-msgstr ""
+msgstr "Địa điểm cha"
 
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_product_product
 msgid "Product"
-msgstr "Sản phẩm"
+msgstr "sản phẩm"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product__categ_id
@@ -259,23 +279,36 @@ msgstr "Nhóm sản phẩm"
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product__name
 msgid "Product Name"
-msgstr ""
+msgstr "Tên sản phẩm"
 
 #. module: sale_rental
 #: code:addons/sale_rental/wizard/create_rental_product.py:29
 #, python-format
 msgid "RENT-%s"
-msgstr "Thuê-%s"
+msgstr "Cho thuê -%s"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__in_picking_id
 msgid "Receipt"
-msgstr ""
+msgstr "Đơn nhập hàng"
+
+#. module: sale_rental
+#: model:ir.model.fields,field_description:sale_rental.field_product_product__rental_service_ids
+#: model_terms:ir.ui.view,arch_db:sale_rental.product_normal_form_view
+msgid "Related Rental Services"
+msgstr "Dịch vụ cho thuê liên quan"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_product_product__rented_product_id
 msgid "Related Rented Product"
-msgstr ""
+msgstr "Sản phẩm cho thuê liên quan"
+
+#. module: sale_rental
+#: code:addons/sale_rental/models/stock.py:44
+#: model:stock.location.route,name:sale_rental.route_warehouse0_rental
+#, python-format
+msgid "Rent"
+msgstr "Cho thuê"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:130
@@ -287,80 +320,108 @@ msgid "Rental"
 msgstr "Cho thuê"
 
 #. module: sale_rental
+#: model:ir.model.fields,field_description:sale_rental.field_stock_warehouse__rental_allowed
+msgid "Rental Allowed"
+msgstr "Cho thuê"
+
+#. module: sale_rental
 #: selection:sale.order.line,rental_type:0
 msgid "Rental Extension"
-msgstr ""
+msgstr "Gia hạn cho thuê"
+
+#. module: sale_rental
+#: model:ir.model.fields,field_description:sale_rental.field_sale_rental__extension_order_line_ids
+#: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
+msgid "Rental Extensions"
+msgstr "Gia hạn cho thuê"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:146
 #: model:ir.model.fields,field_description:sale_rental.field_stock_warehouse__rental_in_location_id
 #, python-format
 msgid "Rental In"
-msgstr ""
+msgstr "kho nhận (Cho Thuê)"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:162
 #: model:ir.model.fields,field_description:sale_rental.field_stock_warehouse__rental_out_location_id
 #, python-format
 msgid "Rental Out"
-msgstr ""
+msgstr "kho gửi (Cho Thuê)"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_create_rental_product__sale_price_per_day
 msgid "Rental Price per Day"
-msgstr ""
+msgstr "Chi phí cho thuê theo ngày"
+
+#. module: sale_rental
+#: model:ir.model.fields,field_description:sale_rental.field_sale_order_line__rental_qty
+#: model:ir.model.fields,field_description:sale_rental.field_sale_rental__rental_qty
+msgid "Rental Quantity"
+msgstr "Số lượng cho thuê"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_stock_warehouse__rental_route_id
 msgid "Rental Route"
-msgstr ""
+msgstr "Tuyến cung ứng cho thuê"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__start_order_id
 msgid "Rental SO"
-msgstr ""
+msgstr "Đơn cho thuê"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__start_order_line_id
 msgid "Rental SO Line"
-msgstr ""
+msgstr "Dòng chi tiết đơn cho thuê"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__rental_product_id
 msgid "Rental Service"
-msgstr ""
+msgstr "Dịch vụ cho thuê"
+
+#. module: sale_rental
+#: model:ir.model.fields,field_description:sale_rental.field_sale_order_line__rental_type
+msgid "Rental Type"
+msgstr "Loại thuê"
 
 #. module: sale_rental
 #: code:addons/sale_rental/wizard/create_rental_product.py:20
 #, python-format
 msgid "Rental of a %s"
-msgstr "Cho thuê %s"
+msgstr "Sản phẩm cho thuê %s"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_order_line__extension_rental_id
 msgid "Rental to Extend"
-msgstr ""
+msgstr "Đơn cho thuê cần gia hạn"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_order_line__sell_rental_id
 msgid "Rental to Sell"
-msgstr ""
+msgstr "Đơn cho thuê đã bán"
+
+#. module: sale_rental
+#: model:ir.actions.act_window,name:sale_rental.sale_rental_action
+#: model:ir.ui.menu,name:sale_rental.sale_rental_menu
+msgid "Rentals"
+msgstr "Cho thuê"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__rented_product_id
 msgid "Rented Product"
-msgstr ""
+msgstr "Sản phẩm cho thuê"
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_tree
 msgid "Return"
-msgstr "Trả hàng"
+msgstr "Nhận hàng"
 
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_sale_order
 msgid "Sale Order"
-msgstr "Đơn hàng Bán"
+msgstr "Đơn hàng"
 
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_sale_order_line
@@ -371,22 +432,22 @@ msgstr "Chi tiết đơn hàng"
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_tree
 msgid "Sales Rentals"
-msgstr ""
+msgstr "Đơn cho thuê"
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
 msgid "Search Rentals"
-msgstr ""
+msgstr "Đơn cho thuê"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__sell_picking_id
 msgid "Sell Delivery Order"
-msgstr ""
+msgstr "Đơn giao hàng bán"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__sell_state
 msgid "Sell Move State"
-msgstr ""
+msgstr "Trạng thái đơn giao hàng bán"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:53
@@ -400,7 +461,13 @@ msgstr "Bán sản phẩm cho thuê"
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_stock_warehouse__sell_rented_product_route_id
 msgid "Sell Rented Product Route"
-msgstr ""
+msgstr "Tuyến cung cứng 'Bán sản phẩm cho thuê'"
+
+#. module: sale_rental
+#: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
+#: selection:sale.rental,state:0
+msgid "Sell in progress"
+msgstr "Đang bán"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__sell_move_id
@@ -410,13 +477,13 @@ msgstr ""
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
 msgid "Selling Order Line"
-msgstr ""
+msgstr "Chi tiết đơn hàng bán"
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
 #: selection:sale.rental,state:0
 msgid "Sold"
-msgstr "Bán"
+msgstr "Đã bán"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__start_date
@@ -428,47 +495,53 @@ msgstr "Ngày bắt đầu"
 #: model:ir.model.fields,field_description:sale_rental.field_sale_rental__state
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_search
 msgid "State"
-msgstr "Giai đoạn"
+msgstr "Trạng thái"
 
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_stock_rule
 msgid "Stock Rule"
-msgstr "Quy tắc tồn kho"
+msgstr "Tuyến cung ứng"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:61
 #, python-format
 msgid "The Rental Input stock location is not set on the warehouse %s"
-msgstr "Vị trí kho đầu vào cho thuê không được đặt trên kho %s"
+msgstr "Địa điểm nhận hàng cho thuê chưa được định nghĩa trên kho hàng %s"
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/stock.py:65
 #, python-format
 msgid "The Rental Output stock location is not set on the warehouse %s"
-msgstr "Vị trí kho đầu ra cho thuê không được đặt trên kho %s"
+msgstr "Địa điểm giao hàng cho thuê chưa được định nghĩa trên kho hàng %s"
 
 #. module: sale_rental
-#: code:addons/sale_rental/models/sale_order.py:274
+#: code:addons/sale_rental/models/sale_order.py:289
 #, python-format
 msgid "The Rental Service of the Rental Extension you just selected is '%s' and it's not the same as the Product currently selected in this Sale Order Line."
+msgstr ""
+
+#. module: sale_rental
+#: code:addons/sale_rental/models/product.py:26
+#, python-format
+msgid "The rental product '%s' must be of type 'Service'."
 msgstr ""
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/product.py:30
 #, python-format
 msgid "The rental product '%s' must have the option 'Must Have Start and End Dates' checked."
-msgstr "Sản phẩm cho thuê '%s' phải có chọn 'Phải có ngày bắt đầu và kết thúc'"
+msgstr ""
 
 #. module: sale_rental
 #: code:addons/sale_rental/models/product.py:38
 #, python-format
 msgid "The unit of measure of the rental product '%s' must be 'Day'."
-msgstr "ĐƠn vị sản phẩm cho thuê '%s' phải là 'Ngày'."
+msgstr "Đơn vị của sản phẩm cho thuê '%s' phải là 'ngày'."
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
 msgid "Total"
-msgstr "Tổng"
+msgstr "Tổng cộng"
 
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
@@ -478,20 +551,20 @@ msgstr "Dịch chuyển"
 #. module: sale_rental
 #: model_terms:ir.ui.view,arch_db:sale_rental.sale_rental_form
 msgid "Unit of Measure"
-msgstr "Đơn vị tính"
+msgstr "Đơn vị"
 
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_stock_warehouse
 msgid "Warehouse"
-msgstr "Kho hàng"
+msgstr "Kho"
 
 #. module: sale_rental
 #: model:ir.model.fields,help:sale_rental.field_sale_rental__partner_id
 msgid "You can find a customer by its Name, TIN, Email or Internal Reference."
-msgstr "Bạn có thể tìm khách hàng theo tên, MST, Email hoặc mã nội bộ."
+msgstr "Bạn có thể tìm khách hàng bằng tên, VAT, email hoặc mã nội bộ."
 
 #. module: sale_rental
-#: code:addons/sale_rental/models/sale_order.py:233
+#: code:addons/sale_rental/models/sale_order.py:248
 #, python-format
 msgid "You want to rent %.2f %s but you only have %.2f %s currently available on the stock location '%s' ! Make sure that you get some units back in the mean time or re-supply the stock location '%s'."
-msgstr ""
+msgstr "Bạn muốn cho thuê sản phẩm này %.2f %s nhưng chỉ có %.2f %s trong  %s ! Hãy chắc chắn rằng bạn nhận được đủ sản phẩm cần đúng thời hạn hoặc cung cấp thêm sản phẩm cho vị trí '% s'."

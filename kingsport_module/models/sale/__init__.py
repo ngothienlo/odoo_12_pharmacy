@@ -22,3 +22,4 @@ from . import business_category
 from . import sale_order
 from . import sale_order_line
 from . import sale_location_selection
+from . import product_product

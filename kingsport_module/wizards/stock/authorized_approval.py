@@ -21,9 +21,11 @@ from odoo import api, fields, models
 
 class AuthorizedApproval(models.TransientModel):
     _name = 'authorized.approval'
+    _inherit = "mail.thread"
 
     approver_id = fields.Many2one(
-        'res.partner', 'Authorized Approver', required=True)
+        'res.partner', 'Authorized Approver', required=True,
+        domain=[('customer', '=', False), ('supplier', '=', False)])
 
     @api.multi
     def authorized_approval(self):
@@ -36,5 +38,6 @@ class AuthorizedApproval(models.TransientModel):
                 [('id', '=', stock_picking_id)], limit=1)
             stock_picking.approver_id = self.approver_id
             stock_picking.action_confirm()
-            stock_picking.button_validate()
+            stock_picking.action_assign()
+            stock_picking.write({'approver_id': self.approver_id.id})
         return True

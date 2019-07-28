@@ -16,7 +16,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import data
-from . import models
-from . import wizards
-from . import reports
+from odoo import models, api
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    @api.model
+    def name_search(self, name, args=None, operator='like', limit=100):
+        context = dict(self._context) or {}
+        if args is None:
+            args = []
+
+        domain = []
+        if name:
+            domain = [('name', operator, name)]
+        if 'is_rental_order' in context:
+            if context['is_rental_order']:
+                domain.append(('rented_product_id', '!=', False))
+            else:
+                domain.append(('rented_product_id', '=', False))
+        recs = self.search(domain + args, limit=limit)
+        return recs.name_get()

@@ -83,3 +83,25 @@ class ResPartner(models.Model):
     def _address_fields(self):
         return super(ResPartner, self)._address_fields() +\
             ['ward_id', 'district_id']
+
+    @api.multi
+    def create_membership_invoice(self, product_id=None, datas=None):
+        """
+        Override to update description on account.move.line
+        """
+        invoice_list = super(ResPartner, self).\
+            create_membership_invoice(product_id, datas)
+
+        if not self._context.get('from_membership_invoice', False)\
+                or not invoice_list:
+            return invoice_list
+
+        invoices = self.env['account.invoice'].browse(invoice_list)
+        for partner in self:
+            invoice = invoices.filtered(lambda i: i.partner_id == partner)
+            card_number = self._context.get('membership_card_number', '')
+            for line in invoice.invoice_line_ids:
+                line.write({'name': '%s : %s' % (
+                    card_number,
+                    line.product_id and line.product_id.name or '')})
+        return invoice_list

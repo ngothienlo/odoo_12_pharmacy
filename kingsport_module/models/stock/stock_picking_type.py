@@ -27,4 +27,4 @@ class StockPickingType(models.Model):
         'Default Destination Location'
     )
 
-    show_operations = fields.Boolean(default=True)
+    show_operations = fields.Boolean(default=False)

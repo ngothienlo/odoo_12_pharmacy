@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet/div[@name='button_box']" position="after">
-                <div class="alert alert-danger text-center o_form_header"
+                <div class="alert alert-danger text-center o_form_header" role="alert"
                      attrs="{'invisible': ['|', ('return_do_over_7days', '!=', True), ('approver_id', '!=', False)]}">
                     <a class="close" data-dismiss="alert" href="#" aria-label="Close">x</a>
                     <div>
@@ -16,7 +16,7 @@
             </xpath>
             <field name="origin" position="after">
                 <field name="return_do_over_7days" invisible="1"/>
-                <field name="approver_id"/>
+                <field name="approver_id" readonly="1"/>
             </field>
             <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
                 <field name="warranty_expiration_date" attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'outgoing')]}"/>
@@ -28,12 +28,12 @@
                 <field name="dummy_state" attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}" widget="statusbar" statusbar_visible="draft,pending,confirmed,assigned,done"/>
             </xpath>
             <xpath expr="//header" position="inside">
-                <button name="button_ask_for_approval" string="Ask for Approval" type="object"
+                <button name="button_ask_for_approval" string="Ask for Approval" type="object" class="oe_highlight"
                     attrs="{'invisible': ['|', ('picking_type_code', '!=', 'internal'), ('dummy_state', '!=', 'draft')]}" />                
-                <button name="action_confirm" string="Approve and Reserve" type="object" 
+                <button name="approve_and_reserve" string="Approve and Reserve" type="object" class="oe_highlight"
                     attrs="{'invisible': [('dummy_state', '!=', 'pending')]}" />                
-                <button name="button_authorized_approval" string="Authorized Approval" type="object" 
-                    attrs="{'invisible': ['|', ('picking_type_code', '!=', 'internal'), ('dummy_state', 'not in', ['draft', 'pending'])]}" />
+                <button name="button_authorized_approval" string="Authorized Approval" type="object"
+                    attrs="{'invisible': ['|', ('picking_type_code', '!=', 'internal'), ('dummy_state', '!=', 'pending')]}" />
             </xpath>
         </field>
     </record>

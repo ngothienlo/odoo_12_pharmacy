@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
-	<template id="assets_backend" name="Backend Assets" inherit_id="web.assets_backend">
-		<xpath expr="//link[last()]" position="after">
+    <template id="asset_backend" inherit_id="muk_web_theme.assets_backend">
+        <link href="/muk_web_theme/static/src/scss/list_view.scss" position="replace">
             <link rel="stylesheet" type="text/scss" href="/kingsport_module/static/src/scss/list_view.scss"/>
-		</xpath>
-	</template>
-	
+        </link>
+    </template>
+    <template id="assets_backend" name="crm_activity assets" inherit_id="mail.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/kingsport_module/static/src/js/kanban_controller.js"></script>
+            <script type="text/javascript" src="/kingsport_module/static/src/js/kanban_quick_create.js"></script>
+        </xpath>
+    </template>
 </odoo>

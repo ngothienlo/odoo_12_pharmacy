@@ -88,6 +88,7 @@ This module will install all module dependencies of Pharmacy.
         'views/base/res_partner_views.xml',
         'views/base/res_country_state_views.xml',
         'views/base/res_users_views.xml',
+        'views/base/res_company_views.xml',
 
         'views/crm/crm_lead_views.xml',
         'views/crm/crm_team_views.xml',
@@ -126,6 +127,12 @@ This module will install all module dependencies of Pharmacy.
         # 'menu/',
         'menu/menu.xml',
         'menu/membership_menu.xml',
+
+        # ============================================================
+        # DATA
+        # ============================================================
+        # 'reports/',
+        'reports/sale/quotation_xlsx_report.xml',
 
         # ============================================================
         # FUNCTION USED TO UPDATE DATA LIKE POST OBJECT

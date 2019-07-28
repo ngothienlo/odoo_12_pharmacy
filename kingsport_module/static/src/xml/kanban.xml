@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="KanbanView.KingSport.RecordQuickCreate.buttons">
+        <div>
+            <button class="btn btn-primary o_kanban_edit">Edit</button>
+            <button class="btn btn-secondary o_kanban_cancel ml8">Discard</button>
+        </div>
+    </t>
+</templates>

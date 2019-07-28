@@ -38,9 +38,13 @@ class MembershipLine(models.Model):
         selection=TYPE_MEMBERSHIP, related='membership_id.type_membership')
     personal_trainer_id = fields.Many2one(
         'res.users', string='Personal Trainer', ondelete='set null')
+    day_membership = fields.Integer(
+        'Days of Training Session', readonly=True)
     attendance_ids = fields.One2many(
         'membership.line.attendance', 'membership_line_id',
         string='Attendance Training')
+    is_expired = fields.Boolean(
+        'Is Expired?', compute='_compute_is_expired', store=False)
 
     # Override fields
     date_to = fields.Date(compute='_compute_date_to', store=True)
@@ -60,10 +64,15 @@ class MembershipLine(models.Model):
                 'personal_trainer_id': self._context.get(
                     'membership_personal_trainer_id', False)
             })
-        if not self._context.get('date_from'):
-            values.update({
-                'date_from': fields.Date.today()
-            })
+
+        membership_id = values.get('membership_id', False)
+        membership = self.env['product.product'].browse(membership_id)
+        if membership and membership.type_membership == 'personal_trainer':
+            values.update({'day_membership': membership.day_membership})
+
+        # Reset date_from, this value will be updated
+        # when validate related invoice.
+        values.update({'date_from': None})
         return super(MembershipLine, self).create(values)
 
     @api.constrains('reserve_ids',
@@ -103,11 +112,12 @@ class MembershipLine(models.Model):
         for rec in self:
             dates_reserve = rec.reserve_ids.total_reserve_days()
 
-            date_from = fields.Date.from_string(rec.date_from)
-            date_to = date_from + relativedelta(
-                months=rec.membership_id.month_membership,
-                days=dates_reserve)
-            rec.date_to = fields.Date.to_string(date_to)
+            if rec.date_from:
+                date_from = fields.Date.from_string(rec.date_from)
+                date_to = date_from + relativedelta(
+                    months=rec.membership_id.month_membership,
+                    days=dates_reserve)
+                rec.date_to = fields.Date.to_string(date_to)
 
     @api.depends('date_stop', 'stop_membership')
     def _compute_amount_refunded(self):
@@ -187,15 +197,22 @@ class MembershipLine(models.Model):
             'context': context
         }
 
-    @api.depends('attendance_ids')
-    def _compute_state(self):
-        """
-        Override to update state to old if current membership
-        is personal trainer and have enough attendances.
-        """
-        super(MembershipLine, self)._compute_state()
+    @api.multi
+    def unlink(self):
+        if self.filtered(
+                lambda m: m.account_invoice_id and
+                m.account_invoice_id.state == 'paid'):
+            raise UserError(
+                _('You cannot delete membership lines which have '
+                  'paid invoice!'))
+        return super(MembershipLine, self).unlink()
+
+    @api.depends('date_to')
+    def _compute_is_expired(self):
+        today = fields.Date.context_today(self)
+        print('today', today)
         for rec in self:
-            if rec.membership_id and \
-                    rec.membership_id.type_membership == 'personal_trainer':
-                if len(rec.attendance_ids) >= rec.membership_id.day_membership:
-                    rec.state = 'old'
+            if rec.state == 'paid' and rec.date_to < today:
+                rec.is_expired = True
+            else:
+                rec.is_expired = False

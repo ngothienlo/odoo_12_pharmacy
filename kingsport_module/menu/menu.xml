@@ -5,4 +5,17 @@
         parent="sale.menu_sale_config"
         action="action_business_category"
         sequence="30"/>
+
+    <menuitem id="menu_rental_orders"
+        name="Rental Orders"
+        parent="sale.sale_order_menu"
+        action="action_rental_orders"
+        sequence="2"/>
+
+    <menuitem id="sale_rental.sale_rental_menu" 
+        parent="sale.sale_order_menu"
+        action="sale_rental.sale_rental_action"
+        sequence="3"/>
+
+    
 </odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+        id="kingsport_quotation_xlsx_report"
+        model="sale.order"
+        string="Quotation / Order Excel"
+        report_type="xlsx"
+        name="kingsport_quotation_xlsx_report"
+        file="Quotation Order Excel"
+        attachment_use="True"
+    />
+</odoo>

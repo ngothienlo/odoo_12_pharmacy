@@ -155,24 +155,15 @@ class SaleOrderLine(models.Model):
                 continue
             procurement_group = line.order_id.procurement_group_id
             if not procurement_group:
-                procurement_group = self.env['procurement.group'].create({
-                    'name': line.order_id.name,
-                    'move_type': line.order_id.picking_policy,
-                    'sale_id': line.order_id.id,
-                    'partner_id': line.order_id.partner_shipping_id.id,
-                })
+                vals_procurement_group =\
+                    line._prepare_value_procurement_group()
+                procurement_group = self.env['procurement.group'].create(
+                    vals_procurement_group)
                 line.order_id.procurement_group_id = procurement_group
             vals = {}
             if line.rental_type == 'new_rental':
-                vals = {
-                    'company_id': line.order_id.company_id,
-                    'group_id': procurement_group,
-                    'sale_line_id': line.id,
-                    'date_planned': line._get_rental_date_planned(),
-                    'route_ids': line.order_id.warehouse_id.rental_route_id,
-                    'warehouse_id': line.order_id.warehouse_id or False,
-                    'partner_dest_id': line.order_id.partner_shipping_id,
-                }
+                vals = line._prepare_value_procurement_group_run(
+                    procurement_group)
             try:
                 self.env['procurement.group'].run(
                     line.product_id.rented_product_id,
@@ -187,6 +178,30 @@ class SaleOrderLine(models.Model):
         if errors:
             raise UserError('\n'.join(errors))
         return res
+
+    @api.model
+    def _prepare_value_procurement_group(self):
+        self.ensure_one()
+        vals_procurement_group = {
+            'name': self.order_id.name,
+            'move_type': self.order_id.picking_policy,
+            'sale_id': self.order_id.id,
+            'partner_id': self.order_id.partner_shipping_id.id,
+        }
+        return vals_procurement_group
+
+    @api.model
+    def _prepare_value_procurement_group_run(self, procurement_group):
+        vals = {
+            'company_id': self.order_id.company_id or False,
+            'group_id': procurement_group,
+            'sale_line_id': self.id,
+            'date_planned': self._get_rental_date_planned(),
+            'route_ids': self.order_id.warehouse_id.rental_route_id,
+            'warehouse_id': self.order_id.warehouse_id or False,
+            'partner_dest_id': self.order_id.partner_shipping_id,
+        }
+        return vals
 
     @api.multi
     def _prepare_procurement_values(self, group_id=False):

@@ -7,12 +7,14 @@
         <field name="arch" type="xml">
             <field name="type" position="after">
                 <field name="business_category_id"/>
-                <field name="internal_name"/>
                 <field name="origin"/>
                 <field name="product_specification"/>
             </field>
             <xpath expr="//field[@name='name']" position="after">
-                <field name="internal_name"/>   
+                <label class="oe_edit_only" for="internal_name" string="Internal Name"/>
+                <h2>
+                    <field name="internal_name"/>
+                </h2>
             </xpath>
         </field>
     </record>

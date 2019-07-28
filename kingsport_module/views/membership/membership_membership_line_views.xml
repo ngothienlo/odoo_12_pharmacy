@@ -8,15 +8,26 @@
             <form string="Memberships" create="0">
                 <sheet>
                     <group>
-                        <field name="partner" readonly="1"/>
-                        <field name="card_number" readonly="1"/>
+                        <group>
+                            <field name="partner" readonly="1"/>
+                            <field name="card_number" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="state" readonly="1"/>
+                            <field name="is_expired" readonly="1"/>
+                        </group>
+                        <field name="state" readonly="1"/>
                     </group>
                     <group>
                         <group>
-                            <field name="membership_id" readonly="1"/>
+                            <field name="membership_id" readonly="1"
+                                context="{'form_view_ref': 'membership.membership_products_form'}"/>
                             <field name="type_membership" readonly="1"/>
-                            <label for="date_from" string="Membership Duration"/>
-                            <div readonly="1" >
+                            <field name="day_membership"
+                                attrs="{'invisible': [('type_membership', '!=', 'personal_trainer')]}"/>
+                            <label for="date_from" string="Membership Duration"
+                                attrs="{'invisible': [('state', 'not in', ['paid', 'old'])]}"/>
+                            <div readonly="1" attrs="{'invisible': [('state', 'not in', ['paid', 'old'])]}">
                                 <field name="date_from" class="oe_inline"/> -
                                 <field name="date_to" class="oe_inline"/>
                             </div>
@@ -38,25 +49,30 @@
                                 attrs="{'invisible': [('id', '!=', False)]}"
                                 context="{'form_view_ref': 'account.invoice_form'}"/>
                         </group>
-                        <group>
-                            <field name="stop_membership"/>
+                        <group attrs="{'invisible': [('state', 'not in', ['paid', 'old'])]}">
+                            <field name="stop_membership"
+                                attrs="{'readonly': [('is_expired', '=', True)]}"/>
                             <field name="date_stop"
-                                attrs="{'required': [('stop_membership', '=', True)], 'invisible': [('stop_membership', '=', False)]}"/>
+                                attrs="{'required': [('stop_membership', '=', True)],
+                                        'invisible': [('stop_membership', '=', False)],
+                                        'readonly': [('is_expired', '=', True)]}"/>
                             <field name="days_used"
                                 attrs="{'invisible': [('stop_membership', '=', False)]}"/>
                             <field name="account_invoice_line" invisible="1"/>
-                            <label for="amount_refunded" string="Amount Refunded" attrs="{'invisible': ['|', ('account_invoice_line', '=', False), ('stop_membership', '=', False)]}"/>
+                            <label for="amount_refunded" string="Amount Refunded"
+                                attrs="{'invisible': ['|', ('account_invoice_line', '=', False), ('stop_membership', '=', False)]}"/>
                             <div attrs="{'invisible': ['|', ('account_invoice_line', '=', False), ('stop_membership', '=', False)]}">
                                 <field name="amount_refunded" class="oe_inline"/>
                                 <button string="Refund" name="button_account_invoice_refund" type="object" class="btn-info oe_inline ml-2"
-                                    attrs="{'invisible': [('amount_refunded', '&lt;=', 0)]}" />
+                                    attrs="{'invisible': ['|', ('amount_refunded', '&lt;=', 0), ('is_expired', '=', True)]}" />
                             </div>
                         </group>
                     </group>
-                    <notebook>
+                    <notebook attrs="{'invisible': [('state', 'not in', ['paid', 'old'])]}">
                         <page string="Attendance Training" name="attendance_training"
                                 attrs="{'invisible': [('type_membership', '!=', 'personal_trainer')]}">
-                            <field name="attendance_ids" nolabel="1" context="{'default_personal_trainer_id': personal_trainer_id}">
+                            <field name="attendance_ids" nolabel="1" context="{'default_personal_trainer_id': personal_trainer_id}"
+                                    attrs="{'readonly': [('is_expired', '=', True)]}">
                                 <tree string="Attendance Training" editable="bottom">
                                     <field name="date_training"/>
                                     <field name="personal_trainer_id"/>
@@ -69,8 +85,9 @@
                                 </form>
                             </field>
                         </page>
-                        <page string="Membership Reserve" name="membership_reserve">
-                            <field name="reserve_ids" nolabel="1">
+                        <page string="Membership Reserve" name="membership_reserve"
+                                attrs="{'invisible': [('type_membership', '=', 'personal_trainer')]}">
+                            <field name="reserve_ids" nolabel="1" attrs="{'readonly': [('is_expired', '=', True)]}">
                                 <tree string="Membership Reserve" editable="bottom">
                                     <field name="date_from"/>
                                     <field name="date_to"/>
@@ -102,6 +119,7 @@
         <field name="model">membership.membership_line</field>
         <field name="arch" type="xml">
             <tree string="Memberships" create="0">
+                <field name="partner" invisible="not context.get('from_membership_line_menu', False)"/>
                 <field name="card_number"/>
                 <field name="membership_id"/>
                 <field name="type_membership"/>
@@ -110,6 +128,7 @@
                 <field name="date_to"/>
                 <field name="account_invoice_id"/>
                 <field name="state"/>
+                <field name="is_expired"/>
             </tree>
         </field>
     </record>

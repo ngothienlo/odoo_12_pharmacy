@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data noupdate="1">
         <!-- UTM Source -->
         <record model="utm.source" id="utm.utm_source_search_engine">
             <field name="name">Facebook_Inbox</field>
@@ -22,5 +23,5 @@
         <record model="utm.source" id="utm_source_orther">
             <field name="name">Khác</field>
         </record>
-
+    </data>
 </odoo>

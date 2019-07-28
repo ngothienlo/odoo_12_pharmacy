@@ -150,8 +150,8 @@ class SaleRental(models.Model):
         string='Sell Delivery Order', readonly=True)
     end_date = fields.Date(
         compute='_compute_end_date', string='End Date', store=True,
-        help="End Date of the Rental (extensions included), \
-        taking into account all the extensions sold to the customer.")
+        help="End Date of the Rental (extensions included), "
+        "taking into account all the extensions sold to the customer.")
     state = fields.Selection([
         ('ordered', 'Ordered'),
         ('out', 'Out'),

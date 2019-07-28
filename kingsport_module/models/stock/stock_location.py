@@ -23,6 +23,14 @@ class StockLocation(models.Model):
     _inherit = 'stock.location'
 
     allow_to_receive_good = fields.Boolean()
+    is_sale_location = fields.Boolean('Sale Location')
+
+    @api.onchange('usage')
+    def _reset_config_location(self):
+        ''' If usge != internal
+            Reset allow_to_receive_good and is_sale_location = False'''
+        self.allow_to_receive_good = False
+        self.is_sale_location = False
 
     @api.model
     def name_search(self, name, args=None, operator='like', limit=100):

@@ -28,21 +28,27 @@ class SaleOrder(models.Model):
     def _get_default_locaiton(self):
         return self.env.user.location_id or False
 
+    @api.model
+    def _default_approval(self):
+        return self.env.user.partner_id.id or False
+
     approval_id = fields.Many2one(
         'res.partner', 'Approver',
-        domain=[('customer', '=', False), ('supplier', '=', False)])
+        domain=[('customer', '=', False), ('supplier', '=', False)],
+        default=lambda self: self._default_approval(),
+        track_visibility='onchange')
     direct_shipping = fields.Boolean()
     location_id = fields.Many2one(
         'stock.location', 'Delivery Location',
         default=lambda self: self._get_default_locaiton(),
-        domain=[('usage', '=', 'internal')])
+        domain=[('usage', '=', 'internal'), ('is_sale_location', '=', True)])
     is_maintenance_order = fields.Boolean('Maintenance Order', copy=False)
     delivery_order_id = fields.Many2one(
         'stock.picking', 'Delivery Order', copy=False)
     is_exchange_order = fields.Boolean('Exchange Order', copy=False)
     original_order_id = fields.Many2one(
         'sale.order', 'Original Order', copy=False)
-    total_cost_price = fields.Char(
+    total_cost_price = fields.Monetary(
         compute='_compute_total_cost_price', store=True)
     contact_name = fields.Char(
         'Shipping Contact',
@@ -75,21 +81,49 @@ class SaleOrder(models.Model):
     current_location_id = fields.Many2one(
         'stock.location', 'Current Location',
         default=lambda self: self._get_default_locaiton())
+    is_rental_order = fields.Boolean('Rental Order', default=False)
+    note_service = fields.Text(
+        'Note For Service', default=lambda self: self._default_note_service())
+    note_payment_method = fields.Text(
+        'Note Payment Method',
+        default=lambda self: self._default_note_payment_method())
+    note_delivery_method = fields.Text(
+        'Note Delivery Method',
+        default=lambda self: self._default_note_delivery_method())
+
+    @api.model
+    def _default_note_service(self):
+        return self.env.user.company_id and\
+            self.env.user.company_id.note_service or ''
+
+    @api.model
+    def _default_note_payment_method(self):
+        return self.env.user.company_id and\
+            self.env.user.company_id.note_payment_method or ''
+
+    @api.model
+    def _default_note_delivery_method(self):
+        return self.env.user.company_id and\
+            self.env.user.company_id.note_delivery_method or ''
 
     @api.depends('order_line.total_cost')
     def _compute_total_cost_price(self):
         for rec in self:
-            sale_order_lines = rec.order_line or False
-            if sale_order_lines:
-                total_cost_price = 0
-                for sale_order_line in sale_order_lines:
-                    total_cost = sale_order_line.total_cost or 0
-                    total_cost_price += total_cost
-                rec.total_cost_price = total_cost_price
+            sale_order_lines = rec.order_line.filtered(
+                lambda line: line.display_type not in (
+                    'line_section', 'line_note')) or []
+            total_cost_price = 0.0
+            for sale_order_line in sale_order_lines:
+                total_cost = sale_order_line.total_cost or 0.0
+                total_cost_price += total_cost
+            rec.total_cost_price = total_cost_price
 
     @api.model
     def get_list_product_on_sale_order(self):
-        sale_order_lines = self.order_line or []
+        sale_order_lines = self.order_line.filtered(
+            lambda line: line.display_type not in
+            ('line_section', 'line_note') and line.product_id.type == 'product'
+        ) or []
         product_ids = []
         for sale_order_line in sale_order_lines:
             product_ids.append(
@@ -133,7 +167,7 @@ class SaleOrder(models.Model):
         adv_wiz = self.env['sale.advance.payment.inv'].with_context(
             active_ids=[self.id]).create({
                 'advance_payment_method': 'delivered'})
-        adv_wiz.create_invoices()
+        return adv_wiz.with_context(open_invoices=True).create_invoices()
 
     @api.multi
     def action_invoice_create(self, grouped=False, final=False):
@@ -159,7 +193,8 @@ class SaleOrder(models.Model):
             product_ids.append(product[0].id)
         stock_quants = self.env['stock.quant'].search(
             [('product_id', 'in', product_ids),
-             ('location_id.usage', '=', 'internal')]
+             ('location_id.usage', '=', 'internal'),
+             ('location_id.is_sale_location', '=', True)]
         )
         stock_quant_products = {}
         for stock_quant in stock_quants:
@@ -190,7 +225,7 @@ class SaleOrder(models.Model):
             'current_sale_order': self.id,
             'active_mode': self._name,
             'active_id': self.id,
-            'search_default_groupby_product_id': True
+            'search_default_groupby_product_id': True,
         })
         return {
             'name': _('Choose Location'),
@@ -279,7 +314,10 @@ class SaleOrder(models.Model):
     @api.multi
     def _create_internal_tranfer(self):
         self.ensure_one()
-        lines = self.order_line or []
+        lines = self.order_line.filtered(
+            lambda line: line.display_type not in
+            ('line_section', 'line_note') and line.product_id.type == 'product'
+        ) or []
         if not self.current_location_id:
             raise Warning(
                 _('Current showroom is not defined. Please  define '
@@ -291,10 +329,13 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
+        # check exist approver
+        if not self.approval_id:
+            raise Warning(_('Need to specify a approver quotations'))
         # check s.o line none location => raise warning
         self.check_sale_order_line_none_location()
         direct_shipping = self.direct_shipping
-        if not direct_shipping:
+        if not direct_shipping and not self.is_rental_order:
             self._create_internal_tranfer()
         res = super(SaleOrder, self).action_confirm()
         return res
@@ -311,3 +352,4 @@ class SaleOrder(models.Model):
             raise Warning(
                 _('Need to specify a stock for product: "%s"!')
                 % product_name_str)
+        return True
