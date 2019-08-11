@@ -45,8 +45,25 @@ class PostObjectDataKingsportModule(models.TransientModel):
                 'update_sale_note',
                 'update_administrator',
                 'archive_all_country_and_child_not_vn',
+                'update_location_parent',
             ])
         self.configure_settings()
+        return True
+
+    @api.model
+    def update_location_parent(self):
+        _logger.info(
+            '========== Start update location parent ==========')
+        locs_update = [
+            'stock_location_return_product',
+            'stock_location_defective_product']
+        for loc in locs_update:
+            self.env.ref('kingsport_module.' + loc).write({
+                'location_id':
+                    self.env.ref('stock.warehouse0').view_location_id.id,
+            })
+        _logger.info(
+            '========== End update location parent ==========')
         return True
 
     @api.model
@@ -105,6 +122,11 @@ class PostObjectDataKingsportModule(models.TransientModel):
     @api.model
     def update_sale_note(self):
         _logger.info('========== Start update sale note ==========')
+        sale_note =\
+            ('Mức giá áp dụng tại thời điểm hiện tại và có hiệu '
+             'lực trong 30 ngày.\n'
+             'Tất cả các dòng máy là sản phẩm độc quyền của KINGSPORT. Được '
+             'sản xuất và nhập khẩu, phân phối trực tiếp đến khách hàng.')
         note_service =\
             ('\tBảo hành chính hãng 2 năm hoặc thay thế '
              'linh kiện miễn phí một lần trong 2 năm.\n\t'
@@ -209,6 +231,7 @@ class PostObjectDataKingsportModule(models.TransientModel):
              'Q. Lê Chân, Tp. Hải Phòng.\n\t'
              'Chi nhánh Kingsport Thanh Hóa : 789A Nguyễn Trãi, '
              'P. Phú Sơn, Tp. Thanh Hóa')
+        self.env.ref('base.main_company').write({'sale_note': sale_note})
         self.env.ref('base.main_company').write({'note_service': note_service})
         self.env.ref('base.main_company').write(
             {'note_payment_method': note_payment_method})
@@ -267,7 +290,8 @@ class PostObjectDataKingsportModule(models.TransientModel):
             'po_order_approval': True,
             'po_double_validation_amount': 0,
             'multi_sales_price_method': 'formula',
-            'sale_pricelist_setting': 'formula'
+            'sale_pricelist_setting': 'formula',
+            'use_sale_note': False
             # 'theme_color_brand': '#eb7979',
             # 'theme_color_primary': '#ff5252',
             # 'theme_color_required': '#f5c5c5',

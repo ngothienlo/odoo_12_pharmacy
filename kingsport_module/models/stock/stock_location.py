@@ -24,6 +24,29 @@ class StockLocation(models.Model):
 
     allow_to_receive_good = fields.Boolean()
     is_sale_location = fields.Boolean('Sale Location')
+    showroom_name = fields.Char(
+        compute='_get_showroom_name', readonly=False, store=True)
+
+    @api.depends('name')
+    def _get_showroom_name(self):
+        for rec in self:
+            rec.showroom_name = rec.name or ''
+
+    @api.multi
+    def name_get(self):
+        context = dict(self._context) or {}
+        params = context and context.get('params', {}) or {}
+        model_call = params and params.get('model', '') or ''
+        calling_from_so = model_call and model_call == 'sale.order' or False
+        default_is_rental_order = context.get('default_is_rental_order', False)
+        if context.get('display_showroom_name', False)\
+                or calling_from_so or default_is_rental_order:
+            result = []
+            for rec in self:
+                name = "%s %s" % ('CN', rec.showroom_name or '')
+                result.append((rec.id, name))
+            return result
+        return super(StockLocation, self).name_get()
 
     @api.onchange('usage')
     def _reset_config_location(self):
@@ -39,7 +62,8 @@ class StockLocation(models.Model):
         context = dict(self._context) or {}
         code = context.get('code', False)
         if name:
-            domain = [('name', operator, name)]
+            domain = ['|', ('name', operator, name),
+                      ('showroom_name', operator, name)]
         if code and code == 'incoming':
             domain.append(('allow_to_receive_good', '=', True))
         recs = self.search(domain + args, limit=limit)

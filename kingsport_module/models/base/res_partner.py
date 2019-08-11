@@ -16,6 +16,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from datetime import date
+
 from odoo import models, fields, api
 
 
@@ -105,3 +107,79 @@ class ResPartner(models.Model):
                     card_number,
                     line.product_id and line.product_id.name or '')})
         return invoice_list
+
+    def _membership_state(self):
+        """
+        This Function return Membership State For Given Partner.
+        Override to update the way finding refund invoice
+        """
+        res = {}
+        today = fields.Date.context_today(self)
+        invoice_obj = self.env['account.invoice']
+        for partner in self:
+            res[partner.id] = 'none'
+
+            if partner.membership_cancel and today > partner.membership_cancel:
+                res[partner.id] = 'free' if partner.free_member else 'canceled'
+                continue
+            if partner.membership_stop and today > partner.membership_stop:
+                res[partner.id] = 'free' if partner.free_member else 'old'
+                continue
+            if partner.associate_member:
+                res_state = partner.associate_member._membership_state()
+                res[partner.id] = res_state[partner.associate_member.id]
+                continue
+
+            s = 4
+            if partner.member_lines:
+                for mline in partner.member_lines:
+                    if (mline.date_to or date.min) >= today and (
+                            mline.date_from or date.min) <= today:
+                        if mline.account_invoice_line.invoice_id.\
+                                partner_id == partner:
+                            mstate =\
+                                mline.account_invoice_line.invoice_id.state
+                            if mstate == 'paid':
+                                s = 0
+                                invoice = mline.account_invoice_line.invoice_id
+                                if invoice:
+                                    refund_invoices = invoice_obj.search([
+                                        ('type', '=', 'out_refund'),
+                                        ('origin', '=', invoice.number),
+                                        ('state', '=', 'paid')], limit=1)
+                                    if refund_invoices:
+                                        s = 2
+                                break
+                            elif mstate == 'open' and s != 0:
+                                s = 1
+                            elif mstate == 'cancel' and s != 0 and s != 1:
+                                s = 2
+                            elif mstate == 'draft' and s != 0 and s != 1:
+                                s = 3
+                if s == 4:
+                    for mline in partner.member_lines:
+                        if (mline.date_from or date.min) < today and (
+                                mline.date_to or date.min) < today and (
+                                mline.date_from or date.min) <= (
+                                mline.date_to or date.min) and \
+                                mline.account_invoice_line and \
+                                mline.account_invoice_line.invoice_id.\
+                                state == 'paid':
+                            s = 5
+                        else:
+                            s = 6
+                if s == 0:
+                    res[partner.id] = 'paid'
+                elif s == 1:
+                    res[partner.id] = 'invoiced'
+                elif s == 2:
+                    res[partner.id] = 'canceled'
+                elif s == 3:
+                    res[partner.id] = 'waiting'
+                elif s == 5:
+                    res[partner.id] = 'old'
+                elif s == 6:
+                    res[partner.id] = 'none'
+            if partner.free_member and s != 0:
+                res[partner.id] = 'free'
+        return res

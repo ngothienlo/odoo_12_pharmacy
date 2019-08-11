@@ -6,4 +6,19 @@
         <field name="value">kingsport_module,static/img/logo.jpeg</field>
     </record>
 
+    <record id="name_rental" model="ir.config_parameter">
+        <field name="key">name_rental</field>
+        <field name="value">Kho cho thuê</field>
+    </record>
+
+    <record id="name_rental_in" model="ir.config_parameter">
+        <field name="key">name_rental_in</field>
+        <field name="value">Kho hàng cho thuê</field>
+    </record>
+
+    <record id="name_rental_out" model="ir.config_parameter">
+        <field name="key">name_rental_out</field>
+        <field name="value">Kho hàng đã thuê</field>
+    </record>
+
 </odoo>

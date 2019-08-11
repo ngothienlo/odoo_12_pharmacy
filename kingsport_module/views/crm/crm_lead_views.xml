@@ -137,6 +137,17 @@
                 <attribute name="groups"></attribute>
                 <attribute name="invisible">1</attribute>
             </field>
+
+            <xpath expr="//label[@for='contact_name']" position="replace" />
+            <xpath expr="//field[@name='contact_name']/parent::*" position="replace" />
+
+            <field name="partner_name" position="replace">
+                <label for="contact_name"/>
+                <div class="o_row">
+                    <field name="contact_name"/>
+                    <field name="title" placeholder="Title" domain="[]" options="{&quot;no_open&quot;: True}"/>
+                </div>
+            </field>
             <button name="%(crm.action_crm_lead2opportunity_partner)d" position="attributes">
                 <attribute name="context">{'update_source_from_crm': source_id}</attribute>
             </button>

@@ -393,7 +393,7 @@ msgstr "Hoàn tiền cho thành viên"
 #. module: kingsport_module
 #: model:ir.model.fields,field_description:kingsport_module.field_sale_order__current_location_id
 msgid "Current Location"
-msgstr "Kho hiện tại"
+msgstr "Chi nhánh hiện tại"
 
 #. module: kingsport_module
 #: code:addons/kingsport_module/models/sale/sale_order.py:322
@@ -483,8 +483,12 @@ msgstr "Địa chỉ giao hàng"
 
 #. module: kingsport_module
 #: model:ir.model.fields,field_description:kingsport_module.field_sale_order__location_id
-#: model:ir.model.fields,field_description:kingsport_module.field_sale_order_line__location_id
 #: model_terms:ir.ui.view,arch_db:kingsport_module.sale_order_list_select_view_search_inherit
+msgid "Delivery Location"
+msgstr "Chi nhánh giao hàng"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_sale_order_line__location_id
 msgid "Delivery Location"
 msgstr "Kho giao hàng"
 
@@ -642,15 +646,19 @@ msgstr "Gom nhóm..."
 #: model:ir.actions.act_window,name:kingsport_module.action_stock_location_gym
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_invoice__gym_location_id
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__gym_location_id
+#: model:ir.model.fields,field_description:kingsport_module.field_report_membership__gym_location_id
 #: model:ir.ui.menu,name:kingsport_module.menu_config_stock_location_gym
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
 #: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_form
 #: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_search
 #: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_tree
 msgid "Gym"
-msgstr ""
+msgstr "Phòng tập"
 
 #. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
 #: selection:product.template,type_membership:0
+#: selection:report.membership,type_membership:0
 msgid "Gym Service"
 msgstr "Dịch vụ Gym"
 
@@ -829,7 +837,7 @@ msgstr "Đơn bảo hành/bảo trì"
 #: selection:crm.lead,gender:0
 #: selection:res.partner,gender:0
 msgid "Male"
-msgstr "Name"
+msgstr "Nam"
 
 #. module: kingsport_module
 #: model:product.category,name:kingsport_module.product_category_foot_massage
@@ -1013,11 +1021,15 @@ msgstr "Khách hàng"
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_invoice__personal_trainer_id
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_line_attendance__personal_trainer_id
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__personal_trainer_id
+#: model:ir.model.fields,field_description:kingsport_module.field_report_membership__personal_trainer_id
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
 msgid "Personal Trainer"
 msgstr "Nhân viên hướng dẫn"
 
 #. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
 #: selection:product.template,type_membership:0
+#: selection:report.membership,type_membership:0
 msgid "Personal Trainer Service"
 msgstr "Dịch vụ PT"
 
@@ -1088,7 +1100,6 @@ msgstr "Sản phẩm"
 
 #. module: kingsport_module
 #: model:ir.model.fields,field_description:kingsport_module.field_crm_lead__product_ids
-#: model:ir.ui.menu,name:kingsport_module.menu_config_membership_product
 msgid "Products"
 msgstr "Sản phẩm"
 
@@ -1267,8 +1278,10 @@ msgstr "Hiển thị chi tiết hoạt động"
 #. module: kingsport_module
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_invoice__showroom_id
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__showroom_id
+#: model:ir.model.fields,field_description:kingsport_module.field_report_membership__showroom_id
 #: model:ir.model.fields,field_description:kingsport_module.field_res_users__location_id
 #: model:ir.model.fields,field_description:kingsport_module.field_stock_location_gym__showroom_id
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
 #: model_terms:ir.ui.view,arch_db:kingsport_module.view_stock_location_gym_search
 msgid "Showroom"
 msgstr ""
@@ -1461,6 +1474,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__type_membership
 #: model:ir.model.fields,field_description:kingsport_module.field_product_product__type_membership
 #: model:ir.model.fields,field_description:kingsport_module.field_product_template__type_membership
+#: model:ir.model.fields,field_description:kingsport_module.field_report_membership__type_membership
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
 msgid "Type of Membership"
 msgstr "Gói tập"
 
@@ -1652,4 +1667,113 @@ msgstr "Bạn không thể xoá thẻ thành viên đã được thanh toán ho�
 #. module: kingsport_module
 #: model:ir.model.fields,field_description:kingsport_module.field_membership_membership_line__is_expired
 msgid "Is Expired?"
-msgstr "Hết hạn thẻ?""
+msgstr "Hết hạn thẻ?"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
+msgid "Forecast"
+msgstr "Dự báo"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
+msgid "Revenue Done"
+msgstr "Doanh thu đã hoàn thành"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_report_membership__membership_line_state
+#: model_terms:ir.ui.view,arch_db:kingsport_module.view_report_membership_search_inherit
+msgid "Membership Line State"
+msgstr "Trạng thái thẻ dịch vụ"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_report_membership__num_invoiced
+msgid "# Invoiced"
+msgstr "# Hoá đơn cần thanh toán"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_report_membership__num_paid
+msgid "# Paid"
+msgstr "# Hoá đơn đã thanh toán "
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_report_membership__num_waiting
+msgid "# Waiting"
+msgstr "# Chờ xuất hoá đơn"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_report_membership__tot_earned
+msgid "Earned Amount"
+msgstr "Doanh thu đạt được"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_report_membership__tot_pending
+msgid "Pending Amount"
+msgstr "Doanh thu đang chờ"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_report_membership__membership_state
+#: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
+msgid "Current Membership State"
+msgstr "Trạng thái hiện tại của thành viên"
+
+#. module: membership
+#: model_terms:ir.ui.view,arch_db:membership.membership_product_search_form_view
+msgid "Membership Product"
+msgstr "Gói tập"
+
+#. module: membership
+#: model_terms:ir.ui.view,arch_db:membership.view_res_partner_member_filter
+msgid "Membership State"
+msgstr "Trạng thái thành viên"
+
+#. module: membership
+#: model_terms:ir.ui.view,arch_db:membership.view_res_partner_member_filter
+msgid "All non Members"
+msgstr "Không phải thành viên"
+
+#. module: membership
+#: model_terms:ir.ui.view,arch_db:membership.view_res_partner_member_filter
+msgid "All Members"
+msgstr "Tất cả thành viên"
+
+#. module: account
+#: selection:account.invoice.refund,filter_refund:0
+msgid "Create a draft credit note"
+msgstr "Tạo một hoá đơn âm nháp"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_invoice_refund__filter_refund
+msgid "Credit Method"
+msgstr "Hình thức hoàn tiền"
+
+#. module: membership
+#: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
+msgid "Membership Product"
+msgstr "Thẻ dịch vụ"
+
+#. module: kingsport_module
+#: model:ir.ui.menu,name:kingsport_module.menu_config_membership_product
+msgid "Products"
+msgstr "Gói tập"
+
+#. module: kingsport_module
+#: model_terms:ir.ui.view,arch_db:kingsport_module.sale_order_view_form_inherit
+msgid "Terms and conditions... (note: you can setup default ones in the Configuration menu)"
+msgstr "Điều khoản và điều kiện... (ghi chú: bạn có thể cài đặt giá trị mặc định cho "Điều khoản và điều kiện" ở menu Công ty)"
+
+#. modules: sale_management, sale
+#: model_terms:ir.ui.view,arch_db:sale.view_order_form
+#: model_terms:ir.ui.view,arch_db:sale_management.sale_order_form_quote
+#: model_terms:ir.ui.view,arch_db:sale_management.sale_order_template_view_form
+msgid "Add a product"
+msgstr "Thêm sản phẩm"
+
+#. module: membership
+#: model:ir.model.fields,field_description:membership.field_report_membership__membership_id
+msgid "Membership Product"
+msgstr "Thẻ dịch vụ"
+
+#. module: kingsport_module
+#: model:ir.model.fields,field_description:kingsport_module.field_stock_location__showroom_name
+msgid "Showroom Name"
+msgstr "Tên Chi Nhánh"

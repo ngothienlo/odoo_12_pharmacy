@@ -6,7 +6,7 @@
         string="Quotation / Order Excel"
         report_type="xlsx"
         name="kingsport_quotation_xlsx_report"
-        file="Quotation Order Excel"
+        file="Báo giá setup GYM"
         attachment_use="True"
     />
 </odoo>

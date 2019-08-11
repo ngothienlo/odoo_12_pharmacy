@@ -64,3 +64,27 @@ class StockMove(models.Model):
     def _compute_show_details_visible(self):
         for move in self:
             move.show_details_visible = False
+
+    @api.multi
+    def write(self, vals):
+        """
+        Override to update tracking values of dummy_state
+        instead of state on picking
+        """
+        track_pickings =\
+            not self._context.get('mail_notrack') and \
+            any(field in vals for field in
+                ['state', 'picking_id', 'partially_available'])
+        if track_pickings:
+            to_track_picking_ids = set(
+                [move.picking_id.id for move in self if move.picking_id])
+            if vals.get('picking_id'):
+                to_track_picking_ids.add(vals['picking_id'])
+            to_track_picking_ids = list(to_track_picking_ids)
+            pickings = self.env['stock.picking'].browse(to_track_picking_ids)
+            initial_values_dummy_state =\
+                dict((picking.id, {'dummy_state': picking.dummy_state})
+                     for picking in pickings)
+            self = self.with_context(
+                initial_values_dummy_state=initial_values_dummy_state)
+        return super(StockMove, self).write(vals)

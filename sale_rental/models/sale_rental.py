@@ -42,8 +42,6 @@ class SaleRental(models.Model):
             state = False
             if rental.start_order_line_id:
                 for move in rental.start_order_line_id.move_ids:
-                    if move.state != 'cancel':
-                        out_move = move
                     if move.move_dest_ids:
                         out_move = move
                         in_move = move.move_dest_ids[0]

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_report_membership_search_inherit">
+        <field name="name">view.report.membership.search.inherit</field>
+        <field name="model">report.membership</field>
+        <field name="inherit_id" ref="membership.view_report_membership_search"/>
+        <field name="arch" type="xml">
+            <field name="membership_id" position="after">
+                <field name="type_membership"/>
+                <field name="membership_line_state"/>
+                <field name="personal_trainer_id"/>
+                <field name="gym_location_id"/>
+                <field name="showroom_id"/>
+            </field>
+
+            <xpath expr="//filter[@name='Revenue']" position="after">
+                <filter string="Gym Service" name="gym_service" domain="[('type_membership', '=', 'gym')]"/>
+                <filter string="Personal Trainer Service" name="gym_service" domain="[('type_membership', '=', 'personal_trainer')]"/>
+                <separator />
+                <filter string="Forecast" name="membership_line_forecast" domain="[('membership_line_state', 'in', ['waiting', 'invoiced'])]"/>
+                <filter string="Revenue Done" name="membership_line_revenue" domain="[('membership_line_state', 'in', ['paid', 'old'])]" />
+            </xpath>
+
+            <!-- somehow, these two below filters are not work, eventhough I added domain to them -->
+            <xpath expr="//filter[@name='forecast']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='Revenue']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//group/filter[@name='salesman']" position="after">
+                <filter string="Type of Membership" name="group_by_type_membership" context="{'group_by':'type_membership'}"/>
+                <filter string="Membership Line State" name="group_by_membership_line_state" context="{'group_by':'membership_line_state'}"/>
+                <filter string="Personal Trainer" name="group_by_personal_trainer_id"
+                    domain="[('type_membership', '=', 'personal_trainer')]" context="{'group_by':'personal_trainer_id'}"/>
+                <filter string="Gym" name="group_by_gym_location_id" context="{'group_by':'gym_location_id'}"/>
+                <filter string="Showroom" name="group_by_showroom_id" context="{'group_by':'showroom_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_report_membership_pivot_inherit">
+        <field name="name">view.report.membership.pivot.inherit</field>
+        <field name="model">report.membership</field>
+        <field name="inherit_id" ref="membership.view_report_membership_pivot"/>
+        <field name="arch" type="xml">
+            <field name="membership_id" position="after">
+                <field name="membership_line_state" type="row"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_report_membership_graph1_inherit">
+        <field name="name">view.report.membership.graph1_inherit</field>
+        <field name="model">report.membership</field>
+        <field name="inherit_id" ref="membership.view_report_membership_graph1"/>
+        <field name="arch" type="xml">
+            <field name="membership_id" position="after">
+                <field name="membership_line_state" type="row"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="membership.action_report_membership_tree">
+        <field name="context">{
+            "search_default_start_date":1,
+            "search_default_membership_line_revenue":1,
+            "search_default_salesman":1,
+            "group_by_no_leaf":1}
+        </field>
+    </record>
+</odoo>

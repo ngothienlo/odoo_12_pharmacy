@@ -184,7 +184,8 @@ class MembershipLine(models.Model):
             'active_id': self.account_invoice_id.id,
             'active_ids': [self.account_invoice_id.id],
             'account_invoice_line': self.account_invoice_line.id,
-            'amount_refunded': self.amount_refunded
+            'amount_refunded': self.amount_refunded,
+            'current_membership_line': self.id
         }
         return {
             'name': _("Credit Note for Membership"),
@@ -216,3 +217,50 @@ class MembershipLine(models.Model):
                 rec.is_expired = True
             else:
                 rec.is_expired = False
+
+    @api.depends('account_invoice_line.invoice_id.state',
+                 'account_invoice_line.invoice_id.payment_ids',
+                 'invoice_refund_id.state')
+    def _compute_state(self):
+        """
+        Override to change the way finding credit note for an invoice.
+        """
+        invoice_obj = self.env['account.invoice']
+        for line in self:
+            self._cr.execute('''
+            SELECT i.state, i.id FROM
+            account_invoice i
+            WHERE
+            i.id = (
+                SELECT l.invoice_id FROM
+                account_invoice_line l WHERE
+                l.id = (
+                    SELECT  ml.account_invoice_line FROM
+                    membership_membership_line ml WHERE
+                    ml.id = %s
+                    )
+                )
+            ''', (line.id,))
+            fetched = self._cr.fetchone()
+            if not fetched:
+                line.state = 'canceled'
+                continue
+            istate = fetched[0]
+            if istate == 'draft':
+                line.state = 'waiting'
+            elif istate == 'open':
+                line.state = 'invoiced'
+            elif istate == 'paid':
+                line.state = 'paid'
+                invoice = invoice_obj.browse(fetched[1])
+                if invoice:
+                    refund_invoices = invoice_obj.search([
+                        ('type', '=', 'out_refund'),
+                        ('origin', '=', invoice.number),
+                        ('state', '=', 'paid')], limit=1)
+                    if refund_invoices:
+                        line.state = 'canceled'
+            elif istate == 'cancel':
+                line.state = 'canceled'
+            else:
+                line.state = 'none'

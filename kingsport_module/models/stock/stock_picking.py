@@ -103,3 +103,16 @@ class StockPicking(models.Model):
             'location_dest_id': self.location_dest_id.id
         })
         return True
+
+    @api.multi
+    def message_track(self, tracked_fields, initial_values):
+        """
+        Override to update tracking values of dummy_state instead of state
+        """
+        if 'initial_values_dummy_state' in self._context and \
+                'state' in tracked_fields.keys():
+            tracked_fields.pop('state')
+            tracked_fields.update(self.fields_get(['dummy_state']))
+            initial_values = self._context.get('initial_values_dummy_state')
+        return super(StockPicking, self).message_track(
+            tracked_fields, initial_values)

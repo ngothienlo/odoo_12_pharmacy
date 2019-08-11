@@ -17,7 +17,7 @@
 #
 ##############################################################################
 from odoo import models, fields, api, _
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 
 class SaleOrderLine(models.Model):
@@ -38,20 +38,14 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('product_id')
     def _onchange_update_location(self):
-        if self.product_id:
-            so_id = self.env.context.get('default_order_id') or False
-            if so_id:
-                params = [('order_id', '=', so_id),
-                          ('product_id', '=', self.product_id.id), ]
-                if self.id:
-                    params.append(('id', '!=', self.id))
-                existed_so_lines = self.env['sale.order.line'].search(params)
-                if existed_so_lines:
-                    raise Warning(
-                        _('SO line with product %s already existed.'
-                          ' Please update its quantity instead.' %
-                          self.product_id.name))
-            self._update_location()
+        if self.product_id and\
+            any(sol != self and sol.product_id ==
+                self.product_id for sol in self.order_id.order_line):
+            raise UserError(
+                _('SO line with product %s already existed.'
+                  ' Please update its quantity instead.' %
+                  self.product_id.name))
+        self._update_location()
 
     @api.onchange('product_uom_qty')
     def _onchange_product_uom_qty(self):

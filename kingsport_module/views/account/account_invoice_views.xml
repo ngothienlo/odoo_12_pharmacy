@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_invoice_form_inherit" model="ir.ui.view">
+        <field name="name">view.account.invoice.form.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account_invoice_start_end_dates.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='start_date']" position="attributes">
+                <attribute name="invisible">not context.get('is_rental_order', False)</attribute>
+            </xpath>
+            <xpath expr="//field[@name='end_date']" position="attributes">
+                <attribute name="invisible">not context.get('is_rental_order', False)</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

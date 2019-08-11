@@ -90,6 +90,14 @@ class SaleOrder(models.Model):
     note_delivery_method = fields.Text(
         'Note Delivery Method',
         default=lambda self: self._default_note_delivery_method())
+    note = fields.Text(
+        'Sale Note', default=lambda self: self._default_sale_note()
+    )
+
+    @api.model
+    def _default_sale_note(self):
+        return self.env.user.company_id and\
+            self.env.user.company_id.sale_note or ''
 
     @api.model
     def _default_note_service(self):

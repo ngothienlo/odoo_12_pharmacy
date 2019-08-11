@@ -9,6 +9,11 @@
                 <field name="is_sale_location" attrs="{'invisible': [('usage', '!=', 'internal')]}"/>
                 <field name="allow_to_receive_good" attrs="{'invisible': [('usage', '!=', 'internal')]}"/>
             </xpath>
+            <xpath expr="//field[@name='location_id']" position="after">
+                <br/>
+                <label for="showroom_name" attrs="{'invisible': [('is_sale_location', '=', False)]}" class="oe_edit_only"/>
+                <h2><field name="showroom_name" attrs="{'invisible': [('is_sale_location', '=', False)], 'required': [('is_sale_location', '=', True)]}"/></h2>
+            </xpath>
         </field>
     </record>
 </odoo>

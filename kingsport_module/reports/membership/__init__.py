@@ -16,4 +16,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import membership_invoice
+from . import report_membership

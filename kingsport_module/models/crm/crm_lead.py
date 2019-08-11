@@ -48,7 +48,8 @@ class CrmLead(models.Model):
     country_id = fields.Many2one(
         default=lambda self: self.env[
             'ir.model.data'].xmlid_to_res_id('base.vn'))
-    team_id = fields.Many2one(compute='_compute_assign_team', readonly=False)
+    team_id = fields.Many2one(
+        compute='_compute_assign_team', readonly=False, store=True)
     is_wrong_address = fields.Boolean()
 
     @api.multi
@@ -180,6 +181,10 @@ class CrmLead(models.Model):
                 vals['gender'] = partner_id.gender
             if not vals.get('birthday'):
                 vals['birthday'] = partner_id.birthday
+            if not vals.get('country_id'):
+                vals['country_id'] = partner_id.country_id.id
+            if not vals.get('state_id'):
+                vals['state_id'] = partner_id.state_id.id
             if not vals.get('district_id'):
                 vals['district_id'] = partner_id.district_id.id
             if not vals.get('ward_id'):
@@ -190,3 +195,13 @@ class CrmLead(models.Model):
         new_vals['is_wrong_address'] = is_wrong_address
         vals.update(new_vals)
         return vals
+
+    @api.multi
+    def _create_lead_partner_data(self, name, is_company, parent_id=False):
+        partner_values = super(CrmLead, self)._create_lead_partner_data(
+            name, is_company, parent_id)
+        partner_values.update({
+            'district_id': self.district_id.id,
+            'ward_id': self.ward_id.id
+        })
+        return partner_values

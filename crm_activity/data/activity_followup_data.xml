@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="0">
+<odoo noupdate="1">
     <record model="activity.followup" id="followup_1day">
         <field name="name">F1 - 1 day</field>
         <field name="hours_to_followup" eval="24"/>

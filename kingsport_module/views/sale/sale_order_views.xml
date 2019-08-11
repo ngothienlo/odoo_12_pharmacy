@@ -15,7 +15,7 @@
             <field name="pricelist_id" position="after">
                 <field name="is_exchange_order" invisible="1" readonly="1"/>
                 <field name="approval_id"/>
-                <field name="location_id" attrs="{'invisible': [('is_rental_order', '=', True)]}"/>
+                <field name="location_id" context="{'display_showroom_name': True}" attrs="{'invisible': [('is_rental_order', '=', True)]}"/>
                 <field name="direct_shipping" attrs="{'invisible': [('is_rental_order', '=', True)]}"/>
                 <field name="is_maintenance_order" attrs="{'invisible': [('is_rental_order', '=', True)]}"/>
                 <field name="delivery_order_id" attrs="{'required': [('is_maintenance_order', '=', True)], 'invisible': [('is_maintenance_order', '=', False)]}"/>
@@ -36,8 +36,17 @@
                 <attribute name="context">{'is_rental_order': ['so', parent.is_rental_order]}</attribute>
             </xpath>
 
+            <xpath expr="//field[@name='note']" position="replace">
+            </xpath>
+
+			<xpath expr="//button[@name='action_view_invoice']" position="attributes">
+                <attribute name="context">{'is_rental_order': is_rental_order}</attribute>
+            </xpath>
+
             <xpath expr="//page[@name='other_information']" position="after">
                 <page string="Term and conditions" name="term_and_conditions">
+                    <!-- <separator colspan="2"/> -->
+                    <field name="note" nolabel="1" placeholder="Terms and conditions... (note: you can setup default ones in the Configuration menu)"/>
                     <separator string="Note For Service" colspan="2"/>
                     <field name="note_service" />
                     <separator string="Note Payment Method" colspan="2"/>
@@ -69,7 +78,7 @@
             </xpath>
 
             <xpath expr="//header" position="inside">
-                <button string="Create Exchange Order" name="create_exchange_order" type="object" attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('is_rental_order', '=', True)]}"/>
+                <button string="Create Exchange Order"  name="create_exchange_order" type="object" attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('is_rental_order', '=', True)]}"/>
                 <button name="action_create_down_payment" string="Create Down Payment" attrs="{'invisible': [('state', '!=', 'sale')]}" type="object"/>
             </xpath>
 
@@ -87,7 +96,7 @@
             </xpath>
 
              <xpath expr="//field[@name='delivery_order_id']" position="after">
-                <field name="original_order_id" readonly="1" attrs="{'invisible': [('is_exchange_order', '=', False)]}"/>
+                <field name="original_order_id" readonly="1" attrs="{'invisible': [('is_exchange_order', '=', False)]}" context="{'display_showroom_name': True}"/>
             </xpath>
 
             <xpath expr="//page[@name='order_lines']//form//field[@name='product_id']" position="attributes">
@@ -96,6 +105,7 @@
 
             <xpath expr="//page[@name='order_lines']//form//field[@name='location_id']" position="attributes">
                 <attribute name="attrs">{'invisible': [('parent.is_rental_order', '=', True)]}</attribute>
+                <attribute name="context">{'display_showroom_name': True}</attribute>
             </xpath>
             
             <xpath expr="//group/field[@name='partner_shipping_id']"  position="after">
@@ -153,6 +163,8 @@
             <xpath expr="//field[@name='amount_total']" position="after">
                 <field name="total_cost_price" options="{'currency_field': 'currency_id'}"/>
             </xpath>
+            <xpath expr="//notebook/page/field[@name='order_line']/form/div/field[@name='invoice_lines']/parent::div" position="replace">
+            </xpath>
         </field>
     </record>
 
@@ -198,15 +210,16 @@
         <field name="res_model">sale.order</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('is_rental_order', '=', True)]</field>
-        <field name="context">{'default_is_rental_order': True}</field>
+        <field name="context">{'default_is_rental_order': True, 'display_showroom_name': True}</field>
     </record>
 
     <record id="sale.action_orders" model="ir.actions.act_window">
-        <field name="context">{'default_is_rental_order': True}</field>
+        <field name="context">{'default_is_rental_order': False, 'display_showroom_name': True}</field>
         <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')), ('is_rental_order', '=', False)]</field>
     </record>
 
     <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
         <field name="domain">[('is_rental_order', '=', False)]</field>
+        <field name="context">{'search_default_my_quotation': 1, 'display_showroom_name': True}</field>
     </record>
 </odoo>

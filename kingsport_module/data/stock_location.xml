@@ -6,6 +6,17 @@
         <field name="usage">view</field>
     </record>
 
+    <record id="stock_location_return_product" model="stock.location">
+        <field name="name">Kho hàng trả</field>
+        <field name="usage">internal</field>
+        <field name="return_location">True</field>
+    </record>
+
+    <record id="stock_location_defective_product" model="stock.location">
+        <field name="name">Kho hàng lỗi</field>
+        <field name="usage">internal</field>
+    </record>
+
     <record id="stock_location_northern_inventory_thanh_hoa" model="stock.location">
         <field name="name">Kho Thanh Hóa</field>
         <field name="location_id" ref="kingsport_module.stock_location_northern" />

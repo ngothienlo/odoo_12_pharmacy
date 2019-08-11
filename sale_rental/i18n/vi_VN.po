@@ -389,7 +389,7 @@ msgstr "Loại thuê"
 #: code:addons/sale_rental/wizard/create_rental_product.py:20
 #, python-format
 msgid "Rental of a %s"
-msgstr "Sản phẩm cho thuê %s"
+msgstr "Cho thuê sản phẩm %s"
 
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_order_line__extension_rental_id
@@ -399,7 +399,7 @@ msgstr "Đơn cho thuê cần gia hạn"
 #. module: sale_rental
 #: model:ir.model.fields,field_description:sale_rental.field_sale_order_line__sell_rental_id
 msgid "Rental to Sell"
-msgstr "Đơn cho thuê đã bán"
+msgstr "Đơn cho thuê"
 
 #. module: sale_rental
 #: model:ir.actions.act_window,name:sale_rental.sale_rental_action

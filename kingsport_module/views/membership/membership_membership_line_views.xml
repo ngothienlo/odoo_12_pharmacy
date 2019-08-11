@@ -16,7 +16,6 @@
                             <field name="state" readonly="1"/>
                             <field name="is_expired" readonly="1"/>
                         </group>
-                        <field name="state" readonly="1"/>
                     </group>
                     <group>
                         <group>
@@ -46,16 +45,16 @@
                             <field name="account_invoice_id" readonly="1"
                                 context="{'form_view_ref': 'account.invoice_form'}"/>
                             <field name="invoice_refund_id"
-                                attrs="{'invisible': [('id', '!=', False)]}"
+                                attrs="{'invisible': [('invoice_refund_id', '=', False)]}"
                                 context="{'form_view_ref': 'account.invoice_form'}"/>
                         </group>
-                        <group attrs="{'invisible': [('state', 'not in', ['paid', 'old'])]}">
+                        <group attrs="{'invisible': [('state', 'not in', ['paid', 'old', 'canceled'])]}">
                             <field name="stop_membership"
-                                attrs="{'readonly': [('is_expired', '=', True)]}"/>
+                                attrs="{'readonly': ['|', ('is_expired', '=', True), ('state', '=', 'canceled')]}"/>
                             <field name="date_stop"
                                 attrs="{'required': [('stop_membership', '=', True)],
                                         'invisible': [('stop_membership', '=', False)],
-                                        'readonly': [('is_expired', '=', True)]}"/>
+                                        'readonly': ['|', ('is_expired', '=', True), ('state', '=', 'canceled')]}"/>
                             <field name="days_used"
                                 attrs="{'invisible': [('stop_membership', '=', False)]}"/>
                             <field name="account_invoice_line" invisible="1"/>
@@ -64,15 +63,15 @@
                             <div attrs="{'invisible': ['|', ('account_invoice_line', '=', False), ('stop_membership', '=', False)]}">
                                 <field name="amount_refunded" class="oe_inline"/>
                                 <button string="Refund" name="button_account_invoice_refund" type="object" class="btn-info oe_inline ml-2"
-                                    attrs="{'invisible': ['|', ('amount_refunded', '&lt;=', 0), ('is_expired', '=', True)]}" />
+                                    attrs="{'invisible': ['|', '|', ('amount_refunded', '&lt;=', 0), ('is_expired', '=', True), ('invoice_refund_id', '!=', False)]}" />
                             </div>
                         </group>
                     </group>
-                    <notebook attrs="{'invisible': [('state', 'not in', ['paid', 'old'])]}">
+                    <notebook attrs="{'invisible': [('state', 'not in', ['paid', 'old', 'canceled'])]}">
                         <page string="Attendance Training" name="attendance_training"
                                 attrs="{'invisible': [('type_membership', '!=', 'personal_trainer')]}">
                             <field name="attendance_ids" nolabel="1" context="{'default_personal_trainer_id': personal_trainer_id}"
-                                    attrs="{'readonly': [('is_expired', '=', True)]}">
+                                    attrs="{'readonly': ['|', ('is_expired', '=', True), ('state', '=', 'canceled')]}">
                                 <tree string="Attendance Training" editable="bottom">
                                     <field name="date_training"/>
                                     <field name="personal_trainer_id"/>
@@ -87,7 +86,7 @@
                         </page>
                         <page string="Membership Reserve" name="membership_reserve"
                                 attrs="{'invisible': [('type_membership', '=', 'personal_trainer')]}">
-                            <field name="reserve_ids" nolabel="1" attrs="{'readonly': [('is_expired', '=', True)]}">
+                            <field name="reserve_ids" nolabel="1" attrs="{'readonly': ['|', ('is_expired', '=', True), ('state', '=', 'canceled')]}">
                                 <tree string="Membership Reserve" editable="bottom">
                                     <field name="date_from"/>
                                     <field name="date_to"/>

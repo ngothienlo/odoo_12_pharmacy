@@ -89,6 +89,7 @@ This module will install all module dependencies of Pharmacy.
         'views/base/res_country_state_views.xml',
         'views/base/res_users_views.xml',
         'views/base/res_company_views.xml',
+        'views/base/res_config_settings_views.xml',
 
         'views/crm/crm_lead_views.xml',
         'views/crm/crm_team_views.xml',
@@ -114,6 +115,7 @@ This module will install all module dependencies of Pharmacy.
         'views/purchase/purchase_order_views.xml',
 
         'views/account/account_payment_views.xml',
+        'views/account/account_invoice_views.xml',
 
         # ============================================================
         # WIZARD
@@ -133,11 +135,15 @@ This module will install all module dependencies of Pharmacy.
         # ============================================================
         # 'reports/',
         'reports/sale/quotation_xlsx_report.xml',
+        'reports/membership/report_membership_views.xml',
 
         # ============================================================
         # FUNCTION USED TO UPDATE DATA LIKE POST OBJECT
         # ============================================================
         # "data/function.xml",
+    ],
+    'qweb': [
+        "static/src/xml/*.xml",
     ],
 
     'test': [],

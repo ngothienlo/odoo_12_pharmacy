@@ -22,7 +22,7 @@ from odoo import models, fields
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    use_sale_note = fields.Boolean(default=True)
+    use_sale_note = fields.Boolean(default=False)
     hot_line = fields.Char()
 
     def get_values(self):
